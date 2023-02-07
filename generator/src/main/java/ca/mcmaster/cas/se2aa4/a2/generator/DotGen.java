@@ -26,6 +26,7 @@ public class DotGen {
                 vertices.add(Vertex.newBuilder().setX((double) x+square_size).setY((double) y+square_size).build());
             }
         }
+
         // Distribute colors randomly. Vertices are immutable, need to enrich them
         Set<Vertex> verticesWithColors = new HashSet<>();
         Random bag = new Random();
