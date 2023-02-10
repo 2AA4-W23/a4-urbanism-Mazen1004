@@ -16,7 +16,7 @@ public class GraphicRenderer {
 
     private static final int THICKNESS = 3;
     public void render(Mesh aMesh, Graphics2D canvas) {
-        canvas.setColor(Color.red);
+        canvas.setColor(Color.BLUE);
         Stroke stroke = new BasicStroke(0.5f);
         canvas.setStroke(stroke);
         for (Vertex v: aMesh.getVerticesList()) {

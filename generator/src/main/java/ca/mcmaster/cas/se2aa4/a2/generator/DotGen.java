@@ -23,15 +23,15 @@ public class DotGen {
         Set<Vertex> vertices = new HashSet<>();
         // Create all the vertices
         for(int x = 0; x < width; x += square_size) {
-            for(int y = 0; y < height; y += square_size) {
+            for (int y = 0; y < height; y += square_size) {
                 //first dot
                 vertices.add(Vertex.newBuilder().setX((double) x).setY((double) y).build()); //overlapping with third dot
                 //second dot left
-                vertices.add(Vertex.newBuilder().setX((double) x+square_size).setY((double) y).build());
+                vertices.add(Vertex.newBuilder().setX((double) x + square_size).setY((double) y).build());
                 //third dot above first
-                vertices.add(Vertex.newBuilder().setX((double) x).setY((double) y+square_size).build());
+                vertices.add(Vertex.newBuilder().setX((double) x).setY((double) y + square_size).build());
                 //x+y slanted 45 deg
-                vertices.add(Vertex.newBuilder().setX((double) x+square_size).setY((double) y+square_size).build());
+                vertices.add(Vertex.newBuilder().setX((double) x + square_size).setY((double) y + square_size).build());
             }
         }
 
