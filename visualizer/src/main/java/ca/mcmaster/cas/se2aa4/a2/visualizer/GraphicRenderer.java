@@ -1,5 +1,6 @@
 package ca.mcmaster.cas.se2aa4.a2.visualizer;
 
+import ca.mcmaster.cas.se2aa4.a2.io.Structs;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Mesh;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Vertex;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Property;
@@ -10,6 +11,7 @@ import java.awt.Stroke;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.geom.Ellipse2D;
+import java.awt.geom.Line2D;
 import java.util.List;
 
 public class GraphicRenderer {
@@ -28,6 +30,18 @@ public class GraphicRenderer {
             canvas.fill(point);
             canvas.setColor(old);
         }
+
+        for (Structs.Segment s: aMesh.getSegmentsList()) {
+            //line needs start and end
+            //start is v1 position
+            //need access to v1, to get x and y
+            //get v1
+            Vertex v1 = aMesh.getVertices(s.getV1Idx());
+            Vertex v2 = aMesh.getVertices(s.getV2Idx());
+            Color old = canvas.getColor();
+        }
+
+
     }
     private Color extractColor(List<Property> properties) {
         String val = null;

@@ -7,10 +7,11 @@ import java.util.Random;
 
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Vertex;
+//add segment import
+import ca.mcmaster.cas.se2aa4.a2.io.Structs.Segment;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Property;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Mesh;
 
-import javax.swing.text.Segment;
 
 public class DotGen {
 
@@ -32,8 +33,14 @@ public class DotGen {
                 vertices.add(Vertex.newBuilder().setX((double) x).setY((double) y + square_size).build());
                 //x+y slanted 45 deg
                 vertices.add(Vertex.newBuilder().setX((double) x + square_size).setY((double) y + square_size).build());
+                // (0,0) (20,0) (0,20) (20,20)
+                //   0      1     2       3
             }
         }
+        Set<Segment> segments = new HashSet<>();
+        segments.add(Segment.newBuilder().setV1Idx(0).setV2Idx(1).build());
+
+
 
         // Distribute colors randomly. Vertices are immutable, need to enrich them
         Set<Vertex> verticesWithColors = new HashSet<>();
@@ -48,7 +55,7 @@ public class DotGen {
             verticesWithColors.add(colored);
         }
 
-        return Mesh.newBuilder().addAllVertices(verticesWithColors).build();
+        return Mesh.newBuilder().addAllVertices(verticesWithColors).addAllSegments(segments).build();
     }
 
 }
