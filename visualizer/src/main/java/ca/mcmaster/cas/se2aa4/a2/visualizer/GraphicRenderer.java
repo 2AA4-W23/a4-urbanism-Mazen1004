@@ -4,6 +4,7 @@ import ca.mcmaster.cas.se2aa4.a2.io.Structs.Mesh;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Vertex;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Property;
 
+
 import java.awt.Graphics2D;
 import java.awt.Stroke;
 import java.awt.BasicStroke;
@@ -15,7 +16,7 @@ public class GraphicRenderer {
 
     private static final int THICKNESS = 3;
     public void render(Mesh aMesh, Graphics2D canvas) {
-        canvas.setColor(Color.BLACK);
+        canvas.setColor(Color.red);
         Stroke stroke = new BasicStroke(0.5f);
         canvas.setStroke(stroke);
         for (Vertex v: aMesh.getVerticesList()) {
@@ -28,7 +29,6 @@ public class GraphicRenderer {
             canvas.setColor(old);
         }
     }
-
     private Color extractColor(List<Property> properties) {
         String val = null;
         for(Property p: properties) {

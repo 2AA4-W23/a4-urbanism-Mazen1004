@@ -5,9 +5,12 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Random;
 
+import ca.mcmaster.cas.se2aa4.a2.io.Structs;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Vertex;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Property;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Mesh;
+
+import javax.swing.text.Segment;
 
 public class DotGen {
 
@@ -16,6 +19,7 @@ public class DotGen {
     private final int square_size = 20;
 
     public Mesh generate() {
+
         Set<Vertex> vertices = new HashSet<>();
         // Create all the vertices
         for(int x = 0; x < width; x += square_size) {
@@ -30,7 +34,6 @@ public class DotGen {
                 vertices.add(Vertex.newBuilder().setX((double) x+square_size).setY((double) y+square_size).build());
             }
         }
-
 
         // Distribute colors randomly. Vertices are immutable, need to enrich them
         Set<Vertex> verticesWithColors = new HashSet<>();
