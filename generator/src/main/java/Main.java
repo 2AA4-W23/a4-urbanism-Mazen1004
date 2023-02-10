@@ -7,6 +7,7 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String[] args) throws IOException {
+        System.out.println("what the fuck lmao");
         DotGen generator = new DotGen();
         Mesh myMesh = generator.generate();
         MeshFactory factory = new MeshFactory();

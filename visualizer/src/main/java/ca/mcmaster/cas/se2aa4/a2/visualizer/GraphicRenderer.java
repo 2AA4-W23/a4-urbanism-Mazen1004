@@ -1,14 +1,17 @@
 package ca.mcmaster.cas.se2aa4.a2.visualizer;
 
+import ca.mcmaster.cas.se2aa4.a2.io.Structs;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Mesh;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Vertex;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Property;
+
 
 import java.awt.Graphics2D;
 import java.awt.Stroke;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.geom.Ellipse2D;
+import java.awt.geom.Line2D;
 import java.util.List;
 import java.awt.geom.Line2D;
 
@@ -16,7 +19,7 @@ public class GraphicRenderer {
 
     private static final int THICKNESS = 3;
     public void render(Mesh aMesh, Graphics2D canvas) {
-        canvas.setColor(Color.BLACK);
+        canvas.setColor(Color.BLUE);
         Stroke stroke = new BasicStroke(0.5f);
         canvas.setStroke(stroke);
         for (Vertex v: aMesh.getVerticesList()) {
@@ -29,8 +32,26 @@ public class GraphicRenderer {
             canvas.setColor(old);
             canvas.draw(new Line2D.Double(centre_x, centre_y, centre_x+20, centre_y+20));
         }
-    }
 
+        for (Structs.Segment s: aMesh.getSegmentsList()) {
+            //line needs start and end
+            //start is v1 position
+            //need access to v1, to get x and y
+            //get v1
+            System.out.println("@@@" + s.getV1Idx());
+            System.out.println("@@@" + s.getV2Idx());
+
+            Vertex v1 = aMesh.getVertices(s.getV1Idx());
+            Vertex v2 = aMesh.getVertices(s.getV2Idx());
+            System.out.println("@@@" + v1.getX() + v1.getY());
+            System.out.println("@@@" + v2.getX() + v2.getY());
+
+
+            canvas.draw(new Line2D.Double(v1.getX(), v1.getY(), v2.getX(), v2.getY()));
+        }
+
+
+    }
     private Color extractColor(List<Property> properties) {
         String val = null;
         for(Property p: properties) {
