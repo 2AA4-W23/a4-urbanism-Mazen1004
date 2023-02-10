@@ -36,9 +36,16 @@ public class GraphicRenderer {
             //start is v1 position
             //need access to v1, to get x and y
             //get v1
+            System.out.println("@@@" + s.getV1Idx());
+            System.out.println("@@@" + s.getV2Idx());
+
             Vertex v1 = aMesh.getVertices(s.getV1Idx());
             Vertex v2 = aMesh.getVertices(s.getV2Idx());
-            Color old = canvas.getColor();
+            System.out.println("@@@" + v1.getX() + v1.getY());
+            System.out.println("@@@" + v2.getX() + v2.getY());
+
+
+            canvas.draw(new Line2D.Double(v1.getX(), v1.getY(), v2.getX(), v2.getY()));
         }
 
 

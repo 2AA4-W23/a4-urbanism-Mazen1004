@@ -1,6 +1,8 @@
 package ca.mcmaster.cas.se2aa4.a2.generator;
 
 import java.io.IOException;
+import java.sql.Array;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Random;
@@ -21,7 +23,7 @@ public class DotGen {
 
     public Mesh generate() {
 
-        Set<Vertex> vertices = new HashSet<>();
+        ArrayList<Vertex> vertices = new ArrayList<>();
         // Create all the vertices
         for(int x = 0; x < width; x += square_size) {
             for (int y = 0; y < height; y += square_size) {
@@ -37,13 +39,34 @@ public class DotGen {
                 //   0      1     2       3
             }
         }
-        Set<Segment> segments = new HashSet<>();
-        segments.add(Segment.newBuilder().setV1Idx(0).setV2Idx(1).build());
+        ArrayList<Segment> segments = new ArrayList<>();
+//        System.out.println(vertices.get(0).getX() + vertices.get(0).getY());
+        //horizontal lines
+        for (int i=0; i< 7; i++) {
+            if ((i % 2 != 0) && (i+1 % 2 != 0)){
+                segments.add(Segment.newBuilder().setV1Idx(i).setV2Idx(i+2).build());
+                segments.add(Segment.newBuilder().setV1Idx(i).setV2Idx(i+1).build());
+                segments.add(Segment.newBuilder().setV1Idx(i+2).setV2Idx(i+3).build());
+                segments.add(Segment.newBuilder().setV1Idx(i+1).setV2Idx(i+2).build());
+            }
+
+        }
+//        for (int j=0; j< 7; j++) {
+//            segments.add(Segment.newBuilder().setV1Idx(j).setV2Idx(j+2).build());
+//            System.out.println("@@@@@@@@@@@@@@@@@@@@");
+//        }
+        //vertical line 1,3,5,7
+//        for (int k=1; k< 7; k++) {
+//            segments.add(Segment.newBuilder().setV1Idx(k).setV2Idx(k+2).build());
+//            System.out.println("@@@@@@@@@@@@@@@");
+//        }
+
+
 
 
 
         // Distribute colors randomly. Vertices are immutable, need to enrich them
-        Set<Vertex> verticesWithColors = new HashSet<>();
+        ArrayList<Vertex> verticesWithColors = new ArrayList<>();
         Random bag = new Random();
         for(Vertex v: vertices){
             int red = bag.nextInt(255);
