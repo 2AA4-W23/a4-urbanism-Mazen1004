@@ -10,6 +10,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.geom.Ellipse2D;
 import java.util.List;
+import java.awt.geom.Line2D;
 
 public class GraphicRenderer {
 
@@ -26,6 +27,7 @@ public class GraphicRenderer {
             Ellipse2D point = new Ellipse2D.Double(centre_x, centre_y, THICKNESS, THICKNESS);
             canvas.fill(point);
             canvas.setColor(old);
+            canvas.draw(new Line2D.Double(centre_x, centre_y, centre_x+20, centre_y+20));
         }
     }
 
