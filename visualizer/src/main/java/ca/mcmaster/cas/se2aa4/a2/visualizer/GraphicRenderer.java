@@ -44,7 +44,13 @@ public class GraphicRenderer {
             Vertex v2 = aMesh.getVertices(s.getV2Idx());
             System.out.println("@@@" + v1.getX() + v1.getY());
             System.out.println("@@@" + v2.getX() + v2.getY());
-
+            canvas.setColor(Color.GREEN);
+            Color seg1=extractColor(v1.getPropertiesList());
+            System.out.println(seg1.getBlue());
+            Color seg2=extractColor(v2.getPropertiesList());
+            System.out.println(seg1);
+            System.out.println(seg2);
+            canvas.setColor(extractColor(s.getPropertiesList()));
 
             canvas.draw(new Line2D.Double(v1.getX(), v1.getY(), v2.getX(), v2.getY()));
         }
