@@ -45,10 +45,14 @@ public class DotGen {
         ArrayList<Segment> segments = new ArrayList<>();
 
         for (int j=0; j <= numOfVerticies - 2; j+=2){
-            segments.add(Segment.newBuilder().setV1Idx(j).setV2Idx(j+1).build());
+                segments.add(Segment.newBuilder().setV1Idx(j).setV2Idx(j + 1).build());
         }
-        for (int i=0; i <= numOfVerticies - 3; i+=2){
-            segments.add(Segment.newBuilder().setV1Idx(i).setV2Idx(i+2).build());
+        for (int i=0; i <= numOfVerticies - 3; i+=2) {
+            // Checks to see if the next top left value in the square segment is in a new square column.
+            // Eliminate lines being drawn diagonally from the last value in the column to the first value in the next column.
+            if ((i + 2) % 100 != 0) {
+                segments.add(Segment.newBuilder().setV1Idx(i).setV2Idx(i + 2).build());
+            }
         }
 
 
