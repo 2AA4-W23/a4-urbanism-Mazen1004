@@ -40,29 +40,13 @@ public class DotGen {
             }
         }
         ArrayList<Segment> segments = new ArrayList<>();
-//        System.out.println(vertices.get(0).getX() + vertices.get(0).getY());
-        //horizontal lines
-        for (int i=0; i< 7; i++) {
-            if ((i % 2 != 0) && (i+1 % 2 != 0)){
-                segments.add(Segment.newBuilder().setV1Idx(i).setV2Idx(i+2).build());
-                segments.add(Segment.newBuilder().setV1Idx(i).setV2Idx(i+1).build());
-                segments.add(Segment.newBuilder().setV1Idx(i+2).setV2Idx(i+3).build());
-                segments.add(Segment.newBuilder().setV1Idx(i+1).setV2Idx(i+2).build());
-            }
 
+        for (int j=0; j <= vertices.lastIndexOf() j+=2){
+            segments.add(Segment.newBuilder().setV1Idx(j).setV2Idx(j+1).build());
         }
-//        for (int j=0; j< 7; j++) {
-//            segments.add(Segment.newBuilder().setV1Idx(j).setV2Idx(j+2).build());
-//            System.out.println("@@@@@@@@@@@@@@@@@@@@");
-//        }
-        //vertical line 1,3,5,7
-//        for (int k=1; k< 7; k++) {
-//            segments.add(Segment.newBuilder().setV1Idx(k).setV2Idx(k+2).build());
-//            System.out.println("@@@@@@@@@@@@@@@");
-//        }
-
-
-
+        for (int i=0; i <= 2000; i+=2){
+            segments.add(Segment.newBuilder().setV1Idx(i).setV2Idx(i+2).build());
+        }
 
 
         // Distribute colors randomly. Vertices are immutable, need to enrich them
