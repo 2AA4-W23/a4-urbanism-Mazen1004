@@ -22,6 +22,7 @@ public class DotGen {
     private final int square_size = 20;
 
     public Mesh generate() {
+        int numOfVerticies = 0;
 
         ArrayList<Vertex> vertices = new ArrayList<>();
         // Create all the vertices
@@ -37,14 +38,16 @@ public class DotGen {
                 vertices.add(Vertex.newBuilder().setX((double) x + square_size).setY((double) y + square_size).build());
                 // (0,0) (20,0) (0,20) (20,20)
                 //   0      1     2       3
+                numOfVerticies+=4;
+
             }
         }
         ArrayList<Segment> segments = new ArrayList<>();
 
-        for (int j=0; j <= vertices.lastIndexOf() j+=2){
+        for (int j=0; j <= numOfVerticies - 2; j+=2){
             segments.add(Segment.newBuilder().setV1Idx(j).setV2Idx(j+1).build());
         }
-        for (int i=0; i <= 2000; i+=2){
+        for (int i=0; i <= numOfVerticies - 3; i+=2){
             segments.add(Segment.newBuilder().setV1Idx(i).setV2Idx(i+2).build());
         }
 
