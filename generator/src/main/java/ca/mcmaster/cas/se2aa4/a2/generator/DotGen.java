@@ -44,12 +44,21 @@ public class DotGen {
         }
         ArrayList<Segment> segments = new ArrayList<>();
 
-        for (int j=0; j <= numOfVerticies - 2; j+=2){
-            segments.add(Segment.newBuilder().setV1Idx(j).setV2Idx(j+1).build());
+        //horizontal, - 2 for unwanted vertices
+        for (int i=0; i <= numOfVerticies - 2; i+=2){
+            segments.add(Segment.newBuilder().setV1Idx(i).setV2Idx(i+1).build());
         }
-        for (int i=0; i <= numOfVerticies - 3; i+=2){
-            segments.add(Segment.newBuilder().setV1Idx(i).setV2Idx(i+2).build());
+        //vertical
+        for (int j=0; j <= numOfVerticies - 3; j+=2){
+            segments.add(Segment.newBuilder().setV1Idx(j).setV2Idx(j+2).build());
         }
+        //last line
+        for (int k = 2001; k <= numOfVerticies -3; k+=2) {
+            segments.add(Segment.newBuilder().setV1Idx(k).setV2Idx(k+2).build());
+        }
+
+
+
 
 
         // Distribute colors randomly. Vertices are immutable, need to enrich them
