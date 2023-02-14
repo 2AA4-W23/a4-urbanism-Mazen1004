@@ -30,7 +30,6 @@ public class GraphicRenderer {
             Ellipse2D point = new Ellipse2D.Double(centre_x, centre_y, THICKNESS, THICKNESS);
             canvas.fill(point);
             canvas.setColor(old);
-            canvas.draw(new Line2D.Double(centre_x, centre_y, centre_x+20, centre_y+20));
         }
 
         for (Structs.Segment s: aMesh.getSegmentsList()) {

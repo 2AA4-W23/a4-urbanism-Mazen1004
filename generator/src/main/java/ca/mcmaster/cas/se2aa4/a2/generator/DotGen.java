@@ -43,11 +43,11 @@ public class DotGen {
 //        System.out.println(vertices.get(0).getX() + vertices.get(0).getY());
         //horizontal lines
         for (int i=0; i< 7; i++) {
-            if ((i % 2 != 0) && (i+1 % 2 != 0)){
-                segments.add(Segment.newBuilder().setV1Idx(i).setV2Idx(i+2).build());
+            if ((i % 2 != 0) && ((i+1) % 2 != 0)){
+                segments.add(Segment.newBuilder().setV1Idx(i).setV2Idx(i).build());
+                segments.add(Segment.newBuilder().setV1Idx(i+1).setV2Idx(i).build());
                 segments.add(Segment.newBuilder().setV1Idx(i).setV2Idx(i+1).build());
-                segments.add(Segment.newBuilder().setV1Idx(i+2).setV2Idx(i+3).build());
-                segments.add(Segment.newBuilder().setV1Idx(i+1).setV2Idx(i+2).build());
+                segments.add(Segment.newBuilder().setV1Idx(i+1).setV2Idx(i+1).build());
             }
 
         }
