@@ -37,7 +37,7 @@ public class GraphicRenderer {
             //start is v1 position
             //need access to v1, to get x and y
             //get v1
-            System.out.println("@@@" + s.getV1Idx());
+            System.out.println("v2" + s.getV1Idx());
             System.out.println("@@@" + s.getV2Idx());
 
             Vertex v1 = aMesh.getVertices(s.getV1Idx());

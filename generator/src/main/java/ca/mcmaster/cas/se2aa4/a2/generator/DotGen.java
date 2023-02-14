@@ -53,8 +53,11 @@ public class DotGen {
             if ((i + 2) % 100 != 0) {
                 segments.add(Segment.newBuilder().setV1Idx(i).setV2Idx(i + 2).build());
             }
+            // Draws segments for the last column in the mesh
+            if ((i % 2400 < 100) && i > 100 ) {
+                segments.add(Segment.newBuilder().setV1Idx(i + 1).setV2Idx(i + 3).build());
+            }
         }
-
 
         // Distribute colors randomly. Vertices are immutable, need to enrich them
         ArrayList<Vertex> verticesWithColors = new ArrayList<>();
