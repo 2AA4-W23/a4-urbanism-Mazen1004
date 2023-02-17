@@ -1,6 +1,7 @@
 import ca.mcmaster.cas.se2aa4.a2.io.MeshFactory;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
 import ca.mcmaster.cas.se2aa4.a2.visualizer.GraphicRenderer;
+import ca.mcmaster.cas.se2aa4.a2.visualizer.GraphicRendererDebug;
 import ca.mcmaster.cas.se2aa4.a2.visualizer.MeshDump;
 import ca.mcmaster.cas.se2aa4.a2.visualizer.SVGCanvas;
 
@@ -13,6 +14,8 @@ public class Main {
         // Extracting command line parameters
         String input = args[0];
         String output = args[1];
+        String debug = args[2];
+
         // Getting width and height for the canvas
         Structs.Mesh aMesh = new MeshFactory().read(input);
         double max_x = Double.MIN_VALUE;
@@ -24,9 +27,17 @@ public class Main {
         }
         // Creating the Canvas to draw the mesh
         Graphics2D canvas = SVGCanvas.build((int) Math.ceil(max_x), (int) Math.ceil(max_y));
-        GraphicRenderer renderer = new GraphicRenderer();
-        // Painting the mesh on the canvas
-        renderer.render(aMesh, canvas);
+        //IF statement for debug mode on or off
+        if (debug.equals("off")){
+            GraphicRenderer renderer = new GraphicRenderer();
+            // Painting the mesh on the canvas
+            renderer.render(aMesh, canvas);
+        }else if(debug.equals("on")){
+            GraphicRendererDebug renderer1 = new GraphicRendererDebug();
+            // Painting the mesh on the canvas
+            renderer1.render(aMesh, canvas);
+        }
+
         // Storing the result in an SVG file
         SVGCanvas.write(canvas, output);
         // Dump the mesh to stdout
