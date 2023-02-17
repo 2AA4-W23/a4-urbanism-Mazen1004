@@ -17,9 +17,9 @@ import ca.mcmaster.cas.se2aa4.a2.io.Structs.Mesh;
 
 public class DotGen {
 
-    private final int width = 500;
-    private final int height = 500;
-    private final int square_size = 20;
+    private final int width = 1000;
+    private final int height = 1000;
+    private final int square_size = 40;
 
     public Mesh generate() {
         int numOfVertices = 0;
