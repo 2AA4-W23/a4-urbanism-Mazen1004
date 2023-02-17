@@ -38,7 +38,12 @@ To visualize an existing mesh, go the the `visualizer` directory, and use `java 
 
 ```
 mosser@azrael A2 % cd visualizer 
-mosser@azrael visualizer % java -jar visualizer.jar ../generator/sample.mesh sample.svg
+
+DEBUG MODE ON:
+mosser@azrael visualizer % java -jar visualizer.jar ../generator/sample.mesh sample.svg on
+
+DEBUG MODE OFF:
+mosser@azrael visualizer % java -jar visualizer.jar ../generator/sample.mesh sample.svg off
 
 ... (lots of debug information printed to stdout) ...
 
