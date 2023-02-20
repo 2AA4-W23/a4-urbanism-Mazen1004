@@ -1,6 +1,4 @@
 package ca.mcmaster.cas.se2aa4.a2.generator;
-import org.locationtech.jts.algorithm;
-
 import java.io.IOException;
 import java.sql.Array;
 import java.util.ArrayList;
