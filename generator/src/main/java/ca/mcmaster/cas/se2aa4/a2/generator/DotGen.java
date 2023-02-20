@@ -1,4 +1,5 @@
 package ca.mcmaster.cas.se2aa4.a2.generator;
+import org.locationtech.jts.algorithm;
 
 import java.io.IOException;
 import java.sql.Array;
@@ -32,20 +33,27 @@ public class DotGen {
                 vertices.add(Vertex.newBuilder().setX((double) x).setY((double) y).build()); //overlapping with third dot
                 //second dot left
                 vertices.add(Vertex.newBuilder().setX((double) x + square_size).setY((double) y).build());
+
+                int centroidX= (((x + x + square_size)/ 2) + ((x + x + square_size)/ 2))/2 ;
+                int centroidY = (((y + y + square_size)/ 2) + ((y + y + square_size)/ 2))/2 ;
+                vertices.add(Vertex.newBuilder().setX((double) centroidX).setY((double) centroidY).build());
+
                 //third dot above first
-                vertices.add(Vertex.newBuilder().setX((double) x).setY((double) y + square_size).build());
-                //x+y slanted 45 deg
                 vertices.add(Vertex.newBuilder().setX((double) x + square_size).setY((double) y + square_size).build());
                 // (0,0) (20,0) (0,20) (20,20)
+                vertices.add(Vertex.newBuilder().setX((double) x).setY((double) y + square_size).build());
+
+                //x+y slanted 45 deg
                 //   0      1     2       3
                 numOfVertices+=4;
-
             }
         }
+
         ArrayList<Segment> segments = new ArrayList<>();
+
         //horizontal line
-        for (int j=0; j <= numOfVertices - 1; j+=2){
-                segments.add(Segment.newBuilder().setV1Idx(j).setV2Idx(j + 1).build());
+        for (int j=0; j <= numOfVertices - 1; j++){
+              segments.add(Segment.newBuilder().setV1Idx(j).setV2Idx(j + 1).build());
         }
 
         for (int i = 1; i < 100; i += 2 ) {
