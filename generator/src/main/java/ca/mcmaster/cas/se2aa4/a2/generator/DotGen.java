@@ -19,15 +19,15 @@ public class DotGen {
 
     private final int width = 1000;
     private final int height = 1000;
-    private final int square_size = 40;
+    private final int square_size = 20;
 
     public Mesh generate() {
         int numOfVertices = 0;
 
         ArrayList<Vertex> vertices = new ArrayList<>();
         // Create all the vertices
-        for(int x = 0; x < width; x += square_size) {
-            for (int y = 0; y < height; y += square_size) {
+        for(int x = 0; x < width; x += square_size*2) {
+            for (int y = 0; y < height; y += square_size*2) {
                 //first dot
                 vertices.add(Vertex.newBuilder().setX((double) x).setY((double) y).build()); //overlapping with third dot
                 //second dot left
