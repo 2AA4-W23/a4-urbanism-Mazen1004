@@ -43,21 +43,45 @@ public class DotGen {
             }
         }
         ArrayList<Segment> segments = new ArrayList<>();
-
-        for (int j=0; j <= numOfVertices - 2; j+=2){
+        //horizontal line
+        for (int j=0; j <= numOfVertices - 1; j+=2){
                 segments.add(Segment.newBuilder().setV1Idx(j).setV2Idx(j + 1).build());
         }
-        for (int i=0; i <= numOfVertices - 3; i+=2) {
-            // Checks to see if the next top left value in the square segment is in a new square column.
-            // Eliminate lines being drawn diagonally from the last value in the column to the first value in the next column.
-            if ((i + 2) % 100 != 0) {
-                segments.add(Segment.newBuilder().setV1Idx(i).setV2Idx(i + 2).build());
-            }
-            // Draws segments for the last column in the mesh
-            if ((i % 2400 < 100) && i > 100 ) {
-                segments.add(Segment.newBuilder().setV1Idx(i + 1).setV2Idx(i + 3).build());
+
+        for (int i = 1; i < 100; i += 2 ) {
+            for (int j=0; j < 2400; j += 100) {
+                segments.add(Segment.newBuilder().setV1Idx(j+i).setV2Idx(j+i + 100).build());
             }
         }
+
+        //can make nested if you really want
+        for (int j=0; j <= numOfVertices - 4; j+=2){
+            if ((j + 2) % 100 != 0)  {
+                segments.add(Segment.newBuilder().setV1Idx(j).setV2Idx(j + 2).build());
+            }
+
+        }
+        int columnCounter = 0;
+        for (int j=1; j <= numOfVertices - 4; j+=2){
+            if ((j + 2) % (columnCounter*100 + 1) != 0) {
+                segments.add(Segment.newBuilder().setV1Idx(j).setV2Idx(j + 2).build());
+            }
+            else {
+                columnCounter++;
+            }
+        }
+
+
+
+//        for (int i=0; i <= numOfVertices - 3; i++) {
+//            if (i % 2 == 0) {
+//                segments.add(Segment.newBuilder().setV1Idx(i).setV2Idx(i + 2).build());
+//            }
+//        }
+//        for (int i=1; i <= numOfVertices - 3; i++) {
+//            if (i % 1 != 0) {
+//                segments.add(Segment.newBuilder().setV1Idx(i).setV2Idx(i + 2).build());
+//            }
 
         // Distribute colors randomly. Vertices are immutable, need to enrich them
         ArrayList<Vertex> verticesWithColors = new ArrayList<>();
