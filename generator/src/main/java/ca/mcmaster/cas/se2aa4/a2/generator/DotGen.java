@@ -17,15 +17,32 @@ import ca.mcmaster.cas.se2aa4.a2.io.Structs.Mesh;
 
 public class DotGen {
 
-    private final int width = 1000;
-    private final int height = 1000;
+    private final int width = 500;
+    private final int height = 500;
     private final int square_size = 20;
 
-    public Mesh generate() {
-        int numOfVertices = 0;
+    ArrayList<Vertex> vertices = new ArrayList<>();
+    ArrayList<Segment> segments = new ArrayList<>();
+    ArrayList<Vertex> centroids = new ArrayList<>();
 
-        ArrayList<Vertex> vertices = new ArrayList<>();
+    public Mesh generate() {
         // Create all the vertices
+        for(int x = 0; x < width; x += square_size) {
+            for (int y = 0; y < height; y += square_size) {
+                vertices.add(Vertex.newBuilder().setX((double) x).setY((double) y).build());;
+
+            }
+        }
+        //Create all the centroids
+        for(int x = 10; x < width-10; x += square_size) {
+            for (int y = 10; y < height-10; y += square_size) {
+                centroids.add(Vertex.newBuilder().setX((double) x).setY((double) y).build());;
+
+            }
+        }
+
+
+        /*
         for(int x = 0; x < width; x += square_size*2) {
             for (int y = 0; y < height; y += square_size*2) {
                 //first dot
@@ -40,48 +57,24 @@ public class DotGen {
                 //   0      1     2       3
                 numOfVertices+=4;
 
+
             }
         }
-        ArrayList<Segment> segments = new ArrayList<>();
-        //horizontal line
-        for (int j=0; j <= numOfVertices - 1; j+=2){
-                segments.add(Segment.newBuilder().setV1Idx(j).setV2Idx(j + 1).build());
-        }
+        */
 
-        for (int i = 1; i < 100; i += 2 ) {
-            for (int j=0; j < 2400; j += 100) {
-                segments.add(Segment.newBuilder().setV1Idx(j+i).setV2Idx(j+i + 100).build());
+
+        //Draws all the Segments
+        for(Vertex v: vertices){
+            //Draws Horizontal Segments
+            if((vertices.indexOf(v)+1)%25 != 0){
+                segments.add(Segment.newBuilder().setV1Idx(vertices.indexOf(v)).setV2Idx(vertices.indexOf(v)+1).build());
             }
-        }
-
-        //can make nested if you really want
-        for (int j=0; j <= numOfVertices - 4; j+=2){
-            if ((j + 2) % 100 != 0)  {
-                segments.add(Segment.newBuilder().setV1Idx(j).setV2Idx(j + 2).build());
+            //Draws Vertical Segments
+            if((vertices.indexOf(v)+25) < vertices.size()){
+                segments.add(Segment.newBuilder().setV1Idx(vertices.indexOf(v)).setV2Idx(vertices.indexOf(v)+25).build());
             }
 
         }
-        int columnCounter = 0;
-        for (int j=1; j <= numOfVertices - 4; j+=2){
-            if ((j + 2) % (columnCounter*100 + 1) != 0) {
-                segments.add(Segment.newBuilder().setV1Idx(j).setV2Idx(j + 2).build());
-            }
-            else {
-                columnCounter++;
-            }
-        }
-
-
-
-//        for (int i=0; i <= numOfVertices - 3; i++) {
-//            if (i % 2 == 0) {
-//                segments.add(Segment.newBuilder().setV1Idx(i).setV2Idx(i + 2).build());
-//            }
-//        }
-//        for (int i=1; i <= numOfVertices - 3; i++) {
-//            if (i % 1 != 0) {
-//                segments.add(Segment.newBuilder().setV1Idx(i).setV2Idx(i + 2).build());
-//            }
 
         // Distribute colors randomly. Vertices are immutable, need to enrich them
         ArrayList<Vertex> verticesWithColors = new ArrayList<>();
@@ -96,7 +89,15 @@ public class DotGen {
             verticesWithColors.add(colored);
         }
 
-        return Mesh.newBuilder().addAllVertices(verticesWithColors).addAllSegments(segments).build();
+        // Set colors of centroids to red
+        ArrayList<Vertex> centroidsWithColors = new ArrayList<>();
+        for(Vertex v: centroids){
+            Property color = Property.newBuilder().setKey("rgb_color").setValue("255,0,0").build();
+            Vertex colored = Vertex.newBuilder(v).addProperties(color).build();
+            verticesWithColors.add(colored);
+        }
+
+        return Mesh.newBuilder().addAllVertices(verticesWithColors).addAllSegments(segments).addAllVertices(centroidsWithColors).build();
     }
 
 }

@@ -34,6 +34,8 @@ public class GraphicRenderer {
             canvas.setColor(old);
         }
 
+
+
         for (Structs.Segment s: aMesh.getSegmentsList()) {
             //line needs start and end
             //start is v1 position
