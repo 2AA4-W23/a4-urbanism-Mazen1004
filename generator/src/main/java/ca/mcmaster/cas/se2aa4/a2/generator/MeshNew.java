@@ -6,26 +6,32 @@ import java.util.ArrayList;
 
 public class MeshNew extends DotGen {
     ArrayList<Structs.Polygon> polygons = new ArrayList<>();
+    ArrayList<Integer> numOfCentroids = new ArrayList<>();
     ArrayList<Integer> neighborIndicies = new ArrayList<Integer>();
 
+
     public MeshNew(){
+        for (int i=0; i<575; i++){
+            numOfCentroids.add(i);
+        }
+
         //There is 575 (24x24) Centroid Points assuming you start at 0
         for (int c=0; c<575; c++){
             neighborIndicies.clear();
 
-            if (centroids.contains(c-1)) {
+            if (numOfCentroids.contains(c-1)) {
                 neighborIndicies.add(c-1);
                 System.out.println("test");
             }
-            if (centroids.contains(c-25)) {
+            if (numOfCentroids.contains(c-25)) {
                 neighborIndicies.add(c-25);
                 System.out.println("test2");
             }
-            if (centroids.contains(c+1)) {
+            if (numOfCentroids.contains(c+1)) {
                 neighborIndicies.add(c+1);
                 System.out.println("test3");
             }
-            if (centroids.contains(c+25)) {
+            if (numOfCentroids.contains(c+25)) {
                 neighborIndicies.add(c+25);
                 System.out.println("test4");
             }
