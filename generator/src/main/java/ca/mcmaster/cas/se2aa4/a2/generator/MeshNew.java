@@ -6,16 +6,33 @@ import java.util.ArrayList;
 
 public class MeshNew extends DotGen {
     ArrayList<Structs.Polygon> polygons = new ArrayList<>();
+    ArrayList<Integer> neighborIndicies = new ArrayList<Integer>();
 
     public MeshNew(){
-
         //There is 575 (24x24) Centroid Points assuming you start at 0
-        for (int i=0; i<525 ;i++){
-            //There is 1199 (24x25x2) Segments assuming you start at 0
-            int v;
-            Structs.Polygon p = Structs.Polygon.newBuilder().addSegmentIdxs(i).addSegmentIdxs(600+i+1).addSegmentIdxs(25+i).addSegmentIdxs(600+i).setCentroidIdx(i).build();
-            System.out.println(p.toString());
+        for (int c=0; c<575; c++){
+            neighborIndicies.clear();
 
+            if (centroids.contains(c-1)) {
+                neighborIndicies.add(c-1);
+                System.out.println("test");
+            }
+            if (centroids.contains(c-25)) {
+                neighborIndicies.add(c-25);
+                System.out.println("test2");
+            }
+            if (centroids.contains(c+1)) {
+                neighborIndicies.add(c+1);
+                System.out.println("test3");
+            }
+            if (centroids.contains(c+25)) {
+                neighborIndicies.add(c+25);
+                System.out.println("test4");
+            }
+            System.out.println(neighborIndicies.toString());
+            //There is 1199 (24x25x2) Segments assuming you start at 0
+            Structs.Polygon p = Structs.Polygon.newBuilder().setCentroidIdx(c).addSegmentIdxs(c).addSegmentIdxs(600+c+25).addSegmentIdxs(c+25).addSegmentIdxs(600+c).addAllNeighborIdxs(neighborIndicies).build();
+            System.out.println(p.toString());
         }
     }
 }
