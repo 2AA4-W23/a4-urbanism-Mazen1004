@@ -8,16 +8,11 @@ public class MeshNew extends DotGen {
     ArrayList<Structs.Polygon> polygons = new ArrayList<>();
 
     public MeshNew(){
-
         //There is 575 (24x24) Centroid Points assuming you start at 0
-        for (int c=0; c<10 ;c++){
+        for (int c=0; c<575 ;c++){
             //There is 1199 (24x25x2) Segments assuming you start at 0
-            int v;
-            for (v=0;v<1199;v++){
-            }
-            Structs.Polygon p = Structs.Polygon.newBuilder().addSegmentIdxs(v).addSegmentIdxs(v+1).addSegmentIdxs(v+25).addSegmentIdxs(v+26).setCentroidIdx(c).build();
+            Structs.Polygon p = Structs.Polygon.newBuilder().setCentroidIdx(c).addSegmentIdxs(c).addSegmentIdxs(600+c+25).addSegmentIdxs(c+25).addSegmentIdxs(600+c).build();
             System.out.println(p.toString());
-
         }
     }
 }
