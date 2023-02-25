@@ -27,16 +27,20 @@ public class DotGen {
 
     public Mesh generate() {
         // Create all the vertices
-        for(int x = 0; x < width; x += square_size) {
-            for (int y = 0; y < height; y += square_size) {
-                vertices.add(Vertex.newBuilder().setX((double) x).setY((double) y).build());;
+        for(double x = 0; x < width; x += square_size) {
+            for (double y = 0; y < height; y += square_size) {
+                Float xRound = Float.parseFloat(String.format("%.2f",x));
+                Float yRound = Float.parseFloat(String.format("%.2f",y));
+                vertices.add(Vertex.newBuilder().setX((double) xRound).setY((double) yRound).build());;
 
             }
         }
         //Create all the centroids
-        for(int x = 10; x < width-10; x += square_size) {
-            for (int y = 10; y < height-10; y += square_size) {
-                centroids.add(Vertex.newBuilder().setX((double) x).setY((double) y).build());;
+        for(double x = 10; x < width-10; x += square_size) {
+            for (double y = 10; y < height-10; y += square_size) {
+                Float xRound = Float.parseFloat(String.format("%.2f",x));
+                Float yRound = Float.parseFloat(String.format("%.2f",y));
+                centroids.add(Vertex.newBuilder().setX((double) xRound).setY((double) yRound).build());;
 
             }
         }
