@@ -21,19 +21,15 @@ public class MeshNew extends DotGen {
 
             if (numOfCentroids.contains(c-1)) {
                 neighborIndicies.add(c-1);
-                System.out.println("test");
             }
             if (numOfCentroids.contains(c-25)) {
                 neighborIndicies.add(c-25);
-                System.out.println("test2");
             }
             if (numOfCentroids.contains(c+1)) {
                 neighborIndicies.add(c+1);
-                System.out.println("test3");
             }
             if (numOfCentroids.contains(c+25)) {
                 neighborIndicies.add(c+25);
-                System.out.println("test4");
             }
             System.out.println(neighborIndicies.toString());
             //There is 1199 (24x25x2) Segments assuming you start at 0
