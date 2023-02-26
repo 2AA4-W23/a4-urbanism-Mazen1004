@@ -1,4 +1,5 @@
 
+import ca.mcmaster.cas.se2aa4.a2.generator.MeshNew;
 import ca.mcmaster.cas.se2aa4.a2.io.MeshFactory;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
 import ca.mcmaster.cas.se2aa4.a2.visualizer.GraphicRenderer;
@@ -44,5 +45,8 @@ public class Main {
         // Dump the mesh to stdout
         MeshDump dumper = new MeshDump();
         dumper.dump(aMesh);
+        MeshNew meshADT = new MeshNew();
+
+        System.out.println(meshADT);
     }
 }
