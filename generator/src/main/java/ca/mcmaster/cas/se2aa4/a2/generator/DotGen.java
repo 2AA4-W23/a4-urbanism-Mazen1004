@@ -20,88 +20,48 @@ public class DotGen {
     private final int height = 500;
     private final int square_size = 20;
 
-    ArrayList<Vertex> vertices = new ArrayList<>();
-    ArrayList<Segment> segments = new ArrayList<>();
-    ArrayList<Vertex> centroids = new ArrayList<>();
+    MeshImplement newMesh = new MeshImplement();
 
     public Mesh generate() {
 
         // Create all the vertices
         for(double x = 0; x < width; x += square_size) {
             for (double y = 0; y < height; y += square_size) {
-                Float xRound = Float.parseFloat(String.format("%.2f",x));
-                Float yRound = Float.parseFloat(String.format("%.2f",y));
-                vertices.add(Vertex.newBuilder().setX((double) xRound).setY((double) yRound).build());;
+                newMesh.addVertex(x,y);
             }
         }
 
         //Create all the centroids
         for(double x = 10; x < width-10; x += square_size) {
             for (double y = 10; y < height-10; y += square_size) {
-                Float xRound = Float.parseFloat(String.format("%.2f",x));
-                Float yRound = Float.parseFloat(String.format("%.2f",y));
-                centroids.add(Vertex.newBuilder().setX((double) xRound).setY((double) yRound).build());;
-
+                newMesh.addCentroid(x,y);
             }
         }
-
-
-        /*
-        for(int x = 0; x < width; x += square_size*2) {
-            for (int y = 0; y < height; y += square_size*2) {
-                //first dot
-                vertices.add(Vertex.newBuilder().setX((double) x).setY((double) y).build()); //overlapping with third dot
-                //second dot left
-                vertices.add(Vertex.newBuilder().setX((double) x + square_size).setY((double) y).build());
-                //third dot above first
-                vertices.add(Vertex.newBuilder().setX((double) x).setY((double) y + square_size).build());
-                //x+y slanted 45 deg
-                vertices.add(Vertex.newBuilder().setX((double) x + square_size).setY((double) y + square_size).build());
-                // (0,0) (20,0) (0,20) (20,20)
-                //   0      1     2       3
-                numOfVertices+=4;
-
-
-            }
-        }
-        */
-
 
         //Draws all the Segments
-        for(Vertex v: vertices){
-            //Draws Horizontal Segments
-            if((vertices.indexOf(v)+1)%25 != 0){
-                segments.add(Segment.newBuilder().setV1Idx(vertices.indexOf(v)).setV2Idx(vertices.indexOf(v)+1).build());
-            }
-            //Draws Vertical Segments
-            if((vertices.indexOf(v)+25) < vertices.size()){
-                segments.add(Segment.newBuilder().setV1Idx(vertices.indexOf(v)).setV2Idx(vertices.indexOf(v)+25).build());
-            }
-
+        for(Vertex v: newMesh.vertices){
+            newMesh.addSegment(v);
         }
 
         // Distribute colors randomly. Vertices are immutable, need to enrich them
-        ArrayList<Vertex> verticesWithColors = new ArrayList<>();
+        //ArrayList<Vertex> verticesWithColors = new ArrayList<>();
         Random bag = new Random();
-        for(Vertex v: vertices){
+        for(Vertex v: newMesh.vertices){
             int red = bag.nextInt(255);
             int green = bag.nextInt(255);
             int blue = bag.nextInt(255);
             String colorCode = red + "," + green + "," + blue;
-            Property color = Property.newBuilder().setKey("rgb_color").setValue(colorCode).build();
-            Vertex colored = Vertex.newBuilder(v).addProperties(color).build();
-            verticesWithColors.add(colored);
+            newMesh.vertexColors(colorCode,v);
         }
 
         // Set colors of centroids to red
-        ArrayList<Vertex> centroidsWithColors = new ArrayList<>();
-        for(Vertex v: centroids){
-            Property color = Property.newBuilder().setKey("rgb_color").setValue("255,0,0").build();
-            Vertex colored = Vertex.newBuilder(v).addProperties(color).build();
-            verticesWithColors.add(colored);
+        //ArrayList<Vertex> centroidsWithColors = new ArrayList<>();
+        for(Vertex v: newMesh.centroids){
+
+            newMesh.centroidColors(v);
         }
 
-        return Mesh.newBuilder().addAllVertices(verticesWithColors).addAllSegments(segments).addAllVertices(centroidsWithColors).build();
+        return newMesh.getMesh();
     }
 
 }
