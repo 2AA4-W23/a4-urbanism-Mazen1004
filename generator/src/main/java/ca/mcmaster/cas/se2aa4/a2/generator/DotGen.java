@@ -13,8 +13,7 @@ import ca.mcmaster.cas.se2aa4.a2.io.Structs.Vertex;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Segment;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Property;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Mesh;
-
-
+import org.locationtech.jts.triangulate.VoronoiDiagramBuilder;
 public class DotGen {
 
     private final int width = 500;
@@ -26,15 +25,16 @@ public class DotGen {
     ArrayList<Vertex> centroids = new ArrayList<>();
 
     public Mesh generate() {
+
         // Create all the vertices
         for(double x = 0; x < width; x += square_size) {
             for (double y = 0; y < height; y += square_size) {
                 Float xRound = Float.parseFloat(String.format("%.2f",x));
                 Float yRound = Float.parseFloat(String.format("%.2f",y));
                 vertices.add(Vertex.newBuilder().setX((double) xRound).setY((double) yRound).build());;
-
             }
         }
+
         //Create all the centroids
         for(double x = 10; x < width-10; x += square_size) {
             for (double y = 10; y < height-10; y += square_size) {
