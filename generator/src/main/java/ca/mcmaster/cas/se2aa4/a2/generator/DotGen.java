@@ -1,18 +1,16 @@
 package ca.mcmaster.cas.se2aa4.a2.generator;
 
-import java.io.IOException;
-import java.sql.Array;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Random;
+import java.util.*;
 
-import ca.mcmaster.cas.se2aa4.a2.io.Structs;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Vertex;
-//add segment import
-import ca.mcmaster.cas.se2aa4.a2.io.Structs.Segment;
-import ca.mcmaster.cas.se2aa4.a2.io.Structs.Property;
+
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Mesh;
+import java.util.Random;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.Point;
+import org.locationtech.jts.geom.PrecisionModel;
+
 import org.locationtech.jts.triangulate.VoronoiDiagramBuilder;
 public class DotGen {
 
@@ -21,6 +19,7 @@ public class DotGen {
     private final int square_size = 20;
 
     MeshImplement newMesh = new MeshImplement();
+    Random random = new Random();
 
     public Mesh generate() {
 
@@ -31,11 +30,13 @@ public class DotGen {
             }
         }
 
-        //Create all the centroids
-        for(double x = 10; x < width-10; x += square_size) {
-            for (double y = 10; y < height-10; y += square_size) {
-                newMesh.addCentroid(x,y);
-            }
+        Coordinate centroids = new Coordinate();
+        // Draws centroids
+        for (int i = 0; i < 575; i++) {
+            double x = random.nextDouble(475);
+            double y = random.nextDouble(475);
+            centroids.(x,y);
+            newMesh.addCentroid(x,y);
         }
 
         //Draws all the Segments
@@ -63,5 +64,21 @@ public class DotGen {
 
         return newMesh.getMesh();
     }
-
+    public void voronoi(){
+        VoronoiDiagramBuilder map = new VoronoiDiagramBuilder();
+        map.setSites();
+        // get list of coordinates (of centroids) to set sites
+        // use getdiagram which returns type geometry
+        // use geometry libraries to extract information to put back into visualizer
+            // getNumGeometries returns total number of geometries in getDiagram
+            // use for loop to iterate through every geometry in the collection
+            // use getGeometryN which returns the geometry in the collection
+                // use getCoordinates to get an array containing all the vertices in the geometry
+                    // loop through the array and extract the x and y coordinates
+                    // use x and y to build vertices
+                        // build segments using vertices
+                    // use Geometry getCentroid to get centroid
+                // input vertices, segments and centroid to polygon builder, then do the same as step2 to appear on SVG
+        map.getDiagram();
+    }
 }
