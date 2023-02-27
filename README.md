@@ -62,14 +62,32 @@ When you develop features and enrich the product, remember that you have first t
 
 ## Backlog
 
-### Definition of Done
 
--- Insert here your definition of done for your features --
+### Definition of Done
+- Code is neatly written and properly documented
+- Code has been reviewed, tested and employed on a testing environment
+- Code passes all unit, functional and acceptance tests
+
+
 
 ### Product Backlog
 
-| Id | Feature title | Who? | Start | End | Status |
+| Id | Feature title | Who? | Start (DD/MM/YY) | End (DD/MM/YY) | Status |
 |:--:|---------------|------|-------|-----|--------|
-|    |               |      |       |     |        |
-
+|  01  | Implement segments between vertices for 1 square | Kelvin  |  06/03/2023  | 09/03/2023 |  Done  |
+|  02  | Create full grid of squares | Matthew  |  09/03/2023  | 13/03/2023 |  Done  |
+|  03  | Colour vertices to random RGB value | Mazen  |  09/03/2023  | 13/03/2023 |  Done  |
+|  04  | Colour segments to average between two points | Kelvin  |  09/03/2023  | 13/03/2023 |  Done  |
+|  05  | Debug mode | Matthew  |  13/03/2023  | 14/03/2023 |  Done  |
+|  06  | Unique vertices and segments | Mazen  |  17/03/2023  | 20/03/2023 |  Done  |
+|  07  | Centroids in squares | Kelvin  |  17/03/2023  | 20/03/2023 |  Done  |
+|  08  | Squares defined as polygons | Matthew  |  20/03/2023  | 20/03/2023 |  Done  |
+|  09  | Centroids in squares | Mazen  |  20/03/2023  | 20/03/2023 |  Done  |
+|  10  | Neighbouring indices for each polygon | Kelvin  |  20/03/2023  | 22/03/2023 |  Done  |
+|  11  | MeshADT implementation | Matthew  |  27/03/2023  | 27/03/2023 |  Done  |
+|  12  | Computed Voronoi Diagram  | Mazen  |  20/03/2023  | 20/03/2023 |  Done  |
+|  13  | Apply Lloyd relaxation  | Kelvin  |  20/03/2023  | 20/03/2023 |  Done  |
+|  14  | Crop Mesh to expected Size  | Matthew  |  20/03/2023  | 20/03/2023 |  Done  |
+|  15  | Compute neighbourhood relationships using Delaunay’s triangulation  | Mazen  |  20/03/2023  | 20/03/2023 |  Done  |
+|  16  | Reordered the segments for each irregular polygon  | Kelvin  |  20/03/2023  | 20/03/2023 |  Done  |
 
