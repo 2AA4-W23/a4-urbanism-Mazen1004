@@ -86,9 +86,9 @@ When you develop features and enrich the product, remember that you have first t
 |  10  | Neighbouring indices for each polygon | Kelvin  |  20/02/2023  | 22/02/2023 |  Done  |
 |  11  | MeshADT implementation | Matthew  |  27/02/2023  | 27/02/2023 |  Done  |
 |  12  | Calculated Random Points  | Mazen  |  27/02/2023  | 27/02/2023 | Done   |
-|  12  | Computed Voronoi Diagram  | Mazen  |  27/02/2023  | 27/02/2023 |  NC |
-|  13  | Apply Lloyd relaxation  | Kelvin  |  27/02/2023  | 27/02/2023 |  NC  |
-|  14  | Crop Mesh to expected Size  | Matthew  |  27/02/2023  | 27/02/2023 |  NC  |
-|  15  | Compute neighbourhood relationships using Delaunay’s triangulation  | Mazen  |  27/02/2023  | 27/02/2023 |  NC  |
-|  16  | Reordered the segments for each irregular polygon  | Kelvin  |  27/02/2023  | 27/02/2023 |  NC  |
+|  13  | Computed Voronoi Diagram  | Mazen  |  27/02/2023  | 27/02/2023 |  NC |
+|  14  | Apply Lloyd relaxation  | Kelvin  |  27/02/2023  | 27/02/2023 |  NC  |
+|  15  | Crop Mesh to expected Size  | Matthew  |  27/02/2023  | 27/02/2023 |  NC  |
+|  16  | Compute neighbourhood relationships using Delaunay’s triangulation  | Mazen  |  27/02/2023  | 27/02/2023 |  NC  |
+|  17  | Reordered the segments for each irregular polygon  | Kelvin  |  27/02/2023  | 27/02/2023 |  NC  |
 
