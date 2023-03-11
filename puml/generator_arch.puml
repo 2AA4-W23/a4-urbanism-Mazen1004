@@ -1,0 +1,38 @@
+@startuml
+
+!include ./common.style
+ 
+package adt {}
+package configuration {}
+package export {}
+package geomfilters {}
+package specification{}
+package JTS LightSalmon {}
+package "Apache CLI" LightSalmon {}
+package io LightBlue {}
+package neighborhood {}
+
+adt <.> neighborhood
+neighborhood .> geomfilters
+
+JTS <.. geomfilters
+JTS <.. adt
+configuration .> "Apache CLI"
+
+io <. export
+
+export .> adt
+specification .> adt
+
+class Main
+
+Main .> specification
+configuration <.. Main 
+Main ..> io
+Main .> export
+
+specification .> JTS
+
+configuration <.. specification
+
+@enduml

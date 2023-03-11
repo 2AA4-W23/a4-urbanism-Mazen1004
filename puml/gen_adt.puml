@@ -1,0 +1,80 @@
+@startuml
+
+!include ./common.style
+ 
+package adt {
+
+    interface Cropable<T> {
+        + crop(x: float, y: float): T
+    }
+
+    class Mesh <<Iterable[Polygon]>> {
+        - width: int
+        - height: int
+        --
+        + this(w: int, h: int)
+        --
+        + register(p: Polygon)
+        + populateNeighborhood()
+    }
+
+    Mesh *--> Polygon
+
+
+    class PairOfVertex {
+        + this(v1: Vertex, v2: Vertex)
+        --
+        + contents(): Vertex[]
+        --
+        + equals(o: Object): bool
+        + hashcode(): int
+    }
+
+    class Polygon<<Iterable[Vertex]>> implements Cropable {
+        + this()
+        - this(hull: List<Vertex>)
+        --
+        + add (v: Vertex)
+        + registerAsNeighbor(p: Polygon)
+        + neighbors(): Set<Polygon>
+        --
+        + centroid(): Vertex
+        + hull(): List<PairOfVertex>
+        --
+        + equals(o: Object): bool
+        + hashcode(): int
+    }
+
+    Polygon *-right-> Vertex 
+    Polygon -down-> "*\n{ordered}" Polygon
+
+    PairOfVertex <.. Polygon
+
+    class Vertex implements Cropable {
+        - {static} PRECISION = 2
+        - x: int
+        - y: int
+        --
+        + this(x: float, y: float)
+        --
+        + x(): float
+        + y(): float
+        --
+        - convert(f: float): int
+        --
+        + equals(o: Object): bool
+        + hashcode(): int
+    }
+}
+
+
+package neighborhood {
+    abstract class Neighborhood {
+        + build()
+        + neighbors(p: Polygon): Set<Polygon>
+    }
+}
+
+neighborhood.Neighborhood <. adt.Mesh
+
+@enduml

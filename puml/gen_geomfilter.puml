@@ -1,0 +1,57 @@
+@startuml
+
+!include ./common.style
+ 
+package geomfilters {
+
+    class BoundingBox implements JTS.GeometryFilter {
+        - boundingBox: Geometry
+        --
+        + this(w: int, h: int)
+        --
+        + contents(): Geometry[]
+    }
+
+    class ExtractCentroids implements JTS.GeometryFilter {
+        + centroids(): Set<Coordinate>
+    }
+
+    class ExtractTriangles implements JTS.GeometryFilter {
+        + getLinks(): Map<Vertex, Set<Vertex>>
+    }
+
+    class ToPolygons implements JTS.GeometryFilter {
+        + transformed(): Set<adt.Polygons>
+        --
+        + transform(p: JDT.Polygon)
+    }
+
+}
+
+
+package adt {
+    class Vertex
+}
+
+geomfilters.ExtractTriangles ..> adt.Vertex
+
+package JTS {
+
+    interface GeometryFilter {
+        + filter(g: Geometry)
+    }
+
+    class Geometry {
+        + apply(filter: GeometryFilter)
+    }
+
+    GeometryFilter <.> Geometry: visitor
+
+    class Polygon extends Geometry
+
+}
+
+geomfilters.ToPolygons ..> adt.Polygon
+JTS.Polygon <.. geomfilters.ToPolygons
+
+@enduml

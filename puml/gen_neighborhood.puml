@@ -1,0 +1,52 @@
+@startuml
+
+!include ./common.style
+ 
+package specification {
+
+    interface Buildable {
+        + build(): Mesh
+    }
+    class GridSpecification
+    class IrregularSpecification implements Buildable
+    GridSpecification ..|> Buildable
+}
+
+package JTS {
+    class VoronoiDiagramBuilder
+    class DelaunayTriangulationDiagramBuilder
+}
+
+
+package neighborhood {
+    abstract class Neighborhood {
+        + build(polygons: Set<Polygons>)
+        + neighbors(p: Polygon): Set<Polygon>
+        --
+        # {abstract} computeRelations()
+        --
+        # register(p: Polygon, neighbors: Set<Polygon>)
+        # register(p1: Polygon, p2: Polygon)
+        --
+        # polygonAt(v: Vertex): Polygon
+        # registeredCentroids(): Set<Vertex>
+    }
+
+    class DelaunayNeighborhood extends Neighborhood {
+        # <<override>> computeRelations()
+    }
+    class GridNeighborhood {
+        # <<override>> computeRelations()
+    }
+
+    GridNeighborhood --|> Neighborhood
+
+}
+
+neighborhood.DelaunayNeighborhood ..> JTS.DelaunayTriangulationDiagramBuilder
+specification.IrregularSpecification ..> JTS.VoronoiDiagramBuilder
+
+neighborhood.GridNeighborhood <. specification.GridSpecification
+neighborhood.DelaunayNeighborhood <. specification.IrregularSpecification
+
+@enduml

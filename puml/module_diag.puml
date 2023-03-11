@@ -1,0 +1,19 @@
+@startuml
+
+!include ./common.style
+
+component [io]
+component [generator]
+component [visualizer]
+
+component [CLI] #LightSalmon
+component [JTS] #LightSalmon
+
+[generator] --> [io]
+[io] <- [visualizer]
+[JTS] <- [generator]
+
+[generator] -> [CLI]
+[CLI] <-- [visualizer]
+
+@enduml
