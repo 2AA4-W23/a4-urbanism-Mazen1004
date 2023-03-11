@@ -16,8 +16,8 @@ It creates two jars:
 ## Examples of execution
 
 ### Generating a mesh, grid or irregular
-
-``` ensure for -k it's grid or irregular depending  
+    
+``` ensure for -k it's grid or irregular depending on the needs of the user 
 mosser@azrael A2 % java -jar generator/generator.jar -k grid -h 1080 -w 1920 -p 1000 -s 20 -o img/grid.mesh 
 mosser@azrael A2 % java -jar generator/generator.jar -k irregular -h 1080 -w 1920 -p 1000 -s 20 -o img/irregular.mesh
 ```
