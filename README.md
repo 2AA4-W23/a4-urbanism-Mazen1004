@@ -34,7 +34,7 @@ mosser@azrael generator %
 
 ### Visualizer
 
-To visualize an existing mesh, go the the `visualizer` directory, and use `java -jar` to run the product. The product take two arguments (so far): the file containing the mesh, and the name of the file to store the visualization (as an SVG image).
+To visualize an existing mesh, go to the `visualizer` directory, and use `java -jar` to run the product. The product take two arguments (so far): the file containing the mesh, and the name of the file to store the visualization (as an SVG image).
 
 ```
 mosser@azrael A2 % cd visualizer 
@@ -68,26 +68,27 @@ When you develop features and enrich the product, remember that you have first t
 - Code has been reviewed, tested and employed on a testing environment
 - Code passes all unit, functional and acceptance tests
 
-
+-NC = Not Compelete
 
 ### Product Backlog
 
 | Id | Feature title | Who? | Start (DD/MM/YY) | End (DD/MM/YY) | Status |
 |:--:|---------------|------|-------|-----|--------|
-|  01  | Implement segments between vertices for 1 square | Kelvin  |  06/03/2023  | 09/03/2023 |  Done  |
-|  02  | Create full grid of squares | Matthew  |  09/03/2023  | 13/03/2023 |  Done  |
-|  03  | Colour vertices to random RGB value | Mazen  |  09/03/2023  | 13/03/2023 |  Done  |
-|  04  | Colour segments to average between two points | Kelvin  |  09/03/2023  | 13/03/2023 |  Done  |
-|  05  | Debug mode | Matthew  |  13/03/2023  | 14/03/2023 |  Done  |
-|  06  | Unique vertices and segments | Mazen  |  17/03/2023  | 20/03/2023 |  Done  |
-|  07  | Centroids in squares | Kelvin  |  17/03/2023  | 20/03/2023 |  Done  |
-|  08  | Squares defined as polygons | Matthew  |  20/03/2023  | 20/03/2023 |  Done  |
-|  09  | Centroids in squares | Mazen  |  20/03/2023  | 20/03/2023 |  Done  |
-|  10  | Neighbouring indices for each polygon | Kelvin  |  20/03/2023  | 22/03/2023 |  Done  |
-|  11  | MeshADT implementation | Matthew  |  27/03/2023  | 27/03/2023 |  Done  |
-|  12  | Computed Voronoi Diagram  | Mazen  |  20/03/2023  | 20/03/2023 |  Done  |
-|  13  | Apply Lloyd relaxation  | Kelvin  |  20/03/2023  | 20/03/2023 |  Done  |
-|  14  | Crop Mesh to expected Size  | Matthew  |  20/03/2023  | 20/03/2023 |  Done  |
-|  15  | Compute neighbourhood relationships using Delaunay’s triangulation  | Mazen  |  20/03/2023  | 20/03/2023 |  Done  |
-|  16  | Reordered the segments for each irregular polygon  | Kelvin  |  20/03/2023  | 20/03/2023 |  Done  |
+|  01  | Implement segments between vertices for 1 square | Kelvin  |  06/02/2023  | 09/02/2023 |  Done  |
+|  02  | Create full grid of squares | Matthew  |  09/02/2023  | 13/02/2023 |  Done  |
+|  03  | Colour vertices to random RGB value | Mazen  |  09/02/2023  | 13/02/2023 |  Done  |
+|  04  | Colour segments to average between two points | Kelvin  |  09/02/2023  | 13/02/2023 |  Done  |
+|  05  | Debug mode | Matthew  |  13/02/2023  | 14/02/2023 |  Done  |
+|  06  | Unique vertices and segments | Mazen  |  17/02/2023  | 20/02/2023 |  Done  |
+|  07  | Centroids in squares | Kelvin  |  17/02/2023  | 20/02/2023 |  Done  |
+|  08  | Squares defined as polygons | Matthew  |  20/02/2023  | 20/02/2023 |  Done  |
+|  09  | Centroids in squares | Mazen  |  20/02/2023  | 20/02/2023 |  Done  |
+|  10  | Neighbouring indices for each polygon | Kelvin  |  20/02/2023  | 22/02/2023 |  Done  |
+|  11  | MeshADT implementation | Matthew  |  27/02/2023  | 27/02/2023 |  Done  |
+|  12  | Calculated Random Points  | Mazen  |  27/02/2023  | 27/02/2023 | Done   |
+|  13  | Computed Voronoi Diagram  | Mazen  |  27/02/2023  | 27/02/2023 |  NC |
+|  14  | Apply Lloyd relaxation  | Kelvin  |  27/02/2023  | 27/02/2023 |  NC  |
+|  15  | Crop Mesh to expected Size  | Matthew  |  27/02/2023  | 27/02/2023 |  NC  |
+|  16  | Compute neighbourhood relationships using Delaunay’s triangulation  | Mazen  |  27/02/2023  | 27/02/2023 |  NC  |
+|  17  | Reordered the segments for each irregular polygon  | Kelvin  |  27/02/2023  | 27/02/2023 |  NC  |
 

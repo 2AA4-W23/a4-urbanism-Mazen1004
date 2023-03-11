@@ -1,0 +1,77 @@
+@startuml
+
+!include ./common.style
+ 
+package specification {
+
+    class SpecificationFactory {
+        + {static} create(conf: Configuration): Buildable
+    }
+
+    interface Buildable {
+        + build(): Mesh
+    }
+
+    class GridSpecification implements Buildable {
+        - width: int
+        - height: int
+        - squareSize: int
+        --
+        + <<override>> build(): Mesh
+        --
+        + this(w: int, h: int, sqS: int)
+        ~ this(options: Map<String, String>)
+        --
+        - checkSizeConstraints(w: int, h: int, sqS: int): bool
+        - buildConvexSquare(i: int, j: int): Polygon
+    }
+
+    class IrregularSpecification implements Buildable {
+        - width: int
+        - height: int
+        - nbTiles: int
+        - relax: int
+        --
+         + <<override>> build(): Mesh
+        --
+        + this(w: int, h: int, n: int, r: int)
+        ~ this(options: Map<String, String>)
+        --
+        - initialize(): Set<Coordinate>
+        - generate(relax: int, sites: Set<Coordinates>): Set<Polygons>
+        - tesselate(sites: Set<Coordinates>): GeometryCollection
+    }
+
+    SpecificationFactory . Buildable
+}
+
+package adt {
+    class Polygon
+    class Mesh
+    Mesh *--> Polygon
+}
+
+package configuration {
+    class Configuration {
+        + options(): Map<String, String>
+    }
+}
+
+package JTS {
+    
+    together {
+        class VoronoiDiagramBuilder
+        class GeometryCollection
+        class Coordinates
+    }
+    VoronoiDiagramBuilder .[hidden]> GeometryCollection
+}
+
+specification.IrregularSpecification ..> JTS.VoronoiDiagramBuilder
+specification.IrregularSpecification ..> JTS.Coordinates
+specification.IrregularSpecification ..> JTS.GeometryCollection
+
+configuration.Configuration <.. specification.SpecificationFactory
+specification.Buildable .> adt.Mesh
+
+@enduml

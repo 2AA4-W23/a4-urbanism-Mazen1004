@@ -1,0 +1,83 @@
+@startuml
+
+!include ./common.style
+ 
+class Main {
+    + {static} main(args: String[])
+}
+
+Main .> renderer.Renderer
+Main ..> configuration.Configuration
+
+
+package configuration {
+    class Configuration {
+        + this(args: String[])
+        --
+        + input(): String
+        + output(): String
+        + debug(): Boolean
+    }
+}
+
+package renderer {
+
+    package properties {
+        interface PropertyAccess<T> {
+            + extract(props: List<Property>): Optional<T>
+        }
+        
+        class ColorProperty
+        PropertyAccess <|. ColorProperty
+        
+        class Reader {
+            ~this()
+        }
+
+        ColorProperty .> Reader
+    }
+
+    interface Renderer {
+        + render(mesh: Mesh, canvas: Graphics2D)
+    }
+
+    class GraphicRenderer implements Renderer {
+        + render(mesh: Mesh, canvas: Graphics2D)
+        --
+        - drawPolygons(mesh: Mesh, canvas: Graphics2D)
+        - drawAPolygon(p: Polygon, mesh: Mesh, canvas: Graphics2D)
+    }
+
+    class DebugRenderer implements Renderer {
+        + this(r: Renderer)
+        --
+        + render(mesh: Mesh, canvas: Graphics2D)
+        --
+        + drawCentroids(mesh: Mesh, canvas: Graphics2D)
+        + drawNeighborhood(mesh: Mesh, canvas: Graphics2D)
+    }
+    
+    Renderer "1\nfoundation" <-* DebugRenderer
+
+    class Hull <<Iterable>> {
+        + this()
+        --
+        + add(s: Segment, m: Mesh)
+    }
+
+    GraphicRenderer .> Hull
+} 
+
+
+    renderer.GraphicRenderer ..> PropertyAccess 
+
+
+renderer ..> "io.Structs"
+
+configuration.Configuration ..> "Apache CLI"
+
+package "io" LightBlue {} 
+package "Apache CLI" LightSalmon {}
+
+
+@enduml

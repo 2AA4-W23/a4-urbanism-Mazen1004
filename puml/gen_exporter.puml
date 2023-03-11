@@ -1,0 +1,53 @@
+@startuml
+
+!include ./common.style
+ 
+package exporter {
+
+    class Exporter {
+        + this()
+        --
+        + run(m: adt.Mesh): io.Structs.Mesh
+        --
+        - registerVertices(m: adt.Mesh, builder: io.Mesh.Builder): Map<adt.Vertex, Int> 
+        - registerSegments(m: adt.Mesh, builder: io.Mesh.Builder, reg: Map<adt.Vertex, Int>):  Map<adt.PairOfVertex, Int> 
+        - registerPolygons(m: adt.Mesh, builder: io.Mesh.Builder, reg: Map<adt.PairOfVertex, Int>)
+        --
+        - buildVertexRegistry(m: Mesh): Map<adt.Vertex, Int>
+        - buildSegmentRegistry(m: Mesh): Map<adt.PairOfVertex, Int>
+        - buildPolygonRegistry(m: Mesh): Map<adt.Polygon,Int>
+    }
+}
+
+package adt {
+
+    class Polygon
+    class Vertex
+    class PairOfVertex
+    class Mesh
+    Mesh .[hidden].Polygon
+    Polygon .[hidden]. PairOfVertex
+    PairOfVertex .[hidden].Vertex
+}
+
+package io {
+    class Structs
+    io.Polygon <-+ io.Structs
+    io.Segment <--+ io.Structs
+    io.Vertex  <--+ io.Structs
+    io.Mesh    <--+ io.Structs
+    io.Vertex <.[hidden]. io.Segment
+    io.Segment <.[hidden]. io.Polygon
+}
+
+exporter.Exporter ..> adt.Polygon
+exporter.Exporter ..> adt.Vertex
+exporter.Exporter ..> adt.PairOfVertex
+exporter.Exporter ..> adt.Mesh
+
+exporter.Exporter ..> io.Mesh
+exporter.Exporter ..> io.Vertex
+exporter.Exporter ..> io.Segment
+exporter.Exporter ..> io.Polygon
+
+@enduml
