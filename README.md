@@ -51,7 +51,7 @@ mosser@azrael visualizer % ls -lh sample.svg
 -rw-r--r--  1 mosser  staff    56K 29 Jan 10:53 sample.svg
 mosser@azrael visualizer %
 ```
-To viualize the SVG file:
+To visualize the SVG file:
 
   - Open it with a web browser
   - Convert it into something else with tool slike `rsvg-convert`
