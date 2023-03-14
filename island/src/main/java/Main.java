@@ -9,7 +9,9 @@ public class Main {
     public static void main(String[] args) throws Exception {
         Configuration config = new Configuration(args);
         Structs.Mesh aMesh = new MeshFactory().read(config.input());
+        System.out.println(aMesh.getPolygonsList());
 
+<<<<<<< HEAD
         // calculate the distance of each centroid from the center
         final double centerX = 960; //weight of canvas 1920 / 2
         final double centerY = 540; //height of canvas 1080 / 2
@@ -42,6 +44,9 @@ public class Main {
 
 
 
+=======
+        System.out.println("print this bro");
+>>>>>>> f407caad3a80979b99610f209cc8e9ca34d791cf
         new MeshFactory().write(aMesh, config.output());
     }
     public static double distanceCalc(double x1, double y1, double x2, double y2) {
