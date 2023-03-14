@@ -22,7 +22,10 @@ public class Main {
         ArrayList<Integer> tilesLagoon = new ArrayList<>();
 
         for (int i = 0; i < polygonList.size(); i++) {
+
             Structs.Polygon polygonIndex = aMesh.getPolygons(i);
+            Structs.Polygon.Builder pc = Structs.Polygon.newBuilder(polygonIndex);
+
             int centroidIndex = polygonIndex.getCentroidIdx();
             System.out.println(centroidIndex); //list of all the centroids
 
@@ -37,10 +40,16 @@ public class Main {
 
             if (distanceLagoon < radiusLagoon) { //add the tile if the distance is less than the radius
                 tilesLagoon.add(centroidIndex);
+                String color = 111 + "," + 212 + "," + 232;
+                Structs.Property p = Structs.Property.newBuilder()
+                        .setKey("rgb_color").setValue(color).build();
+                pc.addProperties(p);
             }
+
         }
+
         System.out.println(tilesLagoon);
-        System.out.println("test");
+
 
         new MeshFactory().write(aMesh, config.output());
     }
