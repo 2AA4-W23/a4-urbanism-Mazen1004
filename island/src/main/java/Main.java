@@ -20,14 +20,22 @@ public class Main {
 
         List<Structs.Polygon> polygonList = aMesh.getPolygonsList();
         ArrayList<Integer> tilesLagoon = new ArrayList<>();
-
-        for (int i = 0; i < polygonList.size(); i++) {
+        int i = 0;
+        for (Structs.Polygon poly : aMesh.getPolygonsList()) {
 
             Structs.Polygon polygonIndex = aMesh.getPolygons(i);
-            Structs.Polygon.Builder pc = Structs.Polygon.newBuilder(polygonIndex);
-
             int centroidIndex = polygonIndex.getCentroidIdx();
             System.out.println(centroidIndex); //list of all the centroids
+
+            Structs.Polygon.Builder pc = Structs.Polygon.newBuilder(poly);
+            int index = poly.getCentroidIdx();
+            List<Structs.Vertex> newPolygons = new ArrayList<>(aMesh.getVerticesList());
+            Structs.Vertex centroid = newPolygons.get(index);
+            String color = 111 + "," + 212 + "," + 232;
+            Structs.Property p = Structs.Property.newBuilder()
+                    .setKey("rgb_color").setValue(color).build();
+            pc.addProperties(p);
+
 
             Structs.Vertex centroidVertices = aMesh.getVertices(polygonIndex.getCentroidIdx());
             System.out.println(centroidVertices);
@@ -40,12 +48,9 @@ public class Main {
 
             if (distanceLagoon < radiusLagoon) { //add the tile if the distance is less than the radius
                 tilesLagoon.add(centroidIndex);
-                String color = 111 + "," + 212 + "," + 232;
-                Structs.Property p = Structs.Property.newBuilder()
-                        .setKey("rgb_color").setValue(color).build();
-                pc.addProperties(p);
             }
 
+           i++;
         }
 
         System.out.println(tilesLagoon);
