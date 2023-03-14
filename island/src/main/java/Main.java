@@ -20,12 +20,17 @@ public class Main {
 
         List<Structs.Polygon> polygonList = aMesh.getPolygonsList();
         ArrayList<Integer> tilesLagoon = new ArrayList<>();
+        Structs.Mesh.Builder clone = Structs.Mesh.newBuilder();
+
         int i = 0;
         for (Structs.Polygon poly : aMesh.getPolygonsList()) {
 
             Structs.Polygon polygonIndex = aMesh.getPolygons(i);
             int centroidIndex = polygonIndex.getCentroidIdx();
             System.out.println(centroidIndex); //list of all the centroids
+
+            Structs.Vertex centroidVertices = aMesh.getVertices(polygonIndex.getCentroidIdx());
+            System.out.println(centroidVertices);
 
             Structs.Polygon.Builder pc = Structs.Polygon.newBuilder(poly);
             int index = poly.getCentroidIdx();
@@ -35,10 +40,8 @@ public class Main {
             Structs.Property p = Structs.Property.newBuilder()
                     .setKey("rgb_color").setValue(color).build();
             pc.addProperties(p);
+            clone.addPolygons(pc);
 
-
-            Structs.Vertex centroidVertices = aMesh.getVertices(polygonIndex.getCentroidIdx());
-            System.out.println(centroidVertices);
 
             //get the coordinates from the centroid
             double centroidX = centroidVertices.getX();
