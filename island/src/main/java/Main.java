@@ -44,7 +44,6 @@ public class Main {
             Structs.Vertex centroidVertices = aMesh.getVertices(polygonIndex.getCentroidIdx());
             System.out.println(centroidVertices);
 
-<<<<<<< HEAD
 
             //get the coordinates from the centroid
             double centroidX = centroidVertices.getX();
@@ -97,68 +96,11 @@ public class Main {
         }
 
 
-
         new MeshFactory().write(clone.build(), config.output()); //output mesh
 
-//        System.out.println(tilesLagoon);
-//        System.out.println(tilesLand);
+        //System.out.println(tilesLagoon);
+        //System.out.println(tilesLand);
 
-
-    }
-    public static double distanceCalc(double x1, double y1, double x2, double y2) {
-        return Math.sqrt((y2 - y1) * (y2 - y1) + (x2 - x1) * (x2 - x1));
-=======
-        // calculate the distance of each centroid from the center
-        final double centerX = 960; //weight of canvas 1920 / 2
-        final double centerY = 540; //height of canvas 1080 / 2
-
-        //radius of how big we want the lagoon or land island to be
-        double radiusLagoon = 100;
-        double radiusLand = 50;
-
-        List<Structs.Polygon> polygonList = aMesh.getPolygonsList();
-        ArrayList<Integer> tilesLagoon = new ArrayList<>();
-        Structs.Mesh.Builder clone = Structs.Mesh.newBuilder();
-
-        int i = 0;
-        for (Structs.Polygon poly : aMesh.getPolygonsList()) {
-
-            Structs.Polygon polygonIndex = aMesh.getPolygons(i);
-            int centroidIndex = polygonIndex.getCentroidIdx();
-            System.out.println(centroidIndex); //list of all the centroids
-
-            Structs.Vertex centroidVertices = aMesh.getVertices(polygonIndex.getCentroidIdx());
-            System.out.println(centroidVertices);
-
-            Structs.Polygon.Builder pc = Structs.Polygon.newBuilder(poly);
-            int index = poly.getCentroidIdx();
-            List<Structs.Vertex> newPolygons = new ArrayList<>(aMesh.getVerticesList());
-            Structs.Vertex centroid = newPolygons.get(index);
-            String color = 111 + "," + 212 + "," + 232;
-            Structs.Property p = Structs.Property.newBuilder()
-                    .setKey("rgb_color").setValue(color).build();
-            pc.addProperties(p);
-            clone.addPolygons(pc);
-
-
-            //get the coordinates from the centroid
-            double centroidX = centroidVertices.getX();
-            double centroidY = centroidVertices.getY();
-
-            double distanceLagoon = distanceCalc(centerX, centerY, centroidX, centroidY);
-
-            if (distanceLagoon < radiusLagoon) { //add the tile if the distance is less than the radius
-                tilesLagoon.add(centroidIndex);
-            }
-
-           i++;
-        }
-
-        System.out.println(tilesLagoon);
-
-
-        new MeshFactory().write(aMesh, config.output());
->>>>>>> 88b50ee822ce4ac4a48dc5830ba6bc5c91afdbb9
     }
     public static double distanceCalc(double x1, double y1, double x2, double y2) {
         return Math.sqrt((y2 - y1) * (y2 - y1) + (x2 - x1) * (x2 - x1));
