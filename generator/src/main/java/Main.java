@@ -8,6 +8,8 @@ import ca.mcmaster.cas.se2aa4.a2.io.MeshFactory;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
 
@@ -16,9 +18,10 @@ public class Main {
         Buildable specification = SpecificationFactory.create(config);
         Mesh theMesh = specification.build();
         Structs.Mesh exported = new Exporter().run(theMesh);
-        if(config.export().containsKey(Configuration.DEMO)) {
+        if (config.export().containsKey(Configuration.DEMO)) {
             exported = new RandomEnricher(0.2f).process(exported);
         }
+
         new MeshFactory().write(exported, config.export(Configuration.FILENAME));
     }
 }
