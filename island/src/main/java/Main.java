@@ -1,7 +1,7 @@
-import Configuration.*;
-import Features.*;
 import ca.mcmaster.cas.se2aa4.a2.io.MeshFactory;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
+import ca.mcmaster.cas.se2aa4.island.Features.*;
+import ca.mcmaster.cas.se2aa4.island.Configuration.*;
 
 
 public class Main {
