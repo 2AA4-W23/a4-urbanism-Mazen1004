@@ -7,6 +7,7 @@ public class Configuration {
     public static final String OUTPUT = "o";
     public static final String INPUT = "i";
     public static final String MODE = "mode";
+    public static final String SHAPE = "shape";
 
     private CommandLine cli;
     public Configuration(String[] args) {
@@ -20,13 +21,17 @@ public class Configuration {
     private CommandLineParser parser() {
         return new DefaultParser();
     }
-
+    /*public String export(String key) {
+        return cli.getOptionValue(key);
+    }*/
+    public String mode() {
+        return this.cli.getOptionValue(MODE);
+    }
+    public String shape() {
+        return this.cli.getOptionValue(SHAPE);
+    }
     public String input() {
         return this.cli.getOptionValue(INPUT);
-    }
-
-    public String mode(){
-        return this.cli.getOptionValue(MODE);
     }
 
     public String output() {
@@ -38,6 +43,7 @@ public class Configuration {
         options.addOption(new Option(INPUT, true, "Input file (SVG)"));
         options.addOption(new Option(OUTPUT, true, "Output file (MESH)"));
         options.addOption(new Option(MODE, true,"LAGOON MODE"));
+        options.addOption(new Option(SHAPE, true,"SHAPE MODE"));
 
         return options;
     }
