@@ -10,8 +10,9 @@ public class Main {
         Configuration config = new Configuration(args);
         Structs.Mesh aMesh = new MeshFactory().read(config.input()); //input mesh from the command lines
 
+        String mode = config.mode();
         Structs.Mesh outputMesh; //initializing output mesh
-        outputMesh = Tiles.tile(aMesh);
+        outputMesh = Tiles.tile(aMesh, mode);
 
         new MeshFactory().write(outputMesh, config.output()); //output to visualizer
     }

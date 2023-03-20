@@ -24,6 +24,7 @@ public class Configuration {
     public String input() {
         return this.cli.getOptionValue(INPUT);
     }
+
     public String mode(){
         return this.cli.getOptionValue(MODE);
     }
