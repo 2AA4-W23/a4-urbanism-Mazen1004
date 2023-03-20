@@ -6,6 +6,7 @@ public class Configuration {
 
     public static final String OUTPUT = "o";
     public static final String INPUT = "i";
+    public static final String MODE = "mode";
 
     private CommandLine cli;
     public Configuration(String[] args) {
@@ -23,6 +24,9 @@ public class Configuration {
     public String input() {
         return this.cli.getOptionValue(INPUT);
     }
+    public String mode(){
+        return this.cli.getOptionValue(MODE);
+    }
 
     public String output() {
         return this.cli.getOptionValue(OUTPUT, "output.svg");
@@ -32,6 +36,7 @@ public class Configuration {
         Options options = new Options();
         options.addOption(new Option(INPUT, true, "Input file (SVG)"));
         options.addOption(new Option(OUTPUT, true, "Output file (MESH)"));
+        options.addOption(new Option(MODE, true,"LAGOON MODE"));
 
         return options;
     }

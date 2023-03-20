@@ -9,7 +9,6 @@ import java.util.List;
 public class Lagoon extends Shape{
     public static Structs.Mesh.Builder lagoon(Structs.Mesh aMesh){
 
-
         //radius of how big we want the lagoon or land island to be
         double radiusLagoon = 200;
         double radiusLand = 500;
@@ -45,16 +44,11 @@ public class Lagoon extends Shape{
 
             /*use the poly index for the next step
             not the centroid index cause cant call the methods on it
-
-
-
              */
 
             //get the coordinates from the centroid
             double centroidX = centroidVertices.getX();
             double centroidY = centroidVertices.getY();
-
-
 
             double distance = distanceCalc(centerX, centerY, centroidX, centroidY);
 
@@ -103,6 +97,5 @@ public class Lagoon extends Shape{
         }
         //returns clone mesh
         return clone;
-
     }
 }
