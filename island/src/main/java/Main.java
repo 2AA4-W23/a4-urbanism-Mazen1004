@@ -12,7 +12,7 @@ public class Main {
 
         String mode = config.mode();
         Structs.Mesh outputMesh; //initializing output mesh
-        outputMesh = Tiles.tile(aMesh, mode);
+        outputMesh = Tiles.tile(aMesh, mode); //tiles take
 
         new MeshFactory().write(outputMesh, config.output()); //output to visualizer
     }

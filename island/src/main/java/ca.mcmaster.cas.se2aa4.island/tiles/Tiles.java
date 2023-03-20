@@ -9,9 +9,13 @@ public class Tiles {
 
         Structs.Mesh outputMesh = aMesh;
 
+
         if (mode.equals("lagoon")) {
             //Takes aMesh into Lagoon
             outputMesh = Lagoon.lagoon(aMesh).build();
+        }
+        else { // no mode is given
+            return outputMesh;
         }
 
         return outputMesh;
