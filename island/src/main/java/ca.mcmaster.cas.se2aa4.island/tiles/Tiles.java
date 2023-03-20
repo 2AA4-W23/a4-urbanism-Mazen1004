@@ -14,9 +14,6 @@ public class Tiles {
             //Takes aMesh into Lagoon
             outputMesh = Lagoon.lagoon(aMesh).build();
         }
-        else { // no mode is given
-            return outputMesh;
-        }
 
         return outputMesh;
     }
