@@ -2,29 +2,17 @@ import ca.mcmaster.cas.se2aa4.a2.io.MeshFactory;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
 import ca.mcmaster.cas.se2aa4.island.Features.*;
 import ca.mcmaster.cas.se2aa4.island.Configuration.*;
+import ca.mcmaster.cas.se2aa4.island.tiles.Tiles;
 
 
 public class Main {
     public static void main(String[] args) throws Exception {
         Configuration config = new Configuration(args);
         Structs.Mesh aMesh = new MeshFactory().read(config.input()); //input mesh from the command lines
-        String mode = config.mode();
 
+        Structs.Mesh outputMesh; //initializing output mesh
+        outputMesh = Tiles.tile(aMesh);
 
-        Structs.Mesh outputMesh = aMesh;
-        if (mode != null && "lagoon".equals(mode)) {
-            //Takes aMesh into Lagoon
-            Lagoon shapeTest = new Lagoon();
-            outputMesh = shapeTest.lagoon(aMesh).build();
-        }
-
-
-        //Takes aMesh into Lagoon
-        //Lagoon shapeTest = new Lagoon();
-        //shapeTest.lagoon(aMesh); this is equivalent to clone and should work
-
-        //new MeshFactory().write(shapeTest.lagoon(aMesh).build(), config.output()); //output mesh
-        new MeshFactory().write(outputMesh, config.output()); //output mesh
+        new MeshFactory().write(outputMesh, config.output()); //output to visualizer
     }
-
 }
