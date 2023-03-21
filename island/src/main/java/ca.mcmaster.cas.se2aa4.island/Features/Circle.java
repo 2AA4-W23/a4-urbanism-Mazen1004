@@ -10,9 +10,15 @@ public class Circle extends Shape {
 
     //circle shape
     public static Structs.Mesh.Builder circle(Structs.Mesh aMesh) {
+
         List <Integer> waterNeighbour = new ArrayList<>();
+
+        List <Integer> landPolygon = new ArrayList<>();
+        List <Integer> waterPolygon = new ArrayList<>();
+
         int polyIndex = 0;
-        double radiusLagoon = 200;
+        double radiusCircle = 400;
+
         Structs.Mesh.Builder clone = Structs.Mesh.newBuilder();
         clone.addAllVertices(aMesh.getVerticesList());
         clone.addAllSegments(aMesh.getSegmentsList());
@@ -26,11 +32,11 @@ public class Circle extends Shape {
             Structs.Polygon polygonIndex = aMesh.getPolygons(i);
             Structs.Polygon.Builder pc = Structs.Polygon.newBuilder(polygonIndex);
 
-            int centroidIndex = polygonIndex.getCentroidIdx();
-            System.out.println(centroidIndex); //list of all the centroids
+//            int centroidIndex = polygonIndex.getCentroidIdx();
+//            System.out.println(centroidIndex); //list of all the centroids
 
             Structs.Vertex centroidVertices = aMesh.getVertices(polygonIndex.getCentroidIdx());
-            System.out.println(centroidVertices);
+//            System.out.println(centroidVertices);
 
 
             //get the coordinates from the centroid
@@ -40,26 +46,37 @@ public class Circle extends Shape {
             double distance = distanceCalc(centerX, centerY, centroidX, centroidY);
 
 
-            if (distance < radiusLagoon) { //add the tile if the distance is less than the radius of the lagoon
-                String color= circle.LandColor;
+            if (distance < radiusCircle) { //add the tile if the distance is less than the radius of the circle
+                String color = circle.LandColor;
                 Structs.Property p = Structs.Property.newBuilder().setKey("rgb_color").setValue(color).build();
-                waterNeighbour.add(polyIndex);
+                waterNeighbour.add(polyIndex); //add index for land tile
                 pc.addProperties(p);
             }
 
             else {
                 String color = circle.OceanColor; //ocean color
                 Structs.Property p = Structs.Property.newBuilder().setKey("rgb_color").setValue(color).build();
-                waterNeighbour.add(polyIndex);
                 pc.addProperties(p);
             }
-            clone.addPolygons(pc);
-        }
-        polyIndex = 0;
-        for(Structs.Polygon poly: aMesh.getPolygonsList()) {
-            Structs.Polygon.Builder pc = Structs.Polygon.newBuilder(poly);
 
-            List <Integer> currentNeighbour = poly.getNeighborIdxsList();
+            polyIndex++;
+            clone.addPolygons(pc);
+            System.out.println(waterNeighbour);
+        }
+
+        //beaches for the circle
+        //basically if the int at the water tile .neighbour contains a land tile make that a beach
+
+        polyIndex = 0;
+        for(Structs.Polygon poly: aMesh.getPolygonsList()) { // for each polygon in the list
+
+            Structs.Polygon.Builder pc = Structs.Polygon.newBuilder(poly); //just builds each polygon
+
+            List <Integer> currentNeighbour = poly.getNeighborIdxsList(); //the neighbour of each polygon
+//            System.out.println(polyIndex);
+//            System.out.println(currentNeighbour);
+//            System.out.println(waterNeighbour);
+
             if (!waterNeighbour.contains(polyIndex)) {
                 for (Integer integer : currentNeighbour) {
                     if (waterNeighbour.contains(integer)) {
@@ -73,7 +90,6 @@ public class Circle extends Shape {
             polyIndex++;
         }
 
-        //need beaches
 
         return clone;
     }

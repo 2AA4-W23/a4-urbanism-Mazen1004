@@ -42,9 +42,6 @@ public class Lagoon extends Shape{
             System.out.println(centroidVertices);
 
 
-            /*use the poly index for the next step
-            not the centroid index cause cant call the methods on it
-             */
 
             //get the coordinates from the centroid
             double centroidX = centroidVertices.getX();
