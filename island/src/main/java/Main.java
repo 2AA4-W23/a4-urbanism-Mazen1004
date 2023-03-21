@@ -2,7 +2,7 @@ import ca.mcmaster.cas.se2aa4.a2.io.MeshFactory;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
 import ca.mcmaster.cas.se2aa4.island.Features.*;
 import ca.mcmaster.cas.se2aa4.island.Configuration.*;
-import ca.mcmaster.cas.se2aa4.island.tiles.Tiles;
+import ca.mcmaster.cas.se2aa4.island.islandGen.islandGen;
 
 
 public class Main {
@@ -19,7 +19,7 @@ public class Main {
 
         Structs.Mesh outputMesh; //initializing output mesh
 
-        outputMesh = Tiles.tile(aMesh,"null","square",3); //tiles take
+        outputMesh = islandGen.islandGenerator(aMesh,"null","square",3); //tiles take
 
         new MeshFactory().write(outputMesh, config.output()); //output to visualizer
     }
