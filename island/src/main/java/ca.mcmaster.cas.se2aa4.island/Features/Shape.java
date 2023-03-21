@@ -7,8 +7,15 @@ public abstract class Shape {
     protected static double centerX= canvasX/2;
     protected static double centerY= canvasY/2;
 
+    protected static double EllispseX= 500;
+    protected static double EllispseY= 700;
+
+
     public static double distanceCalc(double x1, double y1, double x2, double y2) {
         return Math.sqrt((y2 - y1) * (y2 - y1) + (x2 - x1) * (x2 - x1));
     }
+
+
+
 
 }
