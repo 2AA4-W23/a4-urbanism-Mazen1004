@@ -62,6 +62,7 @@ public class Lagoon extends Shape{
                 String color = Lagoon.LandColor; //land color
                 Structs.Property p = Structs.Property.newBuilder().setKey("rgb_color").setValue(color).build();
                 pc.addProperties(p);
+
             }
             else {
                 tilesOcean.add(centroidIndex);
@@ -69,6 +70,7 @@ public class Lagoon extends Shape{
                 Structs.Property p = Structs.Property.newBuilder().setKey("rgb_color").setValue(color).build();
                 pc.addProperties(p);
                 waterNeighbour.add(polyIndex);
+
             }
             polyIndex++;
             clone.addPolygons(pc);
