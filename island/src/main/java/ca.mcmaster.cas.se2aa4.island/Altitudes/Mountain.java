@@ -3,6 +3,7 @@ package ca.mcmaster.cas.se2aa4.island.Altitudes;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Mountain extends Altitude {
@@ -24,15 +25,24 @@ public class Mountain extends Altitude {
             Structs.Polygon polygonInfo = aMesh.getPolygons(i);
             Structs.Vertex centroidVertices = aMesh.getVertices(polygonInfo.getCentroidIdx());
 
+            // finds color of polygon
+            List<Structs.Property> propertiesList = polygonInfo.getPropertiesList();
+            colors.Colors mountain = new colors.Colors();
+
+
             // calculates distance from center of canvas to polygon centroid
             double distance = distanceCalc(centerX, centerY, centroidVertices.getX(), centroidVertices.getY());
 
             for (int j=0; i<elevRadii.size(); i++){
-                if (distance > j+1){
-                    elevations[i] = elevRadii.indexOf(j);
-                    break;
-                }
+                Structs.Property property = propertiesList.get(j);
 
+                if (property.getKey().equals("rgb_color") && property.getValue().equals(mountain.LandColor) ||
+                        property.getKey().equals("rgb_color") && property.getValue().equals(mountain.BeachColor)) {
+                    if (distance > j+1){
+                        elevations[i] = elevRadii.indexOf(j);
+                        break;
+                    }
+                }
             }
         }
         // make arraylist with every single circle radius
@@ -46,11 +56,7 @@ public class Mountain extends Altitude {
             // 200 tip, 400 second, 600 third
         // continues until hits sea level. will not by perfect increments of 200 so when
 
-
-
-
-
-
+        System.out.println(Arrays.toString(elevations));
         return elevations;
     }
 }

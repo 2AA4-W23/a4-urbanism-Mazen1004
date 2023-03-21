@@ -3,6 +3,8 @@ import ca.mcmaster.cas.se2aa4.a2.io.Structs;
 import ca.mcmaster.cas.se2aa4.island.Configuration.*;
 import ca.mcmaster.cas.se2aa4.island.islandGen.islandGen;
 
+import static ca.mcmaster.cas.se2aa4.island.Altitudes.Mountain.mountain;
+
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -18,8 +20,9 @@ public class Main {
 
         Structs.Mesh outputMesh; //initializing output mesh
 
-        outputMesh = islandGen.islandGenerator(aMesh,mode,shape,lakes); //tiles take
-
+//        outputMesh = islandGen.islandGenerator(aMesh,mode,shape,lakes); //tiles take
+        outputMesh = islandGen.islandGenerator;
+        int[] output = mountain(outputMesh);
         new MeshFactory().write(outputMesh, config.output()); //output to visualizer
     }
 }
