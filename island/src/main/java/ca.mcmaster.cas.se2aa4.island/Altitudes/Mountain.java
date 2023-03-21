@@ -10,12 +10,16 @@ public class Mountain extends Altitude {
     public static int[] mountain(Structs.Mesh aMesh){
         ArrayList<Integer> elevRadii = new ArrayList<>(); // stores radius of all elevation circles
 
-        int assignRadius=200;
+        int assignRadius=100;
 
         while (assignRadius < canvasX){
             elevRadii.add(assignRadius);
-            assignRadius+=200;
+            assignRadius+=100;
         }
+
+        System.out.println(elevRadii);
+
+
 
         List<Structs.Polygon> polygonList = aMesh.getPolygonsList();
         int[] elevations = new int[polygonList.size()];
@@ -32,28 +36,30 @@ public class Mountain extends Altitude {
 
             // calculates distance from center of canvas to polygon centroid
             double distance = distanceCalc(centerX, centerY, centroidVertices.getX(), centroidVertices.getY());
+            System.out.println(distance);
 
-            for (int j=0; i<elevRadii.size(); i++){
-                Structs.Property property = propertiesList.get(j);
-
-                if (property.getKey().equals("rgb_color") && property.getValue().equals(mountain.LandColor) ||
-                        property.getKey().equals("rgb_color") && property.getValue().equals(mountain.BeachColor)) {
-                    if (distance > j+1){
-                        elevations[i] = elevRadii.indexOf(j);
-                        break;
-                    }
+            for (int j=0; j<elevRadii.size(); j++){
+//                Structs.Property property = propertiesList.get(j);
+//
+//                if (property.getKey().equals("rgb_color") && property.getValue().equals(mountain.LandColor) ||
+//                        property.getKey().equals("rgb_color") && property.getValue().equals(mountain.BeachColor)) {
+                if (distance < elevRadii.get(j)){
+                    System.out.println(elevRadii.get(j));
+                    elevations[i] = j;
+                    break;
                 }
+
             }
         }
         // make arraylist with every single circle radius
         // for i in number of polygons
-            // for j in cirleradii
-                // if i>j+1, add elevation[i] = j
+        // for j in cirleradii
+        // if i>j+1, add elevation[i] = j
 
         // check the current tile's color:
-            // if water, don't repeat the wile loop.
+        // if water, don't repeat the wile loop.
         // circles of 200 radius starting form center of shape
-            // 200 tip, 400 second, 600 third
+        // 200 tip, 400 second, 600 third
         // continues until hits sea level. will not by perfect increments of 200 so when
 
         System.out.println(Arrays.toString(elevations));

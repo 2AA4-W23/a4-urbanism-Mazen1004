@@ -24,8 +24,8 @@ public class Main {
 
 //        outputMesh = islandGen.islandGenerator(aMesh,mode,shape,lakes); //tiles take
         outputMesh = islandGen.islandGenerator(aMesh);
-        int[] output = mountain(outputMesh);
-        System.out.println(Arrays.toString(output));
-//        new MeshFactory().write(outputMesh, config.output()); //output to visualizer
+        mountain(outputMesh);
+
+        new MeshFactory().write(outputMesh, config.output()); //output to visualizer
     }
 }
