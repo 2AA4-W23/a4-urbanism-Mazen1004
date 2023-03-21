@@ -8,6 +8,7 @@ public class Configuration {
     public static final String INPUT = "i";
     public static final String MODE = "mode";
     public static final String SHAPE = "shape";
+    public static final String LAKES = "lakes";
 
     private CommandLine cli;
     public Configuration(String[] args) {
@@ -25,10 +26,13 @@ public class Configuration {
         return cli.getOptionValue(key);
     }
     public String mode() {
-        return this.cli.getOptionValue(MODE);
+        return this.cli.getOptionValue(MODE,"none");
+    }
+    public String lakes() {
+        return this.cli.getOptionValue(LAKES, String.valueOf(0));
     }
     public String shape() {
-        return this.cli.getOptionValue(SHAPE);
+        return this.cli.getOptionValue(LAKES,"none");
     }
     public String input() {
         return this.cli.getOptionValue(INPUT);
@@ -44,6 +48,7 @@ public class Configuration {
         options.addOption(new Option(OUTPUT, true, "Output file (MESH)"));
         options.addOption(new Option(MODE, true,"LAGOON MODE"));
         options.addOption(new Option(SHAPE, true,"SHAPE MODE"));
+        options.addOption(new Option(LAKES, true,"Lake Count"));
 
         return options;
     }

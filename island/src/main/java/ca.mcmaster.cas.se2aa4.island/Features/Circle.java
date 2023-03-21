@@ -11,7 +11,7 @@ public class Circle extends Shape {
     //circle shape
     public static Structs.Mesh.Builder circle(Structs.Mesh aMesh) {
 
-        List <Integer> waterNeighbour = new ArrayList<>();
+        List <Integer> landTiles = new ArrayList<>();
 
         List <Integer> landPolygon = new ArrayList<>();
         List <Integer> waterPolygon = new ArrayList<>();
@@ -49,7 +49,7 @@ public class Circle extends Shape {
             if (distance < radiusCircle) { //add the tile if the distance is less than the radius of the circle
                 String color = circle.LandColor;
                 Structs.Property p = Structs.Property.newBuilder().setKey("rgb_color").setValue(color).build();
-                waterNeighbour.add(polyIndex); //add index for land tile
+                landTiles.add(polyIndex); //add index for land tile
                 pc.addProperties(p);
             }
 
@@ -61,7 +61,7 @@ public class Circle extends Shape {
 
             polyIndex++;
             clone.addPolygons(pc);
-            System.out.println(waterNeighbour);
+            //System.out.println(landTiles);
         }
 
         //beaches for the circle
@@ -75,15 +75,16 @@ public class Circle extends Shape {
             List <Integer> currentNeighbour = poly.getNeighborIdxsList(); //the neighbour of each polygon
 //            System.out.println(polyIndex);
 //            System.out.println(currentNeighbour);
-//            System.out.println(waterNeighbour);
+//            System.out.println(landTiles);
 
-            if (!waterNeighbour.contains(polyIndex)) {
+            if (!landTiles.contains(polyIndex)) {
                 for (Integer integer : currentNeighbour) {
-                    if (waterNeighbour.contains(integer)) {
+                    if (landTiles.contains(integer)) {
                         String color = circle.BeachColor; // beach color
                         Structs.Property p = Structs.Property.newBuilder().setKey("rgb_color").setValue(color).build();
                         pc.addProperties(p);
                         clone.addPolygons(pc);
+
                     }
                 }
             }
