@@ -12,22 +12,29 @@ public class islandGen {
 
         Structs.Mesh outputMesh = aMesh;
 
-       if (mode.equals("lagoon")) {
-            //Takes aMesh into Lagoon
+        if ("lagoon".equals(mode)) {
             outputMesh = Lagoon.lagoon(aMesh).build();
-        } else if (shape.equals("circle")) {
-           //Takes aMesh into Lagoon
-           outputMesh = Circle.circle(aMesh).build();
-       }
+        } else {
+            System.out.println("For mode MVP you input must be '-mode lagoon'");
+            switch (shape) {
+                case "circle":
+                    outputMesh = Circle.circle(aMesh).build();
+                    break;
+                case "square":
+                    outputMesh = Square.square(aMesh).build();
+                    break;
+            }
+            switch (lakeCount) {
+                default:
+                    outputMesh = Lakes.lake(outputMesh,lakeCount).build();
+            }
+
+        }
+
         //outputMesh = Lakes.lake(outputMesh,lakeCount).build();
 
         //outputMesh =Circle.circle(aMesh).build();;
         //outputMesh = Lakes.lake(outputMesh,lakeCount).build();*/
-        if (shape.equals("square")) {
-            //Takes aMesh into Lagoon
-            outputMesh = Square.square(aMesh).build();
-        }
-        outputMesh = Lakes.lake(outputMesh,3).build();
 
         return outputMesh;
     }

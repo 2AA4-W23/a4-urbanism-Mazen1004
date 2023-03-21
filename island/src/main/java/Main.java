@@ -19,7 +19,7 @@ public class Main {
 
         Structs.Mesh outputMesh; //initializing output mesh
 
-        outputMesh = islandGen.islandGenerator(aMesh,"null","square",3); //tiles take
+        outputMesh = islandGen.islandGenerator(aMesh,mode,shape,lakes); //tiles take
 
         new MeshFactory().write(outputMesh, config.output()); //output to visualizer
     }
