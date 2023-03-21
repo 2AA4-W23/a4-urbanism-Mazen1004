@@ -18,7 +18,8 @@ public class Main {
         //System.out.println(shape);
 
         Structs.Mesh outputMesh; //initializing output mesh
-        outputMesh = Tiles.tile(aMesh,mode,shape,lakes); //tiles take
+
+        outputMesh = Tiles.tile(aMesh,"null","square",3); //tiles take
 
         new MeshFactory().write(outputMesh, config.output()); //output to visualizer
     }

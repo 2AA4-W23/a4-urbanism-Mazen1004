@@ -6,6 +6,8 @@ import ca.mcmaster.cas.se2aa4.island.Features.Lagoon;
 import ca.mcmaster.cas.se2aa4.island.Configuration.*;
 import ca.mcmaster.cas.se2aa4.island.lakes.Lakes;
 
+import ca.mcmaster.cas.se2aa4.island.Features.Square;
+
 public class Tiles {
     public static Structs.Mesh tile(Structs.Mesh aMesh,String mode, String shape, int lakeCount){
 
@@ -22,6 +24,11 @@ public class Tiles {
 
         //outputMesh =Circle.circle(aMesh).build();;
         //outputMesh = Lakes.lake(outputMesh,lakeCount).build();*/
+        if (shape.equals("square")) {
+            //Takes aMesh into Lagoon
+            outputMesh = Square.square(aMesh).build();
+        }
+        outputMesh = Lakes.lake(outputMesh,3).build();
 
         return outputMesh;
     }
