@@ -21,9 +21,9 @@ public class Configuration {
     private CommandLineParser parser() {
         return new DefaultParser();
     }
-    /*public String export(String key) {
+    public String export(String key) {
         return cli.getOptionValue(key);
-    }*/
+    }
     public String mode() {
         return this.cli.getOptionValue(MODE);
     }

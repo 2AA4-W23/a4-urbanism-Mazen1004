@@ -17,7 +17,7 @@ public class Main {
         //System.out.println(mode);
         //System.out.println(shape);
 
-        Structs.Mesh outputMesh = aMesh; //initializing output mesh
+        Structs.Mesh outputMesh; //initializing output mesh
         outputMesh = Tiles.tile(aMesh,"null","circle"); //tiles take
 
         new MeshFactory().write(outputMesh, config.output()); //output to visualizer

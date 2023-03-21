@@ -2,6 +2,7 @@ package ca.mcmaster.cas.se2aa4.island.Features;
 
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Circle extends Shape {
@@ -9,6 +10,8 @@ public class Circle extends Shape {
 
     //circle shape
     public static Structs.Mesh.Builder circle(Structs.Mesh aMesh) {
+        List <Integer> waterNeighbour = new ArrayList<>();
+        int polyIndex = 0;
         double radiusLagoon = 200;
         Structs.Mesh.Builder clone = Structs.Mesh.newBuilder();
         clone.addAllVertices(aMesh.getVerticesList());
@@ -40,15 +43,34 @@ public class Circle extends Shape {
             if (distance < radiusLagoon) { //add the tile if the distance is less than the radius of the lagoon
                 String color= circle.LandColor;
                 Structs.Property p = Structs.Property.newBuilder().setKey("rgb_color").setValue(color).build();
+                waterNeighbour.add(polyIndex);
                 pc.addProperties(p);
             }
 
             else {
                 String color = circle.OceanColor; //ocean color
                 Structs.Property p = Structs.Property.newBuilder().setKey("rgb_color").setValue(color).build();
+                waterNeighbour.add(polyIndex);
                 pc.addProperties(p);
             }
             clone.addPolygons(pc);
+        }
+        polyIndex = 0;
+        for(Structs.Polygon poly: aMesh.getPolygonsList()) {
+            Structs.Polygon.Builder pc = Structs.Polygon.newBuilder(poly);
+
+            List <Integer> currentNeighbour = poly.getNeighborIdxsList();
+            if (!waterNeighbour.contains(polyIndex)) {
+                for (Integer integer : currentNeighbour) {
+                    if (waterNeighbour.contains(integer)) {
+                        String color = circle.BeachColor; // beach color
+                        Structs.Property p = Structs.Property.newBuilder().setKey("rgb_color").setValue(color).build();
+                        pc.addProperties(p);
+                        clone.addPolygons(pc);
+                    }
+                }
+            }
+            polyIndex++;
         }
 
         //need beaches
