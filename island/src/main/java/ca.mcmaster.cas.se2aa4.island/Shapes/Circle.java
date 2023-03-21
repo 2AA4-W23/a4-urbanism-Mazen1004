@@ -1,4 +1,4 @@
-package ca.mcmaster.cas.se2aa4.island.Features;
+package ca.mcmaster.cas.se2aa4.island.Shapes;
 
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
 

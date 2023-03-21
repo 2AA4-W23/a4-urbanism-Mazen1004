@@ -1,11 +1,11 @@
 package ca.mcmaster.cas.se2aa4.island.islandGen;
 
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
-import ca.mcmaster.cas.se2aa4.island.Features.Circle;
-import ca.mcmaster.cas.se2aa4.island.Features.Lagoon;
+import ca.mcmaster.cas.se2aa4.island.Shapes.Circle;
+import ca.mcmaster.cas.se2aa4.island.Shapes.Lagoon;
 import ca.mcmaster.cas.se2aa4.island.lakes.Lakes;
 
-import ca.mcmaster.cas.se2aa4.island.Features.Square;
+import ca.mcmaster.cas.se2aa4.island.Shapes.Square;
 
 public class islandGen {
     public static Structs.Mesh islandGenerator(Structs.Mesh aMesh,String mode, String shape, int lakeCount){

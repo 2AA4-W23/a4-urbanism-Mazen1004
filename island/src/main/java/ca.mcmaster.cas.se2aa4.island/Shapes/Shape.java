@@ -1,4 +1,4 @@
-package ca.mcmaster.cas.se2aa4.island.Features;
+package ca.mcmaster.cas.se2aa4.island.Shapes;
 
 
 public abstract class Shape {
@@ -6,9 +6,6 @@ public abstract class Shape {
     protected static double canvasY = 1080;
     protected static double centerX= canvasX/2;
     protected static double centerY= canvasY/2;
-
-    protected static double EllispseX= 500;
-    protected static double EllispseY= 700;
 
 
     public static double distanceCalc(double x1, double y1, double x2, double y2) {
