@@ -32,7 +32,7 @@ public class Configuration {
         return this.cli.getOptionValue(LAKES, String.valueOf(0));
     }
     public String shape() {
-        return this.cli.getOptionValue(LAKES,"none");
+        return this.cli.getOptionValue(SHAPE,"none");
     }
     public String input() {
         return this.cli.getOptionValue(INPUT);
