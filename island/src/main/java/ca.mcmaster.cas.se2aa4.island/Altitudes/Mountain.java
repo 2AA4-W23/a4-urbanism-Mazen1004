@@ -4,6 +4,7 @@ import ca.mcmaster.cas.se2aa4.a2.io.Structs;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class Mountain extends Altitude {
@@ -16,6 +17,8 @@ public class Mountain extends Altitude {
             elevRadii.add(assignRadius);
             assignRadius+=100;
         }
+        // makes 0 the lowest (sea level) and the tallest point on the map is the highest value in elevRadii
+        Collections.reverse(elevRadii);
 
         System.out.println(elevRadii);
 
@@ -39,28 +42,26 @@ public class Mountain extends Altitude {
             System.out.println(distance);
 
             for (int j=0; j<elevRadii.size(); j++){
-//                Structs.Property property = propertiesList.get(j);
-//
-//                if (property.getKey().equals("rgb_color") && property.getValue().equals(mountain.LandColor) ||
-//                        property.getKey().equals("rgb_color") && property.getValue().equals(mountain.BeachColor)) {
-                if (distance < elevRadii.get(j)){
-                    System.out.println(elevRadii.get(j));
-                    elevations[i] = j;
-                    break;
+                Structs.Property property = propertiesList.get(0);
+
+                // checks if land can be attributed with altitude
+                // e.g. only land and beach can have altitudes, not water.
+                if (property.getKey().equals("rgb_color") && property.getValue().equals(mountain.LandColor) ||
+                        property.getKey().equals("rgb_color") && property.getValue().equals(mountain.BeachColor)) {
+
+                    // if distance from current polygon centroid > current elevation circle (radius), it belongs to that level
+                    if (distance > elevRadii.get(j)) {
+                        System.out.println(elevRadii.get(j));
+                        elevations[i] = j;
+                        break;
+                        // else, continue through all elevation levels until found
+                    } else {
+                        elevations[i] = 0;
+                    }
                 }
-
             }
+            System.out.println(elevRadii);
         }
-        // make arraylist with every single circle radius
-        // for i in number of polygons
-        // for j in cirleradii
-        // if i>j+1, add elevation[i] = j
-
-        // check the current tile's color:
-        // if water, don't repeat the wile loop.
-        // circles of 200 radius starting form center of shape
-        // 200 tip, 400 second, 600 third
-        // continues until hits sea level. will not by perfect increments of 200 so when
 
         System.out.println(Arrays.toString(elevations));
         return elevations;
