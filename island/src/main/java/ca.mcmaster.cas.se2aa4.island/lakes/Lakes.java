@@ -1,6 +1,8 @@
 package ca.mcmaster.cas.se2aa4.island.lakes;
 
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
+import ca.mcmaster.cas.se2aa4.island.islandGen.islandGen;
+import ca.mcmaster.cas.se2aa4.island.tiles.Tiles;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,7 +10,7 @@ import java.util.List;
 import java.util.Random;
 
 public class Lakes {
-    public static Structs.Mesh.Builder lake(Structs.Mesh aMesh, int lakeCount) {
+    public static Structs.Mesh.Builder lake(Structs.Mesh aMesh, int lakeCount, Tiles newTile) {
 
         Structs.Mesh.Builder clone = Structs.Mesh.newBuilder();
         clone.addAllVertices(aMesh.getVerticesList());
@@ -54,6 +56,8 @@ public class Lakes {
                             Structs.Property.Builder propertyBuilder = Structs.Property.newBuilder(property);
                             propertyBuilder.setValue(circle.LagoonSeaColor);
                             polygonBuilder.setProperties(j, propertyBuilder.build());
+                            //Updating Humidity Value since polygon is a lake now
+                            newTile.setHumidity(i,100);
                         }
                     }
                 }
