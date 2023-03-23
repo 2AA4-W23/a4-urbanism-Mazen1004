@@ -2,6 +2,7 @@ package ca.mcmaster.cas.se2aa4.island.Altitudes;
 
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
 import ca.mcmaster.cas.se2aa4.island.islandGen.islandGen;
+import ca.mcmaster.cas.se2aa4.island.tiles.Tiles;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -68,14 +69,10 @@ public class Mountain extends Altitude {
         System.out.println(Arrays.toString(elevations));
         return elevations;
     }
-    public static Structs.Mesh.Builder mountainMesh(Structs.Mesh aMesh) {
+    public static Structs.Mesh.Builder mountainMesh(Structs.Mesh aMesh, int[] mountainArray) {
         Structs.Mesh.Builder clone = Structs.Mesh.newBuilder();
         clone.addAllVertices(aMesh.getVerticesList());
         clone.addAllSegments(aMesh.getSegmentsList());
-
-        Structs.Mesh outputMesh;
-        outputMesh = islandGen.islandGenerator(aMesh);
-        int[] mountainArray = mountain(outputMesh);
 
         colors.Colors mountain = new colors.Colors();
 

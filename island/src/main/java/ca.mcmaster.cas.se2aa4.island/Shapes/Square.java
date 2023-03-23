@@ -1,12 +1,13 @@
 package ca.mcmaster.cas.se2aa4.island.Shapes;
 
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
+import ca.mcmaster.cas.se2aa4.island.tiles.Tiles;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Square extends Shape{
-    public static Structs.Mesh.Builder square(Structs.Mesh aMesh) {
+    public static Structs.Mesh.Builder square(Structs.Mesh aMesh, Tiles newTile) {
 
         List <Integer> waterNeighbour = new ArrayList<>();
         int polyIndex = 0;
@@ -32,6 +33,7 @@ public class Square extends Shape{
                 String color = square.LandColor;
                 Structs.Property p = Structs.Property.newBuilder().setKey("rgb_color").setValue(color).build();
                 pc.addProperties(p);
+                newTile.setHumidity(i,30);
                 waterNeighbour.add(polyIndex); //add index for land tile
             }
             else {

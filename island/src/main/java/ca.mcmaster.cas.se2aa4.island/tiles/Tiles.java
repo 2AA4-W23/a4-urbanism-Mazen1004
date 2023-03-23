@@ -1,25 +1,40 @@
 package ca.mcmaster.cas.se2aa4.island.tiles;
 
-import ca.mcmaster.cas.se2aa4.a2.io.Structs;
-import ca.mcmaster.cas.se2aa4.island.Features.Circle;
-import ca.mcmaster.cas.se2aa4.island.Features.Lagoon;
-import ca.mcmaster.cas.se2aa4.island.Configuration.*;
+import java.util.Arrays;
 
 public class Tiles {
-    public static Structs.Mesh tile(Structs.Mesh aMesh,String mode, String shape){
+    private int[] humidityValues;
 
-        Structs.Mesh outputMesh = aMesh;
+    //Some Humidity Assumptions:
+    // Base Humidity is 50, this is humidity for oceans
+    // Island Humidity is 20, includes anywhere in the island
+    // If lake generated humidity is set to 50
+    // Generating Aquifers increases humidity of a tile by +30
+    // E.g a tile on the island that is a lake and has an aquifer would have humidity 50+30=80
 
+    //Use Similar Logic for Elevation
 
-       if (mode.equals("lagoon")) {
-            //Takes aMesh into Lagoon
-            outputMesh = Lagoon.lagoon(aMesh).build();
-        }
-       if (shape.equals("circle")) {
-           //Takes aMesh into Lagoon
-           outputMesh = Circle.circle(aMesh).build();
-       }
+    private int[] elevationValues; //do same thing for elevation
 
-        return outputMesh;
+    public void setBaseHumidity(int numPolygons) {
+        humidityValues = new int[numPolygons];
+        Arrays.fill(humidityValues, 50); // initialize all values to 50
+        //System.out.println("testing");
+        //System.out.println(Arrays.toString(humidityValues));
+    }
+
+    public int getHumidity(int polygonIndex) {
+        return humidityValues[polygonIndex];
+    }
+    public int[] retrieveHumidity(){
+        System.out.println(Arrays.toString(humidityValues));
+        return humidityValues;
+    }
+
+    public void setHumidity(int polygonIndex, int value) {
+        humidityValues[polygonIndex] = value;
+    }
+    public void addHumidity(int polygonIndex, int value) {
+        humidityValues[polygonIndex]=humidityValues[polygonIndex]+value;
     }
 }

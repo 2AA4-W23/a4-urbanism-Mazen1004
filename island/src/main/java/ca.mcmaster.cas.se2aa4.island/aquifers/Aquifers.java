@@ -1,4 +1,4 @@
-package ca.mcmaster.cas.se2aa4.island.lakes;
+package ca.mcmaster.cas.se2aa4.island.aquifers;
 
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
 import ca.mcmaster.cas.se2aa4.island.islandGen.islandGen;
@@ -9,8 +9,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-public class Lakes {
-    public static Structs.Mesh.Builder lake(Structs.Mesh aMesh, int lakeCount, Tiles newTile) {
+public class Aquifers {
+    public static Structs.Mesh.Builder aquifer(Structs.Mesh aMesh, int aquiferCount, Tiles newTile) {
 
         Structs.Mesh.Builder clone = Structs.Mesh.newBuilder();
         clone.addAllVertices(aMesh.getVerticesList());
@@ -32,14 +32,14 @@ public class Lakes {
         }
 
         //Randomly Generates lakes tiles based on number of Lakes
-        int[] randomLakes = new int[lakeCount];
+        int[] randomAquifers = new int[aquiferCount];
         Random rand = new Random();
 
-        for (int i = 0; i < lakeCount; i++) {
+        for (int i = 0; i < aquiferCount; i++) {
             int randomIndex = rand.nextInt(landCount);
-            randomLakes[i] = randomIndex;
+            randomAquifers[i] = randomIndex;
         }
-        System.out.println(Arrays.toString(randomLakes));
+        //System.out.println(Arrays.toString(randomAquifers));
 
         int landCount1=0;
         for (int i = 0; i < aMesh.getPolygonsCount(); i++) {
@@ -51,20 +51,16 @@ public class Lakes {
                 Structs.Property property = propertiesList.get(j);
                 if (property.getKey().equals("rgb_color") && property.getValue().equals(circle.LandColor)) {
                     landCount1++;
-                    for (int k = 0; k < randomLakes.length; k++) {
-                        if (randomLakes[k] == landCount1) {
-                            Structs.Property.Builder propertyBuilder = Structs.Property.newBuilder(property);
-                            propertyBuilder.setValue(circle.LagoonSeaColor);
-                            polygonBuilder.setProperties(j, propertyBuilder.build());
-                            //Updating Humidity Value since polygon is a lake now
-                            newTile.setHumidity(i,100);
+                    for (int k = 0; k < randomAquifers.length; k++) {
+                        if (randomAquifers[k] == landCount1) {
+                            //Updating Humidity Value since polygon has an aquifer now
+                            newTile.addHumidity(i,30);
                         }
                     }
                 }
             }
             clone.addPolygons(polygonBuilder.build());
         }
-
         return clone;
     }
 }
