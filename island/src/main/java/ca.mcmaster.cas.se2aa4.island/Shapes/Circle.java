@@ -1,6 +1,7 @@
 package ca.mcmaster.cas.se2aa4.island.Shapes;
 
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
+import ca.mcmaster.cas.se2aa4.island.tiles.Tiles;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +10,7 @@ public class Circle extends Shape {
     //Will be Implemented in Step 2
 
     //circle shape
-    public static Structs.Mesh.Builder circle(Structs.Mesh aMesh) {
+    public static Structs.Mesh.Builder circle(Structs.Mesh aMesh, Tiles newTile) {
 
         List <Integer> landTiles = new ArrayList<>();
 
@@ -50,6 +51,7 @@ public class Circle extends Shape {
                 String color = circle.LandColor;
                 Structs.Property p = Structs.Property.newBuilder().setKey("rgb_color").setValue(color).build();
                 landTiles.add(polyIndex); //add index for land tile
+                newTile.setHumidity(i,30);
                 pc.addProperties(p);
             }
 

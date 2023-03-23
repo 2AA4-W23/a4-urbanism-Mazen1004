@@ -10,6 +10,9 @@ public class Configuration {
     public static final String SHAPE = "shape";
     public static final String LAKES = "lakes";
 
+    public static final String RIVERS = "rivers";
+
+
     private CommandLine cli;
     public Configuration(String[] args) {
         try {
@@ -31,6 +34,9 @@ public class Configuration {
     public String lakes() {
         return this.cli.getOptionValue(LAKES, String.valueOf(0));
     }
+    public String rivers() {
+        return this.cli.getOptionValue(RIVERS, String.valueOf(0));
+    }
     public String shape() {
         return this.cli.getOptionValue(SHAPE,"none");
     }
@@ -49,6 +55,7 @@ public class Configuration {
         options.addOption(new Option(MODE, true,"LAGOON MODE"));
         options.addOption(new Option(SHAPE, true,"SHAPE MODE"));
         options.addOption(new Option(LAKES, true,"Lake Count"));
+        options.addOption(new Option(RIVERS, true,"Lake Count"));
 
         return options;
     }

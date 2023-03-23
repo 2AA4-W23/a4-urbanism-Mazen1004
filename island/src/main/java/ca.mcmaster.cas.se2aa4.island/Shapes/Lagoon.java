@@ -1,13 +1,14 @@
 package ca.mcmaster.cas.se2aa4.island.Shapes;
 
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
+import ca.mcmaster.cas.se2aa4.island.tiles.Tiles;
 import colors.Colors;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Lagoon extends Shape{
-    public static Structs.Mesh.Builder lagoon(Structs.Mesh aMesh){
+    public static Structs.Mesh.Builder lagoon(Structs.Mesh aMesh, Tiles newTile){
 
         //radius of how big we want the lagoon or land island to be
         double radiusLagoon = 200;
@@ -61,6 +62,7 @@ public class Lagoon extends Shape{
                 tilesLand.add(centroidIndex);
                 String color = Lagoon.LandColor; //land color
                 Structs.Property p = Structs.Property.newBuilder().setKey("rgb_color").setValue(color).build();
+                newTile.setHumidity(i,30);
                 pc.addProperties(p);
 
             }

@@ -1,16 +1,24 @@
 package ca.mcmaster.cas.se2aa4.island.islandGen;
 
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
+import ca.mcmaster.cas.se2aa4.island.Configuration.Configuration;
 import ca.mcmaster.cas.se2aa4.island.Shapes.Circle;
 import ca.mcmaster.cas.se2aa4.island.Shapes.Lagoon;
 import ca.mcmaster.cas.se2aa4.island.lakes.Lakes;
 
 import ca.mcmaster.cas.se2aa4.island.Shapes.Square;
 import ca.mcmaster.cas.se2aa4.island.tiles.Tiles;
+import rivers.Rivers;
 
 public class islandGen {
-    public static Structs.Mesh islandGenerator(Structs.Mesh aMesh, String mode, String shape, int lakeCount){
+    public static Structs.Mesh islandGenerator(Structs.Mesh aMesh, Configuration config){
     //String mode, String shape, int lakeCount other inputs
+
+        String mode = config.mode(); //lagoon
+        String shape= config.shape(); //circle
+        int lakes = Integer.parseInt(config.lakes());
+        int rivers = Integer.parseInt(config.rivers());
+
         Structs.Mesh outputMesh;
 
         //Base Humidity is Initialized
@@ -22,48 +30,43 @@ public class islandGen {
 
         // -shape circle
         if ("circle".equals(shape)) {
-            outputMesh = Circle.circle(aMesh).build();
-            if (lakeCount !=  0) {
-                outputMesh = Lakes.lake(outputMesh,lakeCount,newTile).build();
+            outputMesh = Circle.circle(aMesh,newTile).build();
+            if (lakes !=  0) {
+                outputMesh = Lakes.lake(outputMesh,lakes,newTile).build();
             }
+            if (rivers !=  0) {
+                outputMesh = Rivers.river(outputMesh,rivers).build();
+            }
+
+
         // -shape square
         } else if ("square".equals(shape)) {
-            outputMesh = Square.square(aMesh).build();
-            if (lakeCount !=  0) {
-                outputMesh = Lakes.lake(outputMesh,lakeCount,newTile).build();
+            outputMesh = Square.square(aMesh,newTile).build();
+            if (lakes !=  0) {
+                outputMesh = Lakes.lake(outputMesh,lakes,newTile).build();
             }
         }
+
+        //elevation -volcano
+
+
 
         // -mode lagoon
         else  { //defaults as the mvp when the user doesn't type anything
-            outputMesh = Lagoon.lagoon(aMesh).build();
-            if (lakeCount !=  0) {
-                outputMesh = Lakes.lake(outputMesh,lakeCount,newTile).build();
+            outputMesh = Lagoon.lagoon(aMesh, newTile).build();
+            if (lakes !=  0) {
+                outputMesh = Lakes.lake(outputMesh,lakes,newTile).build();
             }
         }
+
         System.out.println(mode);
         System.out.println(shape);
-        System.out.println("Testing Array Output");
-        newTile.retrieveHumidity();
+        System.out.println(lakes);
+        System.out.println(rivers);
 
-//        if ("lagoon".equals(mode)) {
-//            outputMesh = Lagoon.lagoon(aMesh).build();
-//        } else {
-//            System.out.println("For mode MVP you input must be '-mode lagoon'");
-//            switch (shape) {
-//                case "circle":
-//                    outputMesh = Circle.circle(aMesh).build();
-//                    break;
-//                case "square":
-//                    outputMesh = Square.square(aMesh).build();
-//                    break;
-//            }
-//            switch (lakeCount) {
-//                default:
-//                    outputMesh = Lakes.lake(outputMesh,lakeCount).build();
-//            }
-//
-//        }
+//        System.out.println("Testing Array Output");
+//        newTile.retrieveHumidity();
+
 
 
         return outputMesh;

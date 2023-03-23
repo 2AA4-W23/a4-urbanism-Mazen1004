@@ -15,14 +15,10 @@ public class Main {
         Configuration config = new Configuration(args);
         Structs.Mesh aMesh = new MeshFactory().read(config.input()); //input mesh from the command lines
 
-        String mode = config.mode(); //lagoon
-        String shape= config.shape(); //circle
-        int lakes = Integer.parseInt(config.lakes());
-
         Structs.Mesh outputMesh; //initializing output mesh
 
 
-        outputMesh = islandGen.islandGenerator(aMesh,mode,shape,lakes); //tiles take\
+        outputMesh = islandGen.islandGenerator(aMesh,config); //tiles take\
 
         new MeshFactory().write(outputMesh, config.output()); //output to visualizer
     }
