@@ -4,6 +4,7 @@ import ca.mcmaster.cas.se2aa4.a2.io.Structs;
 import ca.mcmaster.cas.se2aa4.island.Configuration.Configuration;
 import ca.mcmaster.cas.se2aa4.island.Shapes.Circle;
 import ca.mcmaster.cas.se2aa4.island.Shapes.Lagoon;
+import ca.mcmaster.cas.se2aa4.island.aquifers.Aquifers;
 import ca.mcmaster.cas.se2aa4.island.lakes.Lakes;
 
 import ca.mcmaster.cas.se2aa4.island.Shapes.Square;
@@ -18,6 +19,7 @@ public class islandGen {
         String shape= config.shape(); //circle
         int lakes = Integer.parseInt(config.lakes());
         int rivers = Integer.parseInt(config.rivers());
+        int aquifers = Integer.parseInt(config.aquifers());
 
         Structs.Mesh outputMesh;
 
@@ -37,13 +39,18 @@ public class islandGen {
             if (rivers !=  0) {
                 outputMesh = Rivers.river(outputMesh,rivers).build();
             }
-
+            if (aquifers !=  0) {
+                outputMesh = Aquifers.aquifer(outputMesh, aquifers,newTile).build();
+            }
 
         // -shape square
         } else if ("square".equals(shape)) {
             outputMesh = Square.square(aMesh,newTile).build();
             if (lakes !=  0) {
                 outputMesh = Lakes.lake(outputMesh,lakes,newTile).build();
+            }
+            if (aquifers !=  0) {
+                outputMesh = Aquifers.aquifer(outputMesh, aquifers,newTile).build();
             }
         }
 
@@ -63,9 +70,10 @@ public class islandGen {
         System.out.println(shape);
         System.out.println(lakes);
         System.out.println(rivers);
+        System.out.println(aquifers);
 
-//        System.out.println("Testing Array Output");
-//        newTile.retrieveHumidity();
+        System.out.println("Testing Array Output");
+        newTile.retrieveHumidity();
 
 
 

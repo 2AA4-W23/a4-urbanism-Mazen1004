@@ -17,7 +17,6 @@ public class Main {
 
         Structs.Mesh outputMesh; //initializing output mesh
 
-
         outputMesh = islandGen.islandGenerator(aMesh,config); //tiles take\
 
         new MeshFactory().write(outputMesh, config.output()); //output to visualizer

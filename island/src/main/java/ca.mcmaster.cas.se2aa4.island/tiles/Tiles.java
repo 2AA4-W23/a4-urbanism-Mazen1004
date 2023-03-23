@@ -34,9 +34,7 @@ public class Tiles {
     public void setHumidity(int polygonIndex, int value) {
         humidityValues[polygonIndex] = value;
     }
-
-
-
-
-
+    public void addHumidity(int polygonIndex, int value) {
+        humidityValues[polygonIndex]=humidityValues[polygonIndex]+value;
+    }
 }
