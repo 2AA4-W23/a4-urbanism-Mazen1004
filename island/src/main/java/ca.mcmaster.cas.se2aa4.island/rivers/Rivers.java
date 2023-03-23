@@ -1,4 +1,4 @@
-package rivers;
+package ca.mcmaster.cas.se2aa4.island.rivers;
 
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
 
@@ -48,14 +48,23 @@ public class Rivers {
             //get each polygon
             Structs.Polygon polygonIndex = aMesh.getPolygons(i);
 
+
             //this is just the builder for each polygon
             Structs.Polygon.Builder pc = Structs.Polygon.newBuilder(polygonIndex);
 
             //get the segment indices of each polygon
             int segmentIndex = polygonIndex.getSegmentIdxs(i);
 
+            // want the segment itself from the polygon
+
+
             //you want to color segmentIndex.
             Structs.Segment segment = aMesh.getSegments(segmentIndex);
+
+            int segmentX = segment.getV1Idx();
+            int segmentY = segment.getV2Idx();
+
+
 
            System.out.println("segmentIndex:" + segmentIndex);
             //polygon 1 has segment index 2658

@@ -58,6 +58,10 @@ public class islandGen {
             if (aquifers !=  0) {
                 outputMesh = Aquifers.aquifer(outputMesh, aquifers,newTile).build();
             }
+            if ("mountain".equals(elevation)) {
+                int[] arr = Mountain.mountain(outputMesh);
+                outputMesh = Mountain.mountainMesh(outputMesh, arr).build();
+            }
         }
 
         //elevation -volcano
@@ -79,8 +83,8 @@ public class islandGen {
         System.out.println(aquifers);
         System.out.println(elevation);
 
-//        System.out.println("Testing Array Output");
-//        newTile.retrieveHumidity();
+       System.out.println("Testing Array Output");
+        newTile.retrieveHumidity();
 
 
 
