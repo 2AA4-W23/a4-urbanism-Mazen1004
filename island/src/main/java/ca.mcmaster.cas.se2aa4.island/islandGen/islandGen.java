@@ -1,6 +1,7 @@
 package ca.mcmaster.cas.se2aa4.island.islandGen;
 
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
+import ca.mcmaster.cas.se2aa4.island.Altitudes.Altitude;
 import ca.mcmaster.cas.se2aa4.island.Altitudes.Mountain;
 import ca.mcmaster.cas.se2aa4.island.Configuration.Configuration;
 import ca.mcmaster.cas.se2aa4.island.Shapes.Circle;
@@ -9,8 +10,8 @@ import ca.mcmaster.cas.se2aa4.island.aquifers.Aquifers;
 import ca.mcmaster.cas.se2aa4.island.lakes.Lakes;
 
 import ca.mcmaster.cas.se2aa4.island.Shapes.Square;
+import ca.mcmaster.cas.se2aa4.island.rivers.Rivers;
 import ca.mcmaster.cas.se2aa4.island.tiles.Tiles;
-import rivers.Rivers;
 
 public class islandGen {
     public static Structs.Mesh islandGenerator(Structs.Mesh aMesh, Configuration config){
@@ -18,7 +19,7 @@ public class islandGen {
 
         String mode = config.mode(); //lagoon
         String shape= config.shape(); //circle
-        String elevation= config.elevation(); //circle
+        String altitude= config.altitude(); //mountain
         int lakes = Integer.parseInt(config.lakes());
         int rivers = Integer.parseInt(config.rivers());
         int aquifers = Integer.parseInt(config.aquifers());
@@ -44,8 +45,8 @@ public class islandGen {
             if (aquifers !=  0) {
                 outputMesh = Aquifers.aquifer(outputMesh, aquifers,newTile).build();
             }
-            if ("mountain".equals(elevation)) {
-                int[] arr = Mountain.mountain(outputMesh);
+            if ("mountain".equals(altitude)) {
+                int[] arr = Altitude.mountain(outputMesh);
                 outputMesh = Mountain.mountainMesh(outputMesh, arr).build();
             }
 
@@ -58,13 +59,13 @@ public class islandGen {
             if (aquifers !=  0) {
                 outputMesh = Aquifers.aquifer(outputMesh, aquifers,newTile).build();
             }
-            if ("mountain".equals(elevation)) {
-                int[] arr = Mountain.mountain(outputMesh);
+            if ("mountain".equals(altitude)) {
+                int[] arr = Altitude.mountain(outputMesh);
                 outputMesh = Mountain.mountainMesh(outputMesh, arr).build();
             }
         }
 
-        //elevation -volcano
+        //altitude -volcano
 
 
 
@@ -81,7 +82,7 @@ public class islandGen {
         System.out.println(lakes);
         System.out.println(rivers);
         System.out.println(aquifers);
-        System.out.println(elevation);
+        System.out.println(altitude);
 
        System.out.println("Testing Array Output");
         newTile.retrieveHumidity();

@@ -47,5 +47,6 @@ Note: PDF versions of the SVG files were created with `rsvg-convert`.
 ```
 java -jar generator/generator.jar -k irregular -h 1080 -w 1920 -p 1000 -s 20 -o img/input.mesh
 java -jar island/island.jar -i img/input.mesh -o img/lagoon.mesh -mode lagoon
+java -jar island/island.jar -i img/input.mesh -o img/lagoon.mesh -shape circle -altitude mountain
 java -jar visualizer/visualizer.jar -i img/lagoon.mesh -o img/irregular.svg
 ```

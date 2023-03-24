@@ -11,7 +11,7 @@ public class Configuration {
     public static final String LAKES = "lakes";
     public static final String RIVERS = "rivers";
     public static final String AQUIFERS = "aquifers";
-    public static final String ELEVATION = "elevation";
+    public static final String ALTITUDE = "altitude";
 
 
     private CommandLine cli;
@@ -44,7 +44,7 @@ public class Configuration {
     public String shape() {
         return this.cli.getOptionValue(SHAPE,"none");
     }
-    public String elevation() {return this.cli.getOptionValue(ELEVATION,"none");}
+    public String altitude() {return this.cli.getOptionValue(ALTITUDE,"none");}
     public String input() {
         return this.cli.getOptionValue(INPUT);
     }
@@ -61,7 +61,7 @@ public class Configuration {
         options.addOption(new Option(LAKES, true,"Lake Count"));
         options.addOption(new Option(RIVERS, true,"Lake Count"));
         options.addOption(new Option(AQUIFERS, true,"Aquifer Count"));
-        options.addOption(new Option(ELEVATION, true,"Elevation Count"));
+        options.addOption(new Option(ALTITUDE, true,"Altitude Count"));
 
         return options;
     }
