@@ -13,6 +13,8 @@ import java.util.List;
 public class Valley extends Altitude {
     public static Structs.Mesh.Builder valleyMesh(Structs.Mesh aMesh, int[] valleyArray) {
 
-        return null;
+        String[] colorArray = colorArray("valley");
+
+        return cloneBuilder(aMesh, colorArray, valleyArray);
     }
 }

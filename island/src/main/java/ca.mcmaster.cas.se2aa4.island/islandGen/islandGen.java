@@ -3,6 +3,7 @@ package ca.mcmaster.cas.se2aa4.island.islandGen;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
 import ca.mcmaster.cas.se2aa4.island.Altitudes.Altitude;
 import ca.mcmaster.cas.se2aa4.island.Altitudes.Mountain;
+import ca.mcmaster.cas.se2aa4.island.Altitudes.Valley;
 import ca.mcmaster.cas.se2aa4.island.Configuration.Configuration;
 import ca.mcmaster.cas.se2aa4.island.Shapes.Circle;
 import ca.mcmaster.cas.se2aa4.island.Shapes.Lagoon;
@@ -48,6 +49,10 @@ public class islandGen {
             if ("mountain".equals(altitude)) {
                 int[] arr = Altitude.mountain(outputMesh);
                 outputMesh = Mountain.mountainMesh(outputMesh, arr).build();
+            }
+            else if ("valley".equals(altitude)) {
+                int[] arr = Altitude.mountain(outputMesh);
+                outputMesh = Valley.valleyMesh(outputMesh, arr).build();
             }
 
         // -shape square
