@@ -3,6 +3,8 @@ package ca.mcmaster.cas.se2aa4.island.tiles;
 import java.util.Arrays;
 
 public class Tiles {
+    //Tiles stores our humidity and elevation values for our Island
+    //Allows easy referencing in our other classes
     private int[] humidityValues;
     private int[] elevationValues;
 
@@ -35,6 +37,10 @@ public class Tiles {
     public void addHumidity(int polygonIndex, int value) {
         humidityValues[polygonIndex]=humidityValues[polygonIndex]+value;
     }
+
+    //Some Elevation Assumptions:
+    // Base Elevation is 0, if not altitude is defined
+    // If altitude is defined it is extracted from the altitude functions
 
     //ELEVATION FUNCTIONS
     public void setBaseElevation(int numPolygons) {

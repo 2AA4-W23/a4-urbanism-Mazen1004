@@ -43,7 +43,7 @@ public abstract class Altitude {
 
             // calculates distance from center of canvas to polygon centroid
             double distance = distanceCalc(centerX, centerY, centroidVertices.getX(), centroidVertices.getY());
-            System.out.println(distance);
+            //System.out.println(distance);
 
             for (int j=0; j<elevRadii().size(); j++){
                 Structs.Property property = propertiesList.get(0);
@@ -55,7 +55,7 @@ public abstract class Altitude {
 
                     // if distance from current polygon centroid > current elevation circle (radius), it belongs to that level
                     if (distance > elevRadii().get(j)) {
-                        System.out.println(elevRadii().get(j));
+                        //System.out.println(elevRadii().get(j));
                         elevations[i] = j;
                         break;
                         // else, continue through all elevation levels until found
@@ -67,7 +67,7 @@ public abstract class Altitude {
             System.out.println(elevRadii());
         }
         //System.out.println("testing elevation");
-        System.out.println(Arrays.toString(elevations));
+        //System.out.println(Arrays.toString(elevations));
         return elevations;
     }
 
@@ -99,12 +99,12 @@ public abstract class Altitude {
         }
         else if (Objects.equals(type, "valley")) {
             colorArray[0] = color.green;
-            System.out.println(Arrays.toString(colorArray));
+            //System.out.println(Arrays.toString(colorArray));
 
             colorArray = reverseArray(colorArray);
             // First index is 0, thus colored sea level
             colorArray[0] = color.OceanColor;
-            System.out.println(Arrays.toString(colorArray));
+            //System.out.println(Arrays.toString(colorArray));
         }
 
         return colorArray;

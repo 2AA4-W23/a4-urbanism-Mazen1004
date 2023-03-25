@@ -80,11 +80,17 @@ public class islandGen {
                 newTile.updateElevation(arr);
                 outputMesh = Mountain.mountainMesh(outputMesh, arr).build();
             }
+            else if ("valley".equals(altitude)) {
+                int[] arr = Altitude.mountain(outputMesh);
+                newTile.updateElevation(arr);
+                outputMesh = Valley.valleyMesh(outputMesh, arr).build();
+            }
+            if (!"none".equals(biomes)) {
+                outputMesh = Biomes.biomeGenerator(outputMesh,biomes,newTile).build();
+            }
         }
 
         //altitude -volcano
-
-
 
         // -mode lagoon
         else  { //defaults as the mvp when the user doesn't type anything
