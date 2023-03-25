@@ -27,7 +27,9 @@ public class Tiles {
         return humidityValues[polygonIndex];
     }
     public int[] retrieveHumidity(){
+        System.out.println("HUMIDITY FOR EACH TILE IN MESH");
         System.out.println(Arrays.toString(humidityValues));
+        System.out.println("---------------------------------------------------------------------------");
         return humidityValues;
     }
 
@@ -54,7 +56,9 @@ public class Tiles {
         return elevationValues;
     }
     public int[] retrieveElevation(){
+        System.out.println("ELEVATION FOR EACH TILE IN MESH");
         System.out.println(Arrays.toString(elevationValues));
+        System.out.println("---------------------------------------------------------------------------");
         return elevationValues;
     }
     public int getElevation(int polygonIndex) {

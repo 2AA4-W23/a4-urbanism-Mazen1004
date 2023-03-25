@@ -37,10 +37,10 @@ public class Lagoon extends Shape{
             Structs.Polygon.Builder pc = Structs.Polygon.newBuilder(polygonIndex);
 
             int centroidIndex = polygonIndex.getCentroidIdx();
-            System.out.println(centroidIndex); //list of all the centroids
+//            System.out.println(centroidIndex); //list of all the centroids
 
             Structs.Vertex centroidVertices = aMesh.getVertices(polygonIndex.getCentroidIdx());
-            System.out.println(centroidVertices);
+//            System.out.println(centroidVertices);
 
 
 

@@ -11,13 +11,9 @@ public class Biomes {
         int[] humidityValues = newTile.retrieveHumidity();
         int[] elevationValues = newTile.retrieveElevation();
 
-        System.out.println(humidityValues.length);
-        System.out.println(elevationValues.length);
 
         String[] biomeType = new String[humidityValues.length];
 
-
-        System.out.println(biomeType.length);
 
         for (int i = 0; i < humidityValues.length; i++) {
             //Calculating biomes based on elevation and humidity (WHITAKER DIAGRAM)
@@ -50,8 +46,9 @@ public class Biomes {
                 biomeType[i] = "Desert";
             }
         }
-        System.out.println("BIOMES PRINTED BELOW:");
+        System.out.println("BIOMES FOR EACH TILE IN THE MESH");
         System.out.println(Arrays.toString(biomeType));
+
     }
 
     public static Structs.Mesh.Builder biomeGenerator(Structs.Mesh aMesh, String biome, Tiles newTile) {

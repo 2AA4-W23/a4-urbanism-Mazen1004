@@ -39,7 +39,7 @@ public class Rivers {
             int randomIndex = rand.nextInt(landCount);
             randomLakes[i] = randomIndex;
         }
-        System.out.println(Arrays.toString(randomLakes)); //which polygons are going to get a lake
+//        System.out.println(Arrays.toString(randomLakes)); //which polygons are going to get a lake
 
         int landCount1=0;
         for (int i = 0; i < riverCount; i++) {
@@ -66,11 +66,11 @@ public class Rivers {
 
 
 
-           System.out.println("segmentIndex:" + segmentIndex);
-            //polygon 1 has segment index 2658
-            //polygon 2 has segment index 1390
-
-            System.out.println("segment" + segment);
+//           System.out.println("segmentIndex:" + segmentIndex);
+//            //polygon 1 has segment index 2658
+//            //polygon 2 has segment index 1390
+//
+//            System.out.println("segment" + segment);
 
 
 
@@ -100,7 +100,7 @@ public class Rivers {
 
             clone.addSegments(segmentBuilder.build());
             clone.addPolygons(pc.build());
-            System.out.println(segmentBuilder);
+//            System.out.println(segmentBuilder);
         }
         return clone;
     }

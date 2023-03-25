@@ -35,10 +35,6 @@ public class islandGen {
         newTile.setBaseHumidity(aMesh.getPolygonsCount());
         newTile.setBaseElevation(aMesh.getPolygonsCount());
 
-        System.out.println("TESTING polygon count");
-        System.out.println(aMesh.getPolygonsCount());
-
-
 
         // -shape circle
         if ("circle".equals(shape)) {
@@ -72,6 +68,9 @@ public class islandGen {
             if (lakes !=  0) {
                 outputMesh = Lakes.lake(outputMesh,lakes,newTile).build();
             }
+            if (rivers !=  0) {
+                outputMesh = Rivers.river(outputMesh,rivers).build();
+            }
             if (aquifers !=  0) {
                 outputMesh = Aquifers.aquifer(outputMesh, aquifers,newTile).build();
             }
@@ -90,7 +89,6 @@ public class islandGen {
             }
         }
 
-        //altitude -volcano
 
         // -mode lagoon
         else  { //defaults as the mvp when the user doesn't type anything
@@ -100,19 +98,19 @@ public class islandGen {
             }
         }
 
-        System.out.println("TEST BIOMES ISLANDGEN");
+        //biome calculation for all the tiles in the mesh
         Biomes.calculateBiomes(outputMesh, newTile);
 
-        System.out.println(mode);
-        System.out.println(shape);
-        System.out.println(lakes);
-        System.out.println(rivers);
-        System.out.println(aquifers);
-        System.out.println(altitude);
 
-       //System.out.println("Testing Array Output");
-        // newTile.retrieveHumidity();
-
+        System.out.println("---------------------------------------------------------------------------");
+        System.out.println("Command line input summary: ");
+        System.out.println("mode is " + mode);
+        System.out.println("shape is " + shape);
+        System.out.println("lakes count is " + lakes);
+        System.out.println("rivers count is " + rivers);
+        System.out.println("biomes is " + biomes);
+        System.out.println("aquifers count is " + aquifers);
+        System.out.println("altitude is " + altitude);
 
 
         return outputMesh;

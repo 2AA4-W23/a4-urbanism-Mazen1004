@@ -28,26 +28,28 @@ java -jar island/island.jar -i img/input.mesh -o img/lagoon.mesh -mode lagoon
    
    b) Example for lakes/aquifers/rivers
    ```
-   java -jar island/island.jar -i img/input.mesh -o img/lagoon.mesh -shape square -lake 10
-   java -jar island/island.jar -i img/input.mesh -o img/lagoon.mesh -shape square -lake 10 -aquifers 15
-   java -jar island/island.jar -i img/input.mesh -o img/lagoon.mesh -shape square -lake 10 -aquifers 15 -rivers 2
+   java -jar island/island.jar -i img/input.mesh -o img/lagoon.mesh -shape square -lakes 10
+   java -jar island/island.jar -i img/input.mesh -o img/lagoon.mesh -shape circle -lakes 10 -aquifers 15
+   java -jar island/island.jar -i img/input.mesh -o img/lagoon.mesh -shape square -lakes 10 -aquifers 15 -rivers 2
    ```
    
    c) Example for elevations
    ```
-   java -jar island/island.jar -i img/input.mesh -o img/lagoon.mesh -shape circle -altitude mountain
-   java -jar island/island.jar -i img/input.mesh -o img/lagoon.mesh -shape circle -altitude valley
+   java -jar island/island.jar -i img/input.mesh -o img/lagoon.mesh -shape circle -lakes 5 -altitude mountain
+   java -jar island/island.jar -i img/input.mesh -o img/lagoon.mesh -shape square -altitude valley
+    java -jar island/island.jar -i img/input.mesh -o img/lagoon.mesh -shape circle -aquifers 10 -altitude valley
    ```
    
    d) Examples for biomes
    ```
-   java -jar island/island.jar -i img/input.mesh -o img/lagoon.mesh -shape square -biome tundra
-   java -jar island/island.jar -i img/input.mesh -o img/lagoon.mesh -shape square -biome desert
+   java -jar island/island.jar -i img/input.mesh -o img/lagoon.mesh -shape circle -biomes tundra
+   java -jar island/island.jar -i img/input.mesh -o img/lagoon.mesh -shape square -biomes desert 
+   java -jar island/island.jar -i img/input.mesh -o img/lagoon.mesh -shape circle -lakes 20 -biomes tundra
    ```
 
-Example Island: (Square Island with 7 lakes, 10 aquifers, mountain shape, tundra biome)
+Example Island: (Square Island with 7 lakes, 10 aquifers, mountain altitude, tundra biomes)
 ```
-java -jar island/island.jar -i img/input.mesh -o img/lagoon.mesh -shape square -lakes 7 -aquifers 10 -altitude mountain -biome tundra
+java -jar island/island.jar -i img/input.mesh -o img/lagoon.mesh -shape square -lakes 7 -aquifers 10 -altitude valley -biomes tundra
 ```
 
 ## Visualizing Island
@@ -56,4 +58,22 @@ java -jar visualizer/visualizer.jar -i img/lagoon.mesh -o img/irregular.svg
 ```
 
 Note: SVG file with island visualization stored in "img" folder
+
+Humidity Assumptions:
+// Base Humidity is 50, this is humidity for oceans
+// Island Humidity is 20, includes anywhere on the island
+// If lake generated humidity is set to 40
+// Generating Aquifers increases humidity of a tile by +30
+// E.g a tile on the island that is a lake and has an aquifer would have humidity 40+30=70
+// Base Elevation is 0, if not altitude is defined
+// If altitude is defined it is extracted from the altitude functions
+
+Altitude (Elevation) Assumptions:
+// Base Elevation is 0, if not altitude is defined base elevation is set to 0
+// If altitude is defined it is extracted from the altitude functions
+// Elevation is defined for the Mountain or Valley 
+
+Biomes Assumptions:
+// Biomes are calculated based on humidity and elevation values
+
    

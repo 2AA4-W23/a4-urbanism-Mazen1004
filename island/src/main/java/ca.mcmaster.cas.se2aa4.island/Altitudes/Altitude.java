@@ -64,7 +64,7 @@ public abstract class Altitude {
                     }
                 }
             }
-            System.out.println(elevRadii());
+//            System.out.println(elevRadii());
         }
         //System.out.println("testing elevation");
         //System.out.println(Arrays.toString(elevations));
