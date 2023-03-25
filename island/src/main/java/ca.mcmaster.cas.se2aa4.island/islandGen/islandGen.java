@@ -15,6 +15,8 @@ import ca.mcmaster.cas.se2aa4.island.Shapes.Square;
 import ca.mcmaster.cas.se2aa4.island.rivers.Rivers;
 import ca.mcmaster.cas.se2aa4.island.tiles.Tiles;
 
+import java.util.Random;
+
 public class islandGen {
     public static Structs.Mesh islandGenerator(Structs.Mesh aMesh, Configuration config){
     //String mode, String shape, int lakeCount other inputs
@@ -25,6 +27,7 @@ public class islandGen {
         int lakes = Integer.parseInt(config.lakes());
         int rivers = Integer.parseInt(config.rivers());
         int aquifers = Integer.parseInt(config.aquifers());
+        int seed = Integer.parseInt(config.seed());
         String biomes = config.biomes();
 
         Structs.Mesh outputMesh;
@@ -35,6 +38,19 @@ public class islandGen {
         newTile.setBaseHumidity(aMesh.getPolygonsCount());
         newTile.setBaseElevation(aMesh.getPolygonsCount());
 
+
+        if (seed != 0) { //when the user enters a seed value
+            double seedNum = seed;
+            Random random = new Random(seed);
+
+            // generate some random values
+            int rand1 = random.nextInt(10);
+            double rand2 = random.nextDouble();
+
+            // use the random values in your program
+            System.out.println("rand1 = " + rand1);
+            System.out.println("rand2 = " + rand2);
+        }
 
         // -shape circle
         if ("circle".equals(shape)) {

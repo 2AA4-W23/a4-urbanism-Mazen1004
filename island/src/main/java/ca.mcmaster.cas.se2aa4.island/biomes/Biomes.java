@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Biomes {
-    public static void calculateBiomes(Structs.Mesh aMesh, Tiles newTile){
+    public static String[] calculateBiomes(Structs.Mesh aMesh, Tiles newTile){
         int[] humidityValues = newTile.retrieveHumidity();
         int[] elevationValues = newTile.retrieveElevation();
 
@@ -48,6 +48,7 @@ public class Biomes {
         }
         System.out.println("BIOMES FOR EACH TILE IN THE MESH");
         System.out.println(Arrays.toString(biomeType));
+        return biomeType;
 
     }
 
