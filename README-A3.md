@@ -3,8 +3,8 @@
   - Author: Mazen Youssef, Kelvin Yu, Matthew Cheung
 
 ## Setup Commands
-1. mvn clean
-2. mvn install
+1. 'mvn clean'
+2. 'mvn install'
 
 ## Generate Base Mesh
 ```
@@ -12,7 +12,7 @@ java -jar generator/generator.jar -k irregular -h 1080 -w 1920 -p 1000 -s 20 -o 
 ```
 ## Examples of Executions for Island
 1. TESTING STEP 1 (MVP)
-java -jar island/island.jar -i img/input.mesh -o img/lagoon.mesh -mode lagoon
+'java -jar island/island.jar -i img/input.mesh -o img/lagoon.mesh -mode lagoon'
 
 2. TESTING STEP 2
    a) Example for shapes
