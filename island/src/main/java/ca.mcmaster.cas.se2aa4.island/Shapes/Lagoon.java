@@ -62,7 +62,7 @@ public class Lagoon extends Shape{
                 tilesLand.add(centroidIndex);
                 String color = Lagoon.LandColor; //land color
                 Structs.Property p = Structs.Property.newBuilder().setKey("rgb_color").setValue(color).build();
-                newTile.setHumidity(i,30);
+                newTile.setHumidity(i,20);
                 pc.addProperties(p);
 
             }

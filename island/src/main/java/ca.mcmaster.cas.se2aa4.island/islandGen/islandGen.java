@@ -8,6 +8,7 @@ import ca.mcmaster.cas.se2aa4.island.Configuration.Configuration;
 import ca.mcmaster.cas.se2aa4.island.Shapes.Circle;
 import ca.mcmaster.cas.se2aa4.island.Shapes.Lagoon;
 import ca.mcmaster.cas.se2aa4.island.aquifers.Aquifers;
+import ca.mcmaster.cas.se2aa4.island.biomes.Biomes;
 import ca.mcmaster.cas.se2aa4.island.lakes.Lakes;
 
 import ca.mcmaster.cas.se2aa4.island.Shapes.Square;
@@ -24,13 +25,18 @@ public class islandGen {
         int lakes = Integer.parseInt(config.lakes());
         int rivers = Integer.parseInt(config.rivers());
         int aquifers = Integer.parseInt(config.aquifers());
+        String biomes = config.biomes();
 
         Structs.Mesh outputMesh;
 
-        //Base Humidity is Initialized
+        //Base Humidity and Elevation Initialized
         Tiles newTile = new Tiles();
         //System.out.println("number of polygons" + aMesh.getPolygonsCount());
         newTile.setBaseHumidity(aMesh.getPolygonsCount());
+        newTile.setBaseElevation(aMesh.getPolygonsCount());
+
+        System.out.println("TESTING polygon count");
+        System.out.println(aMesh.getPolygonsCount());
 
 
 
@@ -48,11 +54,16 @@ public class islandGen {
             }
             if ("mountain".equals(altitude)) {
                 int[] arr = Altitude.mountain(outputMesh);
+                newTile.updateElevation(arr);
                 outputMesh = Mountain.mountainMesh(outputMesh, arr).build();
             }
             else if ("valley".equals(altitude)) {
                 int[] arr = Altitude.mountain(outputMesh);
+                newTile.updateElevation(arr);
                 outputMesh = Valley.valleyMesh(outputMesh, arr).build();
+            }
+            if (!"none".equals(biomes)) {
+                outputMesh = Biomes.biomeGenerator(outputMesh,biomes,newTile).build();
             }
 
         // -shape square
@@ -66,6 +77,7 @@ public class islandGen {
             }
             if ("mountain".equals(altitude)) {
                 int[] arr = Altitude.mountain(outputMesh);
+                newTile.updateElevation(arr);
                 outputMesh = Mountain.mountainMesh(outputMesh, arr).build();
             }
         }
@@ -82,6 +94,9 @@ public class islandGen {
             }
         }
 
+        System.out.println("TEST BIOMES ISLANDGEN");
+        Biomes.calculateBiomes(outputMesh, newTile);
+
         System.out.println(mode);
         System.out.println(shape);
         System.out.println(lakes);
@@ -89,8 +104,8 @@ public class islandGen {
         System.out.println(aquifers);
         System.out.println(altitude);
 
-       System.out.println("Testing Array Output");
-        newTile.retrieveHumidity();
+       //System.out.println("Testing Array Output");
+        // newTile.retrieveHumidity();
 
 
 

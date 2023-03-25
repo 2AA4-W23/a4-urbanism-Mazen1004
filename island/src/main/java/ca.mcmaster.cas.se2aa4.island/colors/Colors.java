@@ -7,4 +7,6 @@ public class Colors {
     public final String BeachColor = 242 + "," + 210 + "," + 169;
     public final String green = "0,225,0";
     public final String red = "225,0,0";
+    public final String DesertColor = 255 + "," + 190 + "," + 58;
+    public final String TundraColor = 188 + "," + 232 + "," + 234;
 }

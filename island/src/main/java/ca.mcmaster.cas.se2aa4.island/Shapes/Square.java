@@ -33,7 +33,7 @@ public class Square extends Shape{
                 String color = square.LandColor;
                 Structs.Property p = Structs.Property.newBuilder().setKey("rgb_color").setValue(color).build();
                 pc.addProperties(p);
-                newTile.setHumidity(i,30);
+                newTile.setHumidity(i,20);
                 waterNeighbour.add(polyIndex); //add index for land tile
             }
             else {
