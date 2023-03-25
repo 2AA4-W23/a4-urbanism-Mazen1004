@@ -1,6 +1,8 @@
 # Terrain Generator Team 52 (Assignment #3)
 
-  - Author: Mazen Youssef, Kelvin Yu, Matthew Cheung
+  - Author #1 [yuk42@mcmaster.ca]
+  - Author #2 [cheunm23@mcmaster.ca]
+  - Author #3 [youssm19@mcmaster.ca]
 
 ## Setup Commands
 ```
