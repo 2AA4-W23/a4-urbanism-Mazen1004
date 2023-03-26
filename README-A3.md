@@ -63,7 +63,7 @@ java -jar island/island.jar -i img/input.mesh -o img/lagoon.mesh -shape square -
 java -jar visualizer/visualizer.jar -i img/lagoon.mesh -o img/irregular.svg
 ```
 
-Note: SVG file with island visualization stored in "img" folderrr
+Note: SVG file with island visualization stored in "img" folder
 
 ## General Assumptions
 
