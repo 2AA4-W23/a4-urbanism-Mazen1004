@@ -27,7 +27,7 @@ public class Tiles {
         return humidityValues[polygonIndex];
     }
     public int[] retrieveHumidity(){
-        System.out.println("HUMIDITY FOR EACH TILE IN MESH");
+        System.out.println("MOST RECENT HUMIDITY FOR EACH TILE IN MESH");
         System.out.println(Arrays.toString(humidityValues));
         System.out.println("---------------------------------------------------------------------------");
         return humidityValues;

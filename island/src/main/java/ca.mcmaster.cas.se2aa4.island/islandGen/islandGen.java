@@ -93,6 +93,11 @@ public class islandGen {
             if (!"none".equals(biomes)) {
                 outputMesh = Biomes.biomeGenerator(outputMesh,biomes,newTile).build();
             }
+            if ("drySoil".equals(soil)) {
+                soilAbsorption.modifyHumidity("drySoil", newTile);
+            } else if ("wetSoil".equals(soil)) {
+                soilAbsorption.modifyHumidity("wetSoil", newTile);
+            }
         }
 
 

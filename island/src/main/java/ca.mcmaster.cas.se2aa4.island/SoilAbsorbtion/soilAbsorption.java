@@ -19,7 +19,5 @@ public abstract class soilAbsorption {
                 newTile.addHumidity(i, 30);
             }
         }
-
-        System.out.println(Arrays.toString(humidityValues));
     }
 }

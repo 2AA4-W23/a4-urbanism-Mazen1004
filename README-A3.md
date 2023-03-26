@@ -37,7 +37,7 @@ java -jar island/island.jar -i img/input.mesh -o img/lagoon.mesh -mode lagoon
    ```
    java -jar island/island.jar -i img/input.mesh -o img/lagoon.mesh -shape circle -lakes 5 -altitude mountain
    java -jar island/island.jar -i img/input.mesh -o img/lagoon.mesh -shape square -altitude valley
-    java -jar island/island.jar -i img/input.mesh -o img/lagoon.mesh -shape circle -aquifers 10 -altitude valley
+   java -jar island/island.jar -i img/input.mesh -o img/lagoon.mesh -shape circle -aquifers 10 -altitude valley
    ```
    
    d) Examples for biomes
@@ -45,6 +45,12 @@ java -jar island/island.jar -i img/input.mesh -o img/lagoon.mesh -mode lagoon
    java -jar island/island.jar -i img/input.mesh -o img/lagoon.mesh -shape circle -biomes tundra
    java -jar island/island.jar -i img/input.mesh -o img/lagoon.mesh -shape square -biomes desert 
    java -jar island/island.jar -i img/input.mesh -o img/lagoon.mesh -shape circle -lakes 20 -biomes tundra
+   ```
+   e) Examples for soil
+   ```
+   java -jar island/island.jar -i img/input.mesh -o img/lagoon.mesh -shape circle -soil wetSoil
+   java -jar island/island.jar -i img/input.mesh -o img/lagoon.mesh -shape square -aquifers 10 -soil drySoil 
+   java -jar island/island.jar -i img/input.mesh -o img/lagoon.mesh -shape circle -lakes 20 -soil wetSoil
    ```
 
 Example Island: (Square Island with 7 lakes, 10 aquifers, mountain altitude, tundra biomes)
