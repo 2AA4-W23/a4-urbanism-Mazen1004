@@ -14,8 +14,7 @@ public class Configuration {
     public static final String ALTITUDE = "altitude";
     public static final String BIOMES = "biomes";
     public static final String SOIL = "soil";
-
-
+    public static final String SEED = "seed";
 
     private CommandLine cli;
     public Configuration(String[] args) {
@@ -44,6 +43,9 @@ public class Configuration {
     public String rivers() {
         return this.cli.getOptionValue(RIVERS, String.valueOf(0));
     }
+    public String seed() {
+        return this.cli.getOptionValue(SEED, String.valueOf(0));
+    }
     public String shape() {
         return this.cli.getOptionValue(SHAPE,"none");
     }
@@ -68,7 +70,11 @@ public class Configuration {
         options.addOption(new Option(AQUIFERS, true,"Aquifer Count"));
         options.addOption(new Option(ALTITUDE, true,"Altitude Count"));
         options.addOption(new Option(BIOMES, true,"Biomes Type"));
+<<<<<<< HEAD
         options.addOption(new Option(SOIL, true,"Soil Type"));
+=======
+        options.addOption(new Option(SEED, true,"Seed Type"));
+>>>>>>> 659388d18b35fd670170e3a344c41f456941cdc0
 
         return options;
     }

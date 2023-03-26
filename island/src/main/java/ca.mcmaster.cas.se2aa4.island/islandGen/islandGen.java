@@ -15,6 +15,8 @@ import ca.mcmaster.cas.se2aa4.island.rivers.Rivers;
 import ca.mcmaster.cas.se2aa4.island.tiles.Tiles;
 import ca.mcmaster.cas.se2aa4.island.SoilAbsorbtion.soilAbsorption;
 
+import java.util.Random;
+
 public class islandGen {
     public static Structs.Mesh islandGenerator(Structs.Mesh aMesh, Configuration config){
     //String mode, String shape, int lakeCount other inputs
@@ -25,10 +27,14 @@ public class islandGen {
         int lakes = Integer.parseInt(config.lakes());
         int rivers = Integer.parseInt(config.rivers());
         int aquifers = Integer.parseInt(config.aquifers());
+        int seed = Integer.parseInt(config.seed());
         String biomes = config.biomes();
         String soil = config.soil();
 
         Structs.Mesh outputMesh;
+
+
+
 
         //Base Humidity and Elevation Initialized
         Tiles newTile = new Tiles();
@@ -36,6 +42,11 @@ public class islandGen {
         newTile.setBaseHumidity(aMesh.getPolygonsCount());
         newTile.setBaseElevation(aMesh.getPolygonsCount());
 
+        //if the seed doesn't equal zero the seed will be randomly generated
+      if (seed != 0) {
+          Random random = new Random(seed);
+          int randomSeed = random.nextInt(10);
+      }
 
         // -shape circle
         if ("circle".equals(shape)) {
@@ -122,8 +133,12 @@ public class islandGen {
         System.out.println("biomes is " + biomes);
         System.out.println("aquifers count is " + aquifers);
         System.out.println("altitude is " + altitude);
+        System.out.println("seed is " + seed);
+
+
 
 
         return outputMesh;
+
     }
 }
