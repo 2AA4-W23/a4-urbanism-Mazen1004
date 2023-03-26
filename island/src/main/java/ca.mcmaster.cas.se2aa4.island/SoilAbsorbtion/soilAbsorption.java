@@ -12,11 +12,11 @@ public abstract class soilAbsorption {
 
         if (Objects.equals(input, "drySoil")){
             for (int i=0; i<humidityValues.length; i++) {
-                newTile.addHumidity(i, -30);
+                newTile.addHumidity(i, -5);
             }
         }else if (Objects.equals(input, "wetSoil")){
             for (int i=0; i<humidityValues.length; i++) {
-                newTile.addHumidity(i, 30);
+                newTile.addHumidity(i, 5);
             }
         }
     }

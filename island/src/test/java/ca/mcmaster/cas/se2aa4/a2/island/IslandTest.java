@@ -13,13 +13,13 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-public class DotGenTest {
+public class IslandTest {
 
     //aquifersTest
     @Test
     public void testAquiferGeneration() {
         // test mesh
-        Structs.Mesh.Builder meshBuilder = Structs.Mesh.newBuilder();
+        Structs.Mesh.Builder meshBuilder =Structs.Mesh.newBuilder();
         meshBuilder.addVertices(Structs.Vertex.newBuilder().setX(0).setY(0));
         meshBuilder.addVertices(Structs.Vertex.newBuilder().setX(1).setY(0));
         meshBuilder.addVertices(Structs.Vertex.newBuilder().setX(1).setY(1));
@@ -46,7 +46,7 @@ public class DotGenTest {
         assertEquals(testMesh.getPolygonsCount(), resultBuilder.build().getPolygonsCount());
     }
 
-    //biomesTest
+    //biomesTests
     @Test
     public void testCalculateBiomes() {
         // Create a mock Tiles object with dummy humidity and elevation values
@@ -57,7 +57,7 @@ public class DotGenTest {
         //Set Humidity Tile with Base Value
         mockTiles.setBaseHumidity(1);
 
-        mockTiles.addHumidity(0,60);
+        mockTiles.setHumidity(0,75);
         mockTiles.updateElevation(elevationValues);
 
         // Create a mock Mesh object with dummy data
@@ -69,6 +69,30 @@ public class DotGenTest {
         // Call calculateBiomes and verify that the output is as expected
         String[] outputBiomes = Biomes.calculateBiomes(mockMesh, mockTiles);
         String[] expectedBiomes = { "Mountain Wetlands" };
+        assertEquals(Arrays.toString(expectedBiomes), Arrays.toString(outputBiomes));
+    }
+    @Test
+    public void testCalculateBiomes2() {
+        // Create a mock Tiles object with dummy humidity and elevation values
+        Tiles mockTiles = new Tiles();
+
+        int[] elevationValues = {0};
+
+        //Set Humidity Tile with Base Value
+        mockTiles.setBaseHumidity(1);
+
+        mockTiles.setHumidity(0,18);
+        mockTiles.updateElevation(elevationValues);
+
+        // Create a mock Mesh object with dummy data
+        Structs.Mesh.Builder mockMeshBuilder = Structs.Mesh.newBuilder();
+        Structs.Polygon mockPolygon = Structs.Polygon.newBuilder().build();
+        mockMeshBuilder.addPolygons(mockPolygon);
+        Structs.Mesh mockMesh = mockMeshBuilder.build();
+
+        // Call calculateBiomes and verify that the output is as expected
+        String[] outputBiomes = Biomes.calculateBiomes(mockMesh, mockTiles);
+        String[] expectedBiomes = { "Tundra" };
         assertEquals(Arrays.toString(expectedBiomes), Arrays.toString(outputBiomes));
     }
 
@@ -98,7 +122,7 @@ public class DotGenTest {
     public void testSetBaseHumidity() {
         Tiles tiles = new Tiles();
         tiles.setBaseHumidity(10);
-        int[] expectedHumidity = new int[]{50, 50, 50, 50, 50, 50, 50, 50, 50, 50};
+        int[] expectedHumidity = new int[]{60, 60, 60, 60, 60, 60, 60, 60, 60, 60};
         int[] actualHumidity = tiles.retrieveHumidity();
         assertArrayEquals(expectedHumidity, actualHumidity);
     }

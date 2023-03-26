@@ -51,7 +51,7 @@ public class Circle extends Shape {
                 String color = circle.LandColor;
                 Structs.Property p = Structs.Property.newBuilder().setKey("rgb_color").setValue(color).build();
                 landTiles.add(polyIndex); //add index for land tile
-                newTile.setHumidity(i,20);
+                newTile.setHumidity(i,30);
                 pc.addProperties(p);
             }
 

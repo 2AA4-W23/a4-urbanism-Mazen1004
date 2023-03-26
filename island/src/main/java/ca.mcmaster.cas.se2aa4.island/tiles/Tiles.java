@@ -9,16 +9,17 @@ public class Tiles {
     private int[] elevationValues;
 
     //Some Humidity Assumptions:
-    // Base Humidity is 50, this is humidity for oceans
-    // Island Humidity is 20, includes anywhere in the island
-    // If lake generated humidity is set to 40
-    // Generating Aquifers increases humidity of a tile by +30
-    // E.g a tile on the island that is a lake and has an aquifer would have humidity 40+30=70
+    // Base Humidity is 60, this is humidity for oceans
+    // Island Humidity is 30, includes anywhere in the island
+    // If lake generated humidity is set to 45
+    // Generating Aquifers increases humidity of a tile by +40
+    // Soil Absorption profiles adjust humidity by +/- 5
+    // E.g a tile on the island that is a lake and has an aquifer would have humidity 45+40=85
 
     //HUMIDITY FUNCTIONS
     public void setBaseHumidity(int numPolygons) {
         humidityValues = new int[numPolygons];
-        Arrays.fill(humidityValues, 50); // initialize all values to 50
+        Arrays.fill(humidityValues, 60); // initialize all values to 50
         //System.out.println("testing");
         //System.out.println(Arrays.toString(humidityValues));
     }
@@ -41,7 +42,7 @@ public class Tiles {
     }
 
     //Some Elevation Assumptions:
-    // Base Elevation is 0, if not altitude is defined
+    // If no altitude is defined, Base Elevation is 0
     // If altitude is defined it is extracted from the altitude functions
 
     //ELEVATION FUNCTIONS

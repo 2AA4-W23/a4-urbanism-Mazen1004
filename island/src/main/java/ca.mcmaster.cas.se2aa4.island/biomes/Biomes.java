@@ -18,32 +18,44 @@ public class Biomes {
         for (int i = 0; i < humidityValues.length; i++) {
             //Calculating biomes based on elevation and humidity (WHITAKER DIAGRAM)
 
-            if (humidityValues[i] == 50){
+            if (humidityValues[i] >= 55 && humidityValues[i] <= 65){
                 if (elevationValues[i]==0){
                     biomeType[i] = "Ocean";
                 }else{
                     biomeType[i] = "Mountain Ocean";
                 }
-            } else if (humidityValues[i] == 40) {
+            } else if (humidityValues[i] >= 40 && humidityValues[i] <= 50) {
                 if (elevationValues[i]==0){
                     biomeType[i] = "Lakes";
                 }else{
                     biomeType[i] = "Mountain Lakes";
                 }
-            } else if (humidityValues[i] == 20){
-                if (elevationValues[i]==0){
-                    biomeType[i] = "Fields";
-                }else{
-                    biomeType[i] = "Highlands";
+            } else if (humidityValues[i] >= 13 && humidityValues[i] <= 23) {
+                if (elevationValues[i] == 0) {
+                    biomeType[i] = "Tundra";
+                } else {
+                    biomeType[i] = "Mountain Tundra";
                 }
-            } else if (humidityValues[i] > 50) {
-                if (elevationValues[i]==0){
-                    biomeType[i] = "Wetlands";
-                }else{
-                    biomeType[i] = "Mountain Wetlands";
+            }else if (humidityValues[i] >= 0 && humidityValues[i] <= 10) {
+                if (elevationValues[i] == 0) {
+                    biomeType[i] = "Desert";
+                } else {
+                    biomeType[i] = "Mountain Desert";
                 }
+            }else if (humidityValues[i] >= 25 && humidityValues[i] <= 35) {
+                    if (elevationValues[i] == 0) {
+                        biomeType[i] = "Fields";
+                    } else {
+                        biomeType[i] = "Highlands";
+                    }
+            }else if (humidityValues[i] > 65) {
+                    if (elevationValues[i]==0){
+                        biomeType[i] = "Wetlands";
+                    }else{
+                        biomeType[i] = "Mountain Wetlands";
+                    }
             } else{
-                biomeType[i] = "Desert";
+                biomeType[i] = "Unknown";
             }
         }
         System.out.println("BIOMES FOR EACH TILE IN THE MESH");
@@ -73,12 +85,12 @@ public class Biomes {
                         Structs.Property.Builder propertyBuilder = Structs.Property.newBuilder(property);
                         propertyBuilder.setValue(circle.DesertColor);
                         polygonBuilder.setProperties(j, propertyBuilder.build());
-                        newTile.setHumidity(i,10);
+                        newTile.setHumidity(i,5);
                     } else if ("tundra".equals(biome)) {
                         Structs.Property.Builder propertyBuilder = Structs.Property.newBuilder(property);
                         propertyBuilder.setValue(circle.TundraColor);
                         polygonBuilder.setProperties(j, propertyBuilder.build());
-                        newTile.setHumidity(i,30);
+                        newTile.setHumidity(i,18);
                     }
                 }
             }

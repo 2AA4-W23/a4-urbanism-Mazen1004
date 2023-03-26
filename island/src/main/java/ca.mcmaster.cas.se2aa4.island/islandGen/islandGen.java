@@ -133,6 +133,7 @@ public class islandGen {
         System.out.println("biomes is " + biomes);
         System.out.println("aquifers count is " + aquifers);
         System.out.println("altitude is " + altitude);
+        System.out.println("soil profile is " + soil);
         System.out.println("seed is " + seed);
 
 

@@ -57,7 +57,7 @@ public class Lakes {
                             propertyBuilder.setValue(circle.LagoonSeaColor);
                             polygonBuilder.setProperties(j, propertyBuilder.build());
                             //Updating Humidity Value since polygon is a lake now
-                            newTile.setHumidity(i,40);
+                            newTile.setHumidity(i,45);
                         }
                     }
                 }
