@@ -70,11 +70,9 @@ public class Configuration {
         options.addOption(new Option(AQUIFERS, true,"Aquifer Count"));
         options.addOption(new Option(ALTITUDE, true,"Altitude Count"));
         options.addOption(new Option(BIOMES, true,"Biomes Type"));
-<<<<<<< HEAD
         options.addOption(new Option(SOIL, true,"Soil Type"));
-=======
         options.addOption(new Option(SEED, true,"Seed Type"));
->>>>>>> 659388d18b35fd670170e3a344c41f456941cdc0
+
 
         return options;
     }
