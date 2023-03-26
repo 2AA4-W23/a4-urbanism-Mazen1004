@@ -7,13 +7,13 @@ import ca.mcmaster.cas.se2aa4.island.Altitudes.Valley;
 import ca.mcmaster.cas.se2aa4.island.Configuration.Configuration;
 import ca.mcmaster.cas.se2aa4.island.Shapes.Circle;
 import ca.mcmaster.cas.se2aa4.island.Shapes.Lagoon;
+import ca.mcmaster.cas.se2aa4.island.Shapes.Square;
 import ca.mcmaster.cas.se2aa4.island.aquifers.Aquifers;
 import ca.mcmaster.cas.se2aa4.island.biomes.Biomes;
 import ca.mcmaster.cas.se2aa4.island.lakes.Lakes;
-
-import ca.mcmaster.cas.se2aa4.island.Shapes.Square;
 import ca.mcmaster.cas.se2aa4.island.rivers.Rivers;
 import ca.mcmaster.cas.se2aa4.island.tiles.Tiles;
+import ca.mcmaster.cas.se2aa4.island.SoilAbsorbtion.soilAbsorption;
 
 public class islandGen {
     public static Structs.Mesh islandGenerator(Structs.Mesh aMesh, Configuration config){
@@ -26,6 +26,7 @@ public class islandGen {
         int rivers = Integer.parseInt(config.rivers());
         int aquifers = Integer.parseInt(config.aquifers());
         String biomes = config.biomes();
+        String soil = config.soil();
 
         Structs.Mesh outputMesh;
 
@@ -60,6 +61,11 @@ public class islandGen {
             }
             if (!"none".equals(biomes)) {
                 outputMesh = Biomes.biomeGenerator(outputMesh,biomes,newTile).build();
+            }
+            if ("drySoil".equals(soil)) {
+                soilAbsorption.modifyHumidity("drySoil", newTile);
+            } else if ("wetSoil".equals(soil)) {
+                soilAbsorption.modifyHumidity("wetSoil", newTile);
             }
 
         // -shape square

@@ -10,9 +10,12 @@ public abstract class Altitude {
     protected static double centerX= canvasX/2;
     protected static double centerY= canvasY/2;
 
+    // Calculates distance from one point to another
     public static double distanceCalc(double x1, double y1, double x2, double y2) {
         return Math.sqrt((y2 - y1) * (y2 - y1) + (x2 - x1) * (x2 - x1));
     }
+
+    // Creates array of elevation radii, determining elevation rings in the mesh
     public static ArrayList<Integer> elevRadii() {
         ArrayList<Integer> elevRadii = new ArrayList<>(); // stores radius of all elevation circles
 
@@ -22,10 +25,12 @@ public abstract class Altitude {
             elevRadii.add(assignRadius);
             assignRadius+=100;
         }
-        // makes 0 the lowest (sea level) and the tallest point on the map is the highest value in elevRadii
+        // Makes 0 the lowest (sea level) and the tallest point on the map is the highest value in elevRadii
         Collections.reverse(elevRadii);
         return elevRadii;
     }
+
+    // Returns an array with an elevation for every polygon in the mesh
     public static int[] mountain(Structs.Mesh aMesh){
 
         List<Structs.Polygon> polygonList = aMesh.getPolygonsList();
@@ -71,14 +76,16 @@ public abstract class Altitude {
         return elevations;
     }
 
+    // Returns and array with the colors for each elevation ring as a gradient from green to red
+    // Green lowest and red highest point in elevation.
     public static String[] colorArray(String type){
         colors.Colors color = new colors.Colors();
 
         String[] colorArray = new String[elevRadii().size()];
 
-        // Determine the color for each layer of elevation. i starts at 1 since 0 in the array is sea-level, thus blue.
+        // Determines the color for each layer of elevation. i starts at 1 since 0 in the array is sea-level, thus blue.
         for (int i = 1; i < elevRadii().size(); i++) {
-            // Calculate the color value between green and red based on the element's position in the array
+            // Calculates the color value between green and red based on the element's position in the array
             float ratio = (float) i / (float) (elevRadii().size() - 1);
             String[] greenValues = color.green.split(",");
             String[] redValues = color.red.split(",");
@@ -110,6 +117,7 @@ public abstract class Altitude {
         return colorArray;
     }
 
+    // Builds a clone mesh with polygons colored to their respective elevation levels
     public static Structs.Mesh.Builder cloneBuilder(Structs.Mesh aMesh, String[] colorArray, int[] array) {
         Structs.Mesh.Builder clone = Structs.Mesh.newBuilder();
         clone.addAllVertices(aMesh.getVerticesList());
