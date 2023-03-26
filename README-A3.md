@@ -49,7 +49,7 @@ java -jar island/island.jar -i img/input.mesh -o img/lagoon.mesh -mode lagoon
 
 Example Island: (Square Island with 7 lakes, 10 aquifers, mountain altitude, tundra biomes)
 ```
-java -jar island/island.jar -i img/input.mesh -o img/lagoon.mesh -shape square -lakes 7 -aquifers 10 -altitude valley -biomes tundra
+java -jar island/island.jar -i img/input.mesh -o img/lagoon.mesh -shape square -lakes 7 -aquifers 10 -altitude valley -biomes tundra -seed 0
 ```
 
 ## Visualizing Island
@@ -75,5 +75,11 @@ Altitude (Elevation) Assumptions:
 
 Biomes Assumptions:
 // Biomes are calculated based on humidity and elevation values
+
+Seed Assumptions:
+// Seed 0 is the base seed (-seed 0)
+// Anything other than seed 0 will produce a different seed
+// however if generator is run those seeds will be local to that specific generator
+
 
    

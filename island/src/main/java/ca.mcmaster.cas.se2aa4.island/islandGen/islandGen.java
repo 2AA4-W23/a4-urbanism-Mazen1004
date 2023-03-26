@@ -32,25 +32,20 @@ public class islandGen {
 
         Structs.Mesh outputMesh;
 
+
+
+
         //Base Humidity and Elevation Initialized
         Tiles newTile = new Tiles();
         //System.out.println("number of polygons" + aMesh.getPolygonsCount());
         newTile.setBaseHumidity(aMesh.getPolygonsCount());
         newTile.setBaseElevation(aMesh.getPolygonsCount());
 
-
-        if (seed != 0) { //when the user enters a seed value
-            double seedNum = seed;
-            Random random = new Random(seed);
-
-            // generate some random values
-            int rand1 = random.nextInt(10);
-            double rand2 = random.nextDouble();
-
-            // use the random values in your program
-            System.out.println("rand1 = " + rand1);
-            System.out.println("rand2 = " + rand2);
-        }
+        //if the seed doesn't equal zero the seed will be randomly generated
+      if (seed != 0) {
+          Random random = new Random(seed);
+          int randomSeed = random.nextInt(10);
+      }
 
         // -shape circle
         if ("circle".equals(shape)) {
@@ -127,8 +122,12 @@ public class islandGen {
         System.out.println("biomes is " + biomes);
         System.out.println("aquifers count is " + aquifers);
         System.out.println("altitude is " + altitude);
+        System.out.println("seed is " + seed);
+
+
 
 
         return outputMesh;
+
     }
 }

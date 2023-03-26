@@ -6,6 +6,7 @@ import colors.Colors;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Lagoon extends Shape{
     public static Structs.Mesh.Builder lagoon(Structs.Mesh aMesh, Tiles newTile){
@@ -99,4 +100,5 @@ public class Lagoon extends Shape{
         //returns clone mesh
         return clone;
     }
+
 }

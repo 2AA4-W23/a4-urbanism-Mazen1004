@@ -28,6 +28,7 @@ public class GraphicRenderer implements Renderer {
             drawAPolygon(p, aMesh, canvas);
         }
     }
+    //draw segments
 
     private void drawAPolygon(Structs.Polygon p, Mesh aMesh, Graphics2D canvas) {
         Hull hull = new Hull();
