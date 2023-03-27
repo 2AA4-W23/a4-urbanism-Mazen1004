@@ -11,7 +11,7 @@ mvn install
 ```
 ## Generate Base Mesh
 ```
-java -jar generator/generator.jar -k irregular -h 1080 -w 1920 -p 1000 -s 20 -o img/irregular.mesh
+java -jar generator/generator.jar -k irregular -h 1080 -w 1920 -p 1000 -s 20 -o img/input.mesh
 ```
 ## Examples of Executions for Island
 1. TESTING STEP 1 (MVP)
