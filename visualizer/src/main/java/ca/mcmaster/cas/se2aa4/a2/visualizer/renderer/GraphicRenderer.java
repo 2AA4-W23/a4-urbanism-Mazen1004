@@ -22,6 +22,7 @@ public class GraphicRenderer implements Renderer {
         Stroke stroke = new BasicStroke(0.2f);
         canvas.setStroke(stroke);
         drawPolygons(aMesh,canvas);
+        drawSegment(aMesh, canvas);
     }
 
     private void drawPolygons(Mesh aMesh, Graphics2D canvas) {
