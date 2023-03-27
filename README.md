@@ -6,6 +6,7 @@
 
 ## Setup Commands
 ```
+mkdir img (create an image folder in same level as island/generator/visualizer)
 mvn clean
 mvn install
 ```
