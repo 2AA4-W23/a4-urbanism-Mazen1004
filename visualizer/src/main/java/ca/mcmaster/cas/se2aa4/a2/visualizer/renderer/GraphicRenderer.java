@@ -4,6 +4,7 @@ import ca.mcmaster.cas.se2aa4.a2.io.Structs;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Mesh;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Vertex;
 import ca.mcmaster.cas.se2aa4.a2.visualizer.renderer.properties.ColorProperty;
+import ca.mcmaster.cas.se2aa4.a2.visualizer.renderer.properties.isRiver;
 
 import java.awt.Graphics2D;
 import java.awt.Stroke;
@@ -29,6 +30,25 @@ public class GraphicRenderer implements Renderer {
         }
     }
     //draw segments
+    private void drawSegment(Mesh aMesh, Graphics2D canvas) {
+        for (Structs.Segment segment: aMesh.getSegmentsList()) {
+            drawASegments(segment, aMesh, canvas, Color.WHITE);
+        }
+    }
+    private void drawASegments(Structs.Segment segment, Mesh aMesh, Graphics2D canvas, Color color){
+        Structs.Vertex vertex1 = aMesh.getVertices(segment.getV1Idx());
+        Structs.Vertex vertex2 = aMesh.getVertices(segment.getV2Idx());
+
+        isRiver isRiver = new isRiver();
+
+        if (isRiver.extract(segment.getPropertiesList()).toString().equals("rivers")) {
+            canvas.drawLine((int) vertex1.getX(), (int) vertex1.getY(), (int) vertex2.getX(), (int) vertex2.getY());
+            canvas.setColor(Color.red);
+            canvas.setStroke(new BasicStroke(THICKNESS/3));
+        }
+
+
+    }
 
     private void drawAPolygon(Structs.Polygon p, Mesh aMesh, Graphics2D canvas) {
         Hull hull = new Hull();
