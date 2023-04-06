@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface Pathfinder {
-
-
-
+    static List<Nodes> findShortestPath(Map<Integer, Map<Integer, Integer>> adjacencyList, int startNodeID, Nodes endNodeID) {
+        return null;
+    }
 }
