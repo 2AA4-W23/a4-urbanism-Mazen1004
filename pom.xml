@@ -9,7 +9,7 @@
     <groupId>io.github.ace-design</groupId>
     <artifactId>2aa4.mesh</artifactId>
     <version>1.0</version>
-    <name>McMaster :: CAS :: 2AA4 :: A2</name>
+    <name>McMaster :: CAS :: 2AA4 :: A4</name>
     <description>Mesh generator and visualizer</description>
 
     <modules>
@@ -17,6 +17,7 @@
         <module>io</module>
         <module>visualizer</module>
 		<module>island</module>
+        <module>pathfinder</module>
     </modules>
 
     <properties>
