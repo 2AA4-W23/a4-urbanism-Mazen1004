@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Graph {
+public class Graph extends GraphADT {
     private List<Nodes> Nodes = new ArrayList<>();
     private List<Edges> Edges = new ArrayList<>();
 

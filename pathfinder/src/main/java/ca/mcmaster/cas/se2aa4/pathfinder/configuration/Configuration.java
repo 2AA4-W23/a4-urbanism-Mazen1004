@@ -18,7 +18,6 @@ public class Configuration {
         return new DefaultParser();
     }
 
-
     private Options options() {
         Options options = new Options();
         return options;
