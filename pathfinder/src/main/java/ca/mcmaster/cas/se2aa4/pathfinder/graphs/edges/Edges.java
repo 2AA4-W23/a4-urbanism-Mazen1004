@@ -1,15 +1,13 @@
 package ca.mcmaster.cas.se2aa4.pathfinder.graphs.edges;
 
-import ca.mcmaster.cas.se2aa4.pathfinder.graphs.nodes.Nodes;
-
 public class Edges {
     private int weight;
-    private Nodes nodeA;
-    private Nodes nodeB;
+    private int node1ID;
+    private int node2ID;
 
-    public Edges(Nodes node1, Nodes node2, int edgeWeight){
-        this.nodeA = node1;
-        this.nodeB = node2;
+    public Edges(int node1,int node2, int edgeWeight){
+        this.node1ID = node1;
+        this.node1ID = node2;
         //weight of edge set by user, technical debt as edgeWeight must be calculated
         this.weight = edgeWeight;
     }
@@ -18,11 +16,11 @@ public class Edges {
         return this.weight;
     }
 
-    public Nodes getEdgeNodeA(){
-        return this.nodeA;
+    public int getEdgeNodeA(){
+        return this.node1ID;
     }
 
-    public Nodes getEdgeNodeB(){
-        return this.nodeB;
+    public int getEdgeNodeB(){
+        return this.node2ID;
     }
 }

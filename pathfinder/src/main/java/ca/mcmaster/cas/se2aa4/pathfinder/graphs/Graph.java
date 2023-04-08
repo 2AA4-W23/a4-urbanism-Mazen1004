@@ -18,32 +18,34 @@ public class Graph extends GraphADT {
     private Map<Integer,Map<Integer,Integer>> adjacencyList = new HashMap<>();
 
     public void addNode(Structs.Vertex centroid, int id){
-        Nodes node = new Nodes(centroid,id);
-        Nodes.add(node);
-        Map<Integer, Integer> nodeNeighbor = new HashMap<>();
-        adjacencyList.put(node.getNodeID(),nodeNeighbor);
-        System.out.println(adjacencyList.toString());
+        if(!adjacencyList.containsKey(id)){
+            Nodes node = new Nodes(centroid,id);
+            Nodes.add(node);
+            Map<Integer, Integer> nodeNeighbor = new HashMap<>();
+            adjacencyList.put(node.getNodeID(),nodeNeighbor);
+            //System.out.println(adjacencyList.toString());
+        }
     }
 
-    public void addEdge(Nodes node1,Nodes node2, int edgeWeight){
-        if(adjacencyList.containsKey(node1.getNodeID()) && adjacencyList.containsKey(node2.getNodeID())){
-            if(adjacencyList.get(node1.getNodeID()).containsKey(node2.getNodeID())){
+    public void addEdge(int node1ID,int node2ID, int edgeWeight){
+        if(adjacencyList.containsKey(node1ID) && adjacencyList.containsKey(node2ID)){
+            if(adjacencyList.get(node1ID).containsKey(node2ID)){
                 System.out.println("edge already exists between them");
                 System.out.println(adjacencyList.toString());
             }
             else{
-                Edges edge = new Edges(node1, node2, edgeWeight);
+                Edges edge = new Edges(node1ID, node2ID, edgeWeight);
                 Edges.add(edge);
 
-                Map<Integer, Integer> neighbors = adjacencyList.getOrDefault(node1.getNodeID(), new HashMap<>());
-                neighbors.put(node2.getNodeID(),edge.getEdgeWeight());
+                Map<Integer, Integer> neighbors = adjacencyList.getOrDefault(node1ID, new HashMap<>());
+                neighbors.put(node2ID,edge.getEdgeWeight());
 
-                adjacencyList.put(node1.getNodeID(), neighbors);
+                adjacencyList.put(node1ID, neighbors);
 
-                Map<Integer, Integer> neighbors2 = adjacencyList.getOrDefault(node2.getNodeID(), new HashMap<>());
-                neighbors2.put(node1.getNodeID(),edge.getEdgeWeight());
+                Map<Integer, Integer> neighbors2 = adjacencyList.getOrDefault(node2ID, new HashMap<>());
+                neighbors2.put(node1ID,edge.getEdgeWeight());
 
-                adjacencyList.put(node2.getNodeID(), neighbors2);
+                adjacencyList.put(node2ID, neighbors2);
             }
         }
     }

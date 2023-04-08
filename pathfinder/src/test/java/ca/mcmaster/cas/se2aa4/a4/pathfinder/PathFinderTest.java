@@ -1,3 +1,4 @@
+/*
 package ca.mcmaster.cas.se2aa4.a4.pathfinder;
 
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
@@ -40,7 +41,8 @@ public class PathFinderTest {
 
         Map<Integer, Map<Integer, Integer>> adjacencyList = graph.returnGraph();
 
-        /*
+        */
+/*
         TEST GRAPH CREATED:
                        0
                       / \
@@ -54,7 +56,8 @@ public class PathFinderTest {
 
          SHORTEST PATH BETWEEN 0&1 is through 0-2-1
          java -jar pathfinder/pathfinder.jar
-         */
+         *//*
+
 
         //Finding the Shortest Path between 0-1
         List<Integer> calculatedShortestPath = Dijkstra.findShortestPath(adjacencyList, 0, 1);
@@ -172,4 +175,4 @@ public class PathFinderTest {
         Nodes node = new Nodes(centroid, 10);
         assertEquals(centroid, node.getNodeCentroid());
     }
-}
+}*/

@@ -9,7 +9,7 @@ import java.util.Map;
 
 public abstract class GraphADT {
     public abstract void addNode(Structs.Vertex centroid, int id);
-    public abstract void addEdge(Nodes node1,Nodes node2, int edgeWeight);
+    public abstract void addEdge(int node1,int node2, int edgeWeight);
     public abstract List<Nodes> returnGraphNodes();
     public abstract List<Edges> returnGraphEdges();
     public abstract Map<Integer, Map<Integer,Integer>> returnGraph();

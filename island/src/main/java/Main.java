@@ -4,8 +4,10 @@ import ca.mcmaster.cas.se2aa4.island.Configuration.*;
 import ca.mcmaster.cas.se2aa4.island.Shapes.Circle;
 import ca.mcmaster.cas.se2aa4.island.Shapes.Lagoon;
 import ca.mcmaster.cas.se2aa4.island.islandGen.islandGen;
+import ca.mcmaster.cas.se2aa4.island.urbanismGen.UrbanismGen;
 
 import java.util.Arrays;
+import java.util.Map;
 
 import static ca.mcmaster.cas.se2aa4.island.Altitudes.Mountain.mountain;
 
@@ -18,6 +20,12 @@ public class Main {
         Structs.Mesh outputMesh; //initializing output mesh
 
         outputMesh = islandGen.islandGenerator(aMesh,config); //tiles take\
+
+        outputMesh = UrbanismGen.adaptorClass(outputMesh).build();
+
+        outputMesh = UrbanismGen.generateCities(outputMesh,5).build();
+
+
 
         new MeshFactory().write(outputMesh, config.output()); //output to visualizer
     }

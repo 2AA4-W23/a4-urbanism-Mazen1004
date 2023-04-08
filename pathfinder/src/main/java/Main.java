@@ -26,11 +26,11 @@ public class Main {
         Nodes Node2 = nodes.get(2);
 
         //Inserting Edge between node 1 and 2 of weight 5
-        graph.addEdge(Node0,Node1,5);
+        graph.addEdge(0,1,5);
 
-        graph.addEdge(Node0,Node2,1);
+        graph.addEdge(0,2,1);
 
-        graph.addEdge(Node2,Node1,2);
+        graph.addEdge(2,1,2);
 
         Map<Integer, Map<Integer, Integer>> adjacencyList = graph.returnGraph();
 
