@@ -21,8 +21,6 @@ public class UrbanismGen {
 
         colors.Colors circle = new colors.Colors();
 
-
-
         List<Structs.Vertex> vertices = aMesh.getVerticesList();
         //Loop to count how many polygons are land Polygons, where cities can be generated
         int nodeCount = 0;
@@ -100,7 +98,7 @@ public class UrbanismGen {
         System.out.println("CITIES ARE IN THESE POLYGONS");
         System.out.println(cityPolygons); // Example output: [527, 18, 10, 4]
 
-        //calculateCenterHub(aMesh,cityPolygons);
+        calculateCenterHub(aMesh,cityPolygons);
 
 
         //TESTING LOL (WILL NEED TO FIX TO COLOR VERTICES NOT POLYGONS)
@@ -128,8 +126,7 @@ public class UrbanismGen {
         return clone;
     }
 
-    /*
-    //INCORRECT FIX PLEASE
+
     public static int calculateCenterHub(Structs.Mesh aMesh, List<Integer> cityPolygons){
 
         //Center Point Values of Mesh
@@ -143,32 +140,61 @@ public class UrbanismGen {
 
         List<Structs.Vertex> vertices = aMesh.getVerticesList();
 
+        Structs.Mesh.Builder clone = Structs.Mesh.newBuilder();
+        clone.addAllVertices(aMesh.getVerticesList());
+        clone.addAllSegments(aMesh.getSegmentsList());
 
-        for (int cityNodeID : cityPolygons) {
-            //Structs.Polygon polygon = aMesh.getPolygons(cityPolygons.get(cityNodeID));
-            Structs.Polygon polygon = aMesh.getPolygons(cityNodeID);
 
-            Structs.Vertex centroid = vertices.get(polygon.getCentroidIdx());
+        //Structs.Polygon polygon = aMesh.getPolygons(i);
+        //Structs.Polygon.Builder polygonBuilder = Structs.Polygon.newBuilder(polygon);
 
-            double centroidX = centroid.getX();
-            double centroidY = centroid.getY();
+        for (int i = 0; i < aMesh.getPolygonsCount(); i++) {
 
-            double distance = distanceCalc(centerX,centerY,centroidX,centroidY);
+            Structs.Polygon polygon = aMesh.getPolygons(i);
+            Structs.Polygon.Builder polygonBuilder = Structs.Polygon.newBuilder(polygon);
+            List<Structs.Property> propertiesList = polygon.getPropertiesList();
 
-            // if this node is closer to the center than previous nodes, update center and minDistance
-            if (distance < minDistance) {
-                centerPolygonID = cityNodeID;
-                minDistance = distance;
+            for (int j = 0; j < cityPolygons.size(); j++) {
+                int cityNodeID = cityPolygons.get(j);
+
+                if (i == cityNodeID) {
+                    Structs.Vertex centroid = vertices.get(polygon.getCentroidIdx());
+                    double centroidX = centroid.getX();
+                    double centroidY = centroid.getY();
+                    double distance = distanceCalc(centerX, centerY, centroidX, centroidY);
+
+                    if (distance < minDistance) {
+                        centerPolygonID = cityNodeID;
+                        minDistance = distance;
+                    }
+                }
             }
-
-
         }
-        System.out.println("CENTER POLYGON ID IS" + cityPolygons.get(centerPolygonID));
-        return cityPolygons.get(centerPolygonID);
+        /*
+        Structs.Polygon polygon = aMesh.getPolygons(centerPolygonID);
+        Structs.Polygon.Builder polygonBuilder = Structs.Polygon.newBuilder(polygon);
+        List<Structs.Property> propertiesList = polygon.getPropertiesList();
+
+        colors.Colors circle = new colors.Colors();
+
+        for (int j = 0; j < propertiesList.size(); j++) {
+            Structs.Property property = propertiesList.get(j);
+            if (property.getKey().equals("rgb_color") ) {
+                Structs.Vertex centroid = vertices.get(polygon.getCentroidIdx());
+
+                Structs.Property.Builder propertyBuilder = Structs.Property.newBuilder(property);
+                propertyBuilder.setValue(circle.TundraColor);
+                polygonBuilder.setProperties(j, propertyBuilder.build());
+            }
+        }
+        clone.addPolygons(polygonBuilder.build());
+        return clone;*/
+        System.out.println("CENTER POLYGON ID IS " + centerPolygonID);
+        return centerPolygonID;
     }
     public static double distanceCalc(double x1, double y1, double x2, double y2) {
         return Math.sqrt((y2 - y1) * (y2 - y1) + (x2 - x1) * (x2 - x1));
-    }*/
+    }
 }
 
 

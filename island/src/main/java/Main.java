@@ -26,7 +26,6 @@ public class Main {
         outputMesh = UrbanismGen.generateCities(outputMesh,5).build();
 
 
-
         new MeshFactory().write(outputMesh, config.output()); //output to visualizer
     }
 }
