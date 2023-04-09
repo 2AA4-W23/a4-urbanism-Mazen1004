@@ -19,11 +19,13 @@ public class Main {
 
         Map<Integer, Map<Integer, Integer>> adjacencyList = UrbanismGen.adaptorClass(outputMesh);
 
-        List<Integer> cityPolygons = UrbanismGen.generateCities(outputMesh,5);
+        List<Integer> cityPolygons = UrbanismGen.generateCities(outputMesh,20);
 
         int centerHub = UrbanismGen.calculateCenterHub(aMesh,cityPolygons);
 
-        UrbanismGen.roadGeneratorPath(adjacencyList,centerHub,cityPolygons);
+        List<List<Integer>> shortestPaths = UrbanismGen.roadGeneratorPath(adjacencyList,centerHub,cityPolygons);
+
+        outputMesh = UrbanismGen.visualizer(outputMesh,shortestPaths,cityPolygons).build();
 
 
         new MeshFactory().write(outputMesh, config.output()); //output to visualizer

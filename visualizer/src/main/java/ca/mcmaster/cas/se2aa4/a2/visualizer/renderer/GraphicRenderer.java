@@ -10,8 +10,10 @@ import java.awt.Graphics2D;
 import java.awt.Stroke;
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.geom.Ellipse2D;
 import java.awt.geom.Path2D;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 
 public class GraphicRenderer implements Renderer {
@@ -23,6 +25,8 @@ public class GraphicRenderer implements Renderer {
         canvas.setStroke(stroke);
         drawPolygons(aMesh,canvas);
         drawSegment(aMesh, canvas);
+        drawRoads(aMesh, canvas);
+        drawCities(aMesh, canvas);
     }
 
     private void drawPolygons(Mesh aMesh, Graphics2D canvas) {
@@ -40,15 +44,51 @@ public class GraphicRenderer implements Renderer {
         Structs.Vertex vertex1 = aMesh.getVertices(segment.getV1Idx());
         Structs.Vertex vertex2 = aMesh.getVertices(segment.getV2Idx());
 
-        isRiver isRiver = new isRiver();
+       /* isRiver isRiver = new isRiver();
 
         if (isRiver.extract(segment.getPropertiesList()).toString().equals("rivers")) {
             canvas.drawLine((int) vertex1.getX(), (int) vertex1.getY(), (int) vertex2.getX(), (int) vertex2.getY());
             canvas.setColor(Color.red);
             canvas.setStroke(new BasicStroke(THICKNESS/3));
+        }*/
+
+
+    }
+    private void drawRoads(Structs.Mesh aMesh, Graphics2D canvas) {
+        canvas.setColor(Color.RED);
+        for(Structs.Segment s: aMesh.getSegmentsList()) {
+            List<Structs.Property> propertiesList = s.getPropertiesList();
+            Structs.Vertex vertex1 = aMesh.getVertices(s.getV1Idx());
+            Structs.Vertex vertex2 = aMesh.getVertices(s.getV2Idx());
+            for (int j = 0; j < propertiesList.size(); j++) {
+                Structs.Property property = propertiesList.get(j);
+                if (property.getKey().equals("rgb_color") && property.getValue().equals("225,0,0")) {
+
+                    canvas.drawLine((int) vertex1.getX(), (int) vertex1.getY(), (int) vertex2.getX(), (int) vertex2.getY());
+                    canvas.setColor(Color.red);
+                    canvas.setStroke(new BasicStroke(THICKNESS/2));
+
+                }
+            }
+
         }
+    }
+    //Draw City Centroid
+    private void drawCities(Structs.Mesh aMesh, Graphics2D canvas) {
+        canvas.setColor(Color.RED);
+        for(Structs.Vertex p: aMesh.getVerticesList()) {
+            List<Structs.Property> propertiesList = p.getPropertiesList();
+            for (int j = 0; j < propertiesList.size(); j++) {
+                Structs.Property property = propertiesList.get(j);
+                if (property.getKey().equals("rgb_color") && property.getValue().equals("225,0,0")) {
+                    Ellipse2D circle = new Ellipse2D.Float((float) p.getX()-1.5f, (float) p.getY()-1.5f,
+                            6, 6);
+                    canvas.fill(circle);
+                    //canvas.setStroke(new BasicStroke(THICKNESS/1));
 
-
+                }
+            }
+        }
     }
 
     private void drawAPolygon(Structs.Polygon p, Mesh aMesh, Graphics2D canvas) {

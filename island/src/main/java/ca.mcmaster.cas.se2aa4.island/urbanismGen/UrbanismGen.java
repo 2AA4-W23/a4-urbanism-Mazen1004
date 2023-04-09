@@ -215,6 +215,55 @@ public class UrbanismGen {
         return shortestPaths;
 
     }
+
+    public static Structs.Mesh.Builder visualizer(Structs.Mesh aMesh,  List<List<Integer>> shortestPaths, List<Integer> cityPolygons ){
+
+        Structs.Mesh.Builder clone = Structs.Mesh.newBuilder();
+        clone.addAllVertices(aMesh.getVerticesList());
+        clone.addAllSegments(aMesh.getSegmentsList());
+        clone.addAllPolygons(aMesh.getPolygonsList());
+
+        List<Structs.Vertex> vertices = aMesh.getVerticesList();
+
+        Structs.Property color_property = Structs.Property.newBuilder().setKey("rgb_color").setValue("225,0,0").build();
+
+        for (List<Integer> shortestPath : shortestPaths) {
+
+            // Iterate through city polygons in the list
+            for (int i : cityPolygons) {
+                int polygonID = i;
+                Structs.Polygon polygon = aMesh.getPolygons(polygonID);
+
+                Structs.Vertex centroid = vertices.get(polygon.getCentroidIdx());
+
+                Structs.Vertex.Builder centroidBuilder = Structs.Vertex.newBuilder(centroid);
+
+                centroidBuilder.addProperties(color_property);
+
+                Structs.Vertex centroid1 = centroidBuilder.build();
+
+                clone.addVertices(centroid1);
+
+            }
+            // iterate through each pair of consecutive polygons in the list
+            for (int i = 0; i < shortestPath.size() - 1; i++) {
+                int polygonID1 = shortestPath.get(i);
+                int polygonID2 = shortestPath.get(i + 1);
+                System.out.println("TEST" + polygonID1 + " " + polygonID2);
+
+                Structs.Polygon polygon1 = aMesh.getPolygons(polygonID1);
+                Structs.Polygon polygon2 = aMesh.getPolygons(polygonID2);
+
+                Structs.Segment.Builder newSegment = Structs.Segment.newBuilder();
+                newSegment.setV1Idx(polygon1.getCentroidIdx()).setV2Idx(polygon2.getCentroidIdx());
+                newSegment.addProperties(color_property);
+                Structs.Segment newSegment1 = newSegment.build();
+
+                clone.addSegments(newSegment1);
+            }
+        }
+        return clone;
+    }
 }
 
 
