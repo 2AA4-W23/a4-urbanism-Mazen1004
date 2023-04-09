@@ -71,7 +71,7 @@ public class Dijkstra implements Pathfinder {
         //Add the start node to the path list and reverse it to get the correct order of nodes
         path.add(start);
         Collections.reverse(path);
-        System.out.println(path);
+
         return path;
     }
 

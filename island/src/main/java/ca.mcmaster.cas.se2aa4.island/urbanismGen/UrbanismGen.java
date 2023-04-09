@@ -2,6 +2,7 @@ package ca.mcmaster.cas.se2aa4.island.urbanismGen;
 
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
 import ca.mcmaster.cas.se2aa4.pathfinder.graphs.Graph;
+import ca.mcmaster.cas.se2aa4.pathfinder.pathfinding.Dijkstra;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,7 @@ public class UrbanismGen {
 
     //This class converts landTiles from the Mesh into a Graph, where Nodes are centroids of land tiles
     //Edges are segments between each centroid, distance calculated using distance formula
-    public static Structs.Mesh.Builder adaptorClass(Structs.Mesh aMesh) {
+    public static Map<Integer, Map<Integer, Integer>> adaptorClass(Structs.Mesh aMesh) {
         Structs.Mesh.Builder clone = Structs.Mesh.newBuilder();
         clone.addAllVertices(aMesh.getVerticesList());
         clone.addAllSegments(aMesh.getSegmentsList());
@@ -68,12 +69,13 @@ public class UrbanismGen {
             clone.addPolygons(polygonBuilder.build());
         }
         Map<Integer, Map<Integer, Integer>> adjacencyList = graph.returnGraph();
-        return clone;
+        return adjacencyList;
+        //return clone;
 
     }
 
     //Loops through adjacency List generates cities randomly based on user input
-    public static Structs.Mesh.Builder generateCities(Structs.Mesh aMesh, int cityNumber) {
+    public static List<Integer> generateCities(Structs.Mesh aMesh, int cityNumber) {
 
         Structs.Mesh.Builder clone = Structs.Mesh.newBuilder();
         clone.addAllVertices(aMesh.getVerticesList());
@@ -94,13 +96,15 @@ public class UrbanismGen {
             // Add the key to the cityPolygons list
             cityPolygons.add(randomKey);
         }
+        calculateCenterHub(aMesh,cityPolygons);
 
         System.out.println("CITIES ARE IN THESE POLYGONS");
         System.out.println(cityPolygons); // Example output: [527, 18, 10, 4]
+        return cityPolygons;
 
-        calculateCenterHub(aMesh,cityPolygons);
 
 
+/*
         //TESTING LOL (WILL NEED TO FIX TO COLOR VERTICES NOT POLYGONS)
         for (int i = 0; i < aMesh.getPolygonsCount(); i++) {
 
@@ -123,7 +127,7 @@ public class UrbanismGen {
             }
             clone.addPolygons(polygonBuilder.build());
         }
-        return clone;
+        return clone;*/
     }
 
 
@@ -194,6 +198,22 @@ public class UrbanismGen {
     }
     public static double distanceCalc(double x1, double y1, double x2, double y2) {
         return Math.sqrt((y2 - y1) * (y2 - y1) + (x2 - x1) * (x2 - x1));
+    }
+
+    public static List<List<Integer>> roadGeneratorPath(Map<Integer, Map<Integer, Integer>> adjacencyList, int centralHub, List<Integer> cityPolygons){
+
+        List<List<Integer>> shortestPaths = new ArrayList<>();
+
+        for (int i : cityPolygons) {
+            if (centralHub != i){
+                List<Integer> shortestPath = Dijkstra.findShortestPath(adjacencyList, centralHub, i);
+                System.out.println("Shortest path from " + centralHub + " to " + i + ": " + shortestPath);
+                shortestPaths.add(shortestPath);
+            }
+        }
+        System.out.println("SHORTEST PATHS ARE" + shortestPaths);
+        return shortestPaths;
+
     }
 }
 
