@@ -81,6 +81,5 @@ public class Configuration {
 
         return options;
     }
-
 }
 
