@@ -38,10 +38,10 @@ public class UrbanismGen {
 
                     graph.addNode(centroid, i);
 
-                    System.out.println("ADDING EDGES/NEIGHBORS");
+                    //System.out.println("ADDING EDGES/NEIGHBORS");
                     List<Integer> neighborList = polygon.getNeighborIdxsList();
-                    System.out.println(neighborList);
-                    System.out.println(neighborList.size());
+                    //System.out.println(neighborList);
+                    //System.out.println(neighborList.size());
                     for (int k = 0; k < neighborList.size(); k++) {
                         Structs.Polygon neighborPolygon = aMesh.getPolygons(neighborList.get(k));
                         List<Structs.Property> propertiesListNeighbor = neighborPolygon.getPropertiesList();
@@ -146,11 +146,11 @@ public class UrbanismGen {
         for (int i : cityPolygons) {
             if (centralHub != i){
                 List<Integer> shortestPath = Dijkstra.findShortestPath(adjacencyList, centralHub, i);
-                System.out.println("Shortest path from " + centralHub + " to " + i + ": " + shortestPath);
+                //System.out.println("Shortest path from " + centralHub + " to " + i + ": " + shortestPath);
                 shortestPaths.add(shortestPath);
             }
         }
-        System.out.println("SHORTEST PATHS ARE" + shortestPaths);
+        //System.out.println("SHORTEST PATHS ARE" + shortestPaths);
         return shortestPaths;
     }
 

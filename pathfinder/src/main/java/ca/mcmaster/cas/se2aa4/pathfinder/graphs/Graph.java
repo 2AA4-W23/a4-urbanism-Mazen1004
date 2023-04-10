@@ -30,7 +30,7 @@ public class Graph extends GraphADT {
     public void addEdge(int node1ID,int node2ID, int edgeWeight){
         if(adjacencyList.containsKey(node1ID) && adjacencyList.containsKey(node2ID)){
             if(adjacencyList.get(node1ID).containsKey(node2ID)){
-                System.out.println("edge already exists between them");
+                //System.out.println("edge already exists between them");
                 //System.out.println(adjacencyList.toString());
             }
             else{

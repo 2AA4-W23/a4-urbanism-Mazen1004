@@ -74,7 +74,7 @@ public class GraphicRenderer implements Renderer {
 
         }
     }
-    //Draw City Centroid (NEEDS TO BE FIXED)
+    //Draw City Centroid
     private void drawCities(Structs.Mesh aMesh, Graphics2D canvas) {
         canvas.setColor(Color.RED);
 
@@ -85,7 +85,7 @@ public class GraphicRenderer implements Renderer {
                 Random random = new Random();
 
                 float citySize = (random.nextFloat()*15) + 5;
-                System.out.println(citySize);
+                //System.out.println(citySize);
 
                 if (property.getKey().equals("rgb_color") && property.getValue().equals("225,0,0")) {
                     Ellipse2D circle = new Ellipse2D.Float((float) p.getX()- (citySize/2), (float) p.getY()- (citySize/2),

@@ -15,6 +15,7 @@ public class Configuration {
     public static final String BIOMES = "biomes";
     public static final String SOIL = "soil";
     public static final String SEED = "seed";
+    public static final String CITIES = "cities";
 
     private CommandLine cli;
     public Configuration(String[] args) {
@@ -46,6 +47,9 @@ public class Configuration {
     public String seed() {
         return this.cli.getOptionValue(SEED, String.valueOf(0));
     }
+    public String cities() {
+        return this.cli.getOptionValue(CITIES, String.valueOf(0));
+    }
     public String shape() {
         return this.cli.getOptionValue(SHAPE,"none");
     }
@@ -73,6 +77,7 @@ public class Configuration {
         options.addOption(new Option(SOIL, true,"Soil Type"));
         options.addOption(new Option(SEED, true,"Seed Type"));
 
+        options.addOption(new Option(CITIES, true,"City Count"));
 
         return options;
     }

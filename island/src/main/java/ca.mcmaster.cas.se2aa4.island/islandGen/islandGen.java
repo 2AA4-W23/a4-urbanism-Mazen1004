@@ -14,7 +14,10 @@ import ca.mcmaster.cas.se2aa4.island.lakes.Lakes;
 import ca.mcmaster.cas.se2aa4.island.rivers.Rivers;
 import ca.mcmaster.cas.se2aa4.island.tiles.Tiles;
 import ca.mcmaster.cas.se2aa4.island.SoilAbsorbtion.soilAbsorption;
+import ca.mcmaster.cas.se2aa4.island.urbanismGen.UrbanismGen;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public class islandGen {
@@ -30,6 +33,8 @@ public class islandGen {
         int seed = Integer.parseInt(config.seed());
         String biomes = config.biomes();
         String soil = config.soil();
+
+        int cities = Integer.parseInt(config.cities());
 
         Structs.Mesh outputMesh;
 
@@ -124,6 +129,19 @@ public class islandGen {
         Biomes.calculateBiomes(outputMesh, newTile);
 
 
+        //A4 Assignment Part
+        //Converts mesh into a graph
+        Map<Integer, Map<Integer, Integer>> adjacencyList = UrbanismGen.adaptorClass(outputMesh);
+        //Generates Cities
+        List<Integer> cityPolygons = UrbanismGen.generateCities(outputMesh,cities);
+        //Calculates central hub city
+        int centerHub = UrbanismGen.calculateCenterHub(aMesh,cityPolygons);
+        //Calculates all shortest paths
+        List<List<Integer>> shortestPaths = UrbanismGen.roadGeneratorPath(adjacencyList,centerHub,cityPolygons);
+        //Visualizes city
+        outputMesh = UrbanismGen.visualizer(outputMesh,shortestPaths,cityPolygons).build();
+
+
         System.out.println("---------------------------------------------------------------------------");
         System.out.println("Command line input summary: ");
         System.out.println("mode is " + mode);
@@ -136,7 +154,9 @@ public class islandGen {
         System.out.println("soil profile is " + soil);
         System.out.println("seed is " + seed);
 
-
+        System.out.println("---------------------------------------------------------------------------");
+        System.out.println("ASSIGNMENT 4 PART");
+        System.out.println("number of cities is " + cities);
 
 
         return outputMesh;
