@@ -36,7 +36,7 @@ Altitude (Elevation) Assumptions:
 - Cities cannot be generated in valleys or mountains, hence generating cities with elevation attribute will result in no cities being generated.
 
 Lakes Assumptions
-- Cities cannot be generated on lakes and roads avoid lake tiles all together going around them
+- Cities cannot be generated on lakes. Roads avoid lake tiles all together going around them
 
 Biomes Assumptions
 - Cities and roads can be generated over different biomes, refer to example islands to generate such cities
