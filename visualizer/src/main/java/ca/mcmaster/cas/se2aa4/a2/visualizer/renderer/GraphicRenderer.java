@@ -15,6 +15,7 @@ import java.awt.geom.Path2D;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 public class GraphicRenderer implements Renderer {
 
@@ -25,8 +26,8 @@ public class GraphicRenderer implements Renderer {
         canvas.setStroke(stroke);
         drawPolygons(aMesh,canvas);
         drawSegment(aMesh, canvas);
-        drawRoads(aMesh, canvas);
         drawCities(aMesh, canvas);
+        drawRoads(aMesh, canvas);
     }
 
     private void drawPolygons(Mesh aMesh, Graphics2D canvas) {
@@ -73,23 +74,46 @@ public class GraphicRenderer implements Renderer {
 
         }
     }
-    //Draw City Centroid
+    //Draw City Centroid (NEEDS TO BE FIXED)
     private void drawCities(Structs.Mesh aMesh, Graphics2D canvas) {
         canvas.setColor(Color.RED);
+
         for(Structs.Vertex p: aMesh.getVerticesList()) {
             List<Structs.Property> propertiesList = p.getPropertiesList();
             for (int j = 0; j < propertiesList.size(); j++) {
                 Structs.Property property = propertiesList.get(j);
+                Random random = new Random();
+
+                float citySize = (random.nextFloat()*15) + 5;
+                System.out.println(citySize);
+
                 if (property.getKey().equals("rgb_color") && property.getValue().equals("225,0,0")) {
-                    Ellipse2D circle = new Ellipse2D.Float((float) p.getX()-1.5f, (float) p.getY()-1.5f,
-                            6, 6);
+                    Ellipse2D circle = new Ellipse2D.Float((float) p.getX()- (citySize/2), (float) p.getY()- (citySize/2),
+                            (int)citySize, (int)citySize);
                     canvas.fill(circle);
-                    //canvas.setStroke(new BasicStroke(THICKNESS/1));
 
                 }
             }
         }
     }
+    /*private void drawCities(Structs.Mesh aMesh, Graphics2D canvas) {
+        canvas.setColor(Color.RED);
+        for(Structs.Vertex p: aMesh.getVerticesList()) {
+            List<Structs.Property> propertiesList = p.getPropertiesList();
+            for (int j = 0; j < propertiesList.size(); j++) {
+                Structs.Property property = propertiesList.get(j);
+                Random random = new Random();
+                float citySize = (random.nextFloat()*15) + 5;
+
+                if (property.getKey().equals("rgb_color") && property.getValue().equals("255,0,0")) {
+                    Ellipse2D circle = new Ellipse2D.Float(((float) p.getX()- (citySize/2)), ((float) p.getY()- (citySize/2)),
+                            (citySize), (citySize));
+                    canvas.fill(circle);
+
+                }
+            }
+        }
+    }*/
 
     private void drawAPolygon(Structs.Polygon p, Mesh aMesh, Graphics2D canvas) {
         Hull hull = new Hull();

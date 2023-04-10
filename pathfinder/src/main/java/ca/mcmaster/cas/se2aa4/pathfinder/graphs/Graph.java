@@ -31,7 +31,7 @@ public class Graph extends GraphADT {
         if(adjacencyList.containsKey(node1ID) && adjacencyList.containsKey(node2ID)){
             if(adjacencyList.get(node1ID).containsKey(node2ID)){
                 System.out.println("edge already exists between them");
-                System.out.println(adjacencyList.toString());
+                //System.out.println(adjacencyList.toString());
             }
             else{
                 Edges edge = new Edges(node1ID, node2ID, edgeWeight);
@@ -58,7 +58,7 @@ public class Graph extends GraphADT {
         return Edges;
     }
     public Map<Integer,Map<Integer,Integer>> returnGraph() {
-        System.out.println(adjacencyList.toString());
+        //System.out.println(adjacencyList.toString());
         return adjacencyList;
     }
 

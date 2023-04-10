@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.Random;
 
 public class UrbanismGen {
-
     static Graph graph = new Graph();
 
     //This class converts landTiles from the Mesh into a Graph, where Nodes are centroids of land tiles
@@ -23,24 +22,21 @@ public class UrbanismGen {
         colors.Colors circle = new colors.Colors();
 
         List<Structs.Vertex> vertices = aMesh.getVerticesList();
+
         //Loop to count how many polygons are land Polygons, where cities can be generated
-        int nodeCount = 0;
         for (int i = 0; i < aMesh.getPolygonsCount(); i++) {
             Structs.Polygon polygon = aMesh.getPolygons(i);
-            Structs.Polygon.Builder polygonBuilder = Structs.Polygon.newBuilder(polygon);
             List<Structs.Property> propertiesList = polygon.getPropertiesList();
 
             for (int j = 0; j < propertiesList.size(); j++) {
                 Structs.Property property = propertiesList.get(j);
-                if (property.getKey().equals("rgb_color") && property.getValue().equals(circle.LandColor)) {
+                if (property.getKey().equals("rgb_color") && ((property.getValue().equals(circle.LandColor)) ||
+                        (property.getValue().equals(circle.DesertColor))||
+                                (property.getValue().equals(circle.TundraColor)))) {
+
                     Structs.Vertex centroid = vertices.get(polygon.getCentroidIdx());
 
                     graph.addNode(centroid, i);
-
-                    Structs.Property.Builder propertyBuilder = Structs.Property.newBuilder(property);
-                    propertyBuilder.setValue(circle.green);
-                    polygonBuilder.setProperties(j, propertyBuilder.build());
-
 
                     System.out.println("ADDING EDGES/NEIGHBORS");
                     List<Integer> neighborList = polygon.getNeighborIdxsList();
@@ -48,30 +44,28 @@ public class UrbanismGen {
                     System.out.println(neighborList.size());
                     for (int k = 0; k < neighborList.size(); k++) {
                         Structs.Polygon neighborPolygon = aMesh.getPolygons(neighborList.get(k));
+                        List<Structs.Property> propertiesListNeighbor = neighborPolygon.getPropertiesList();
 
-                        int NeighborIdx = neighborList.get(k);
-                        Structs.Vertex centroidNeighbor = vertices.get(neighborPolygon.getCentroidIdx());
-                        graph.addNode(centroidNeighbor, NeighborIdx);
+                        for (int l = 0; l < propertiesListNeighbor.size(); l++) {
+                            Structs.Property propertyNeighbor = propertiesListNeighbor.get(l);
+                            if (propertyNeighbor.getKey().equals("rgb_color") && ((propertyNeighbor.getValue().equals(circle.LandColor)) ||
+                                    (propertyNeighbor.getValue().equals(circle.DesertColor)) ||
+                                    (propertyNeighbor.getValue().equals(circle.TundraColor)))) {
+                                int NeighborIdx = neighborList.get(k);
+                                Structs.Vertex centroidNeighbor = vertices.get(neighborPolygon.getCentroidIdx());
 
+                                graph.addNode(centroidNeighbor, NeighborIdx);
+                                graph.addEdge(i, NeighborIdx, 1);
 
-                        propertyBuilder.setValue(circle.red);
-                        polygonBuilder.setProperties(j, propertyBuilder.build());
-
-
-                        graph.addEdge(i, NeighborIdx, 1);
-
-
+                            }
+                        }
                     }
-
-
                 }
+
             }
-            clone.addPolygons(polygonBuilder.build());
         }
         Map<Integer, Map<Integer, Integer>> adjacencyList = graph.returnGraph();
         return adjacencyList;
-        //return clone;
-
     }
 
     //Loops through adjacency List generates cities randomly based on user input
@@ -80,8 +74,6 @@ public class UrbanismGen {
         Structs.Mesh.Builder clone = Structs.Mesh.newBuilder();
         clone.addAllVertices(aMesh.getVerticesList());
         clone.addAllSegments(aMesh.getSegmentsList());
-
-        colors.Colors circle = new colors.Colors();
 
         Map<Integer, Map<Integer, Integer>> adjacencyList = graph.returnGraph();
 
@@ -96,41 +88,12 @@ public class UrbanismGen {
             // Add the key to the cityPolygons list
             cityPolygons.add(randomKey);
         }
-        calculateCenterHub(aMesh,cityPolygons);
 
         System.out.println("CITIES ARE IN THESE POLYGONS");
         System.out.println(cityPolygons); // Example output: [527, 18, 10, 4]
         return cityPolygons;
 
-
-
-/*
-        //TESTING LOL (WILL NEED TO FIX TO COLOR VERTICES NOT POLYGONS)
-        for (int i = 0; i < aMesh.getPolygonsCount(); i++) {
-
-            Structs.Polygon polygon = aMesh.getPolygons(i);
-            Structs.Polygon.Builder polygonBuilder = Structs.Polygon.newBuilder(polygon);
-            List<Structs.Property> propertiesList = polygon.getPropertiesList();
-
-            // Check if polygon ID is in cityPolygons
-            if (cityPolygons.contains(i)) {
-                // Set polygon color to green
-                for (int j = 0; j < propertiesList.size(); j++) {
-                    Structs.Property property = propertiesList.get(j);
-                    if (property.getKey().equals("rgb_color")) {
-                        Structs.Property.Builder propertyBuilder = Structs.Property.newBuilder(property);
-                        propertyBuilder.setValue(circle.DesertColor);
-                        polygonBuilder.setProperties(j, propertyBuilder.build());
-
-                    }
-                }
-            }
-            clone.addPolygons(polygonBuilder.build());
-        }
-        return clone;*/
     }
-
-
     public static int calculateCenterHub(Structs.Mesh aMesh, List<Integer> cityPolygons){
 
         //Center Point Values of Mesh
@@ -148,15 +111,9 @@ public class UrbanismGen {
         clone.addAllVertices(aMesh.getVerticesList());
         clone.addAllSegments(aMesh.getSegmentsList());
 
-
-        //Structs.Polygon polygon = aMesh.getPolygons(i);
-        //Structs.Polygon.Builder polygonBuilder = Structs.Polygon.newBuilder(polygon);
-
         for (int i = 0; i < aMesh.getPolygonsCount(); i++) {
 
             Structs.Polygon polygon = aMesh.getPolygons(i);
-            Structs.Polygon.Builder polygonBuilder = Structs.Polygon.newBuilder(polygon);
-            List<Structs.Property> propertiesList = polygon.getPropertiesList();
 
             for (int j = 0; j < cityPolygons.size(); j++) {
                 int cityNodeID = cityPolygons.get(j);
@@ -174,26 +131,8 @@ public class UrbanismGen {
                 }
             }
         }
-        /*
-        Structs.Polygon polygon = aMesh.getPolygons(centerPolygonID);
-        Structs.Polygon.Builder polygonBuilder = Structs.Polygon.newBuilder(polygon);
-        List<Structs.Property> propertiesList = polygon.getPropertiesList();
 
-        colors.Colors circle = new colors.Colors();
-
-        for (int j = 0; j < propertiesList.size(); j++) {
-            Structs.Property property = propertiesList.get(j);
-            if (property.getKey().equals("rgb_color") ) {
-                Structs.Vertex centroid = vertices.get(polygon.getCentroidIdx());
-
-                Structs.Property.Builder propertyBuilder = Structs.Property.newBuilder(property);
-                propertyBuilder.setValue(circle.TundraColor);
-                polygonBuilder.setProperties(j, propertyBuilder.build());
-            }
-        }
-        clone.addPolygons(polygonBuilder.build());
-        return clone;*/
-        System.out.println("CENTER POLYGON ID IS " + centerPolygonID);
+        System.out.println("CENTRAL HUB POLYGON ID IS " + centerPolygonID);
         return centerPolygonID;
     }
     public static double distanceCalc(double x1, double y1, double x2, double y2) {
@@ -213,7 +152,6 @@ public class UrbanismGen {
         }
         System.out.println("SHORTEST PATHS ARE" + shortestPaths);
         return shortestPaths;
-
     }
 
     public static Structs.Mesh.Builder visualizer(Structs.Mesh aMesh,  List<List<Integer>> shortestPaths, List<Integer> cityPolygons ){
@@ -245,11 +183,11 @@ public class UrbanismGen {
                 clone.addVertices(centroid1);
 
             }
-            // iterate through each pair of consecutive polygons in the list
+            // iterate through each pair of consecutive polygons in the list (roads)
             for (int i = 0; i < shortestPath.size() - 1; i++) {
                 int polygonID1 = shortestPath.get(i);
                 int polygonID2 = shortestPath.get(i + 1);
-                System.out.println("TEST" + polygonID1 + " " + polygonID2);
+                //System.out.println("TEST" + polygonID1 + " " + polygonID2);
 
                 Structs.Polygon polygon1 = aMesh.getPolygons(polygonID1);
                 Structs.Polygon polygon2 = aMesh.getPolygons(polygonID2);
@@ -265,7 +203,3 @@ public class UrbanismGen {
         return clone;
     }
 }
-
-
-
-

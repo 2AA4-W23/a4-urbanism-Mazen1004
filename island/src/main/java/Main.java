@@ -27,7 +27,6 @@ public class Main {
 
         outputMesh = UrbanismGen.visualizer(outputMesh,shortestPaths,cityPolygons).build();
 
-
         new MeshFactory().write(outputMesh, config.output()); //output to visualizer
     }
 }
