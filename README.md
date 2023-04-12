@@ -28,7 +28,7 @@ java -jar island/island.jar -i img/input.mesh -o img/lagoon.mesh -shape circle -
 java -jar visualizer/visualizer.jar -i img/lagoon.mesh -o img/irregular.svg
 ```
 ## Dependency Issue Note
-Note: Sometimes when running the island generator command a dependency issue occurs preventing the island from generating, if this happens(unlikely to happen) rerunning mvn clean and mvn install once/twice will fix the issue and island will be generated.
+Note: Sometimes when running the island generator command a dependency issue occurs preventing the island from generating, if this happens(sout statement will confirm if island ran or not) rerunning mvn clean and mvn install once/twice will fix the issue and island will be generated.
 
 ## General Assumptions
 
@@ -36,7 +36,7 @@ Altitude (Elevation) Assumptions:
 - Cities cannot be generated in valleys or mountains, hence generating cities with elevation attribute will result in no cities being generated.
 
 Lakes Assumptions
-- Cities cannot be generated on lakes and roads avoid lake tiles all together going around them
+- Cities cannot be generated on lakes. Roads avoid lake tiles all together going around them
 
 Biomes Assumptions
 - Cities and roads can be generated over different biomes, refer to example islands to generate such cities
