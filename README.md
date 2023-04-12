@@ -27,8 +27,6 @@ java -jar island/island.jar -i img/input.mesh -o img/lagoon.mesh -shape circle -
 ```
 java -jar visualizer/visualizer.jar -i img/lagoon.mesh -o img/irregular.svg
 ```
-## Dependency Issue Note
-Note: Sometimes when running the island generator command a dependency issue occurs preventing the island from generating, if this happens(sout statement will confirm if island ran or not) rerunning mvn clean and mvn install once/twice will fix the issue and island will be generated.
 
 ## General Assumptions
 
